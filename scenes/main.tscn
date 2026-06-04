@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://c4mfc3hgrgw7u"]
+
+[ext_resource type="PackedScene" uid="uid://cx0p6o4wgoexv" path="res://level_maps/forest/forest_map.tscn" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://cvswo4xmu1tl" path="res://scripts/main.gd" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://chv8jjjgcvihr" path="res://scenes/player.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cq0y2hvwbtoew" path="res://scenes/hud.tscn" id="4_jyhfs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sugp2"]
+size = Vector2(8, 240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
+size = Vector2(8, 240)
+
+[node name="Main" type="Node" unique_id=997781624]
+script = ExtResource("1_sugp2")
+metadata/_edit_horizontal_guides_ = [0.0, 240.0]
+metadata/_edit_vertical_guides_ = [256.0, 0.0]
+
+[node name="Hud" parent="." unique_id=732583890 instance=ExtResource("4_jyhfs")]
+visible = false
+
+[node name="ForestMap" parent="." unique_id=2116938927 instance=ExtResource("1_0wfyh")]
+
+[node name="Player" parent="." unique_id=1500777258 instance=ExtResource("2_sugp2")]
+position = Vector2(960, 128)
+
+[node name="MapLoop" type="Node2D" parent="." unique_id=1723038664]
+
+[node name="LoopLeft" type="Area2D" parent="MapLoop" unique_id=2126676376]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapLoop/LoopLeft" unique_id=1245937443]
+position = Vector2(-3068, 168)
+shape = SubResource("RectangleShape2D_sugp2")
+debug_color = Color(0.68120867, 0.50354284, 0, 0.41960785)
+
+[node name="SpawnRight" type="Marker2D" parent="MapLoop/LoopLeft" unique_id=1910574676]
+position = Vector2(992, 176)
+
+[node name="LoopRight" type="Area2D" parent="MapLoop" unique_id=1164579003]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapLoop/LoopRight" unique_id=1752134389]
+position = Vector2(1020, 120)
+shape = SubResource("RectangleShape2D_jyhfs")
+debug_color = Color(0.68120867, 0.50354284, 0, 0.41960785)
+
+[node name="SpawnLeft" type="Marker2D" parent="MapLoop/LoopRight" unique_id=1752247443]
+position = Vector2(-3040, 240)
+
+[connection signal="body_entered" from="MapLoop/LoopLeft" to="." method="_on_loop_left_body_entered"]
+[connection signal="body_entered" from="MapLoop/LoopRight" to="." method="_on_loop_right_body_entered"]

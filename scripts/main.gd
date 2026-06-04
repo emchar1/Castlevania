@@ -1,0 +1,92 @@
+extends Node
+
+# PROPERTIES
+
+@onready var player = $Player
+@onready var forest_map = $ForestMap
+
+# TODO: - Build map looping logic
+@onready var spawn_left = $MapLoop/LoopRight/SpawnLeft
+@onready var spawn_right = $MapLoop/LoopLeft/SpawnRight
+
+
+# FUNCTIONS
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	CurseManager.activated.connect(curse_activated)
+	forest_map.zone_trans_started.connect(zone_trans_started)
+	forest_map.zone_trans_ended.connect(zone_trans_ended)
+	player.dead.connect(kill_player)
+	
+	await get_tree().create_timer(0.5).timeout
+	forest_map.get_zone(0, 0).set_music()
+
+
+# SIGNAL CONNECT FUNCTIONS
+
+func zone_trans_started():
+	player.allow_input = false
+
+
+func zone_trans_ended():
+	player.allow_input = true
+
+
+func kill_player():
+	AudioManager.stop_all_music()
+	
+	await get_tree().create_timer(1.0).timeout
+	
+	GameState.reset_health()
+	CurseManager.reset_curse()
+	get_tree().call_deferred("reload_current_scene")
+
+
+# FIXME: - You have to "guess" the zone_type and number :(
+func _on_loop_left_body_entered(body: Node2D) -> void:
+	loop_zone(body, spawn_right, Zone.ZoneType.FOREST, 0)
+
+
+func _on_loop_right_body_entered(body: Node2D) -> void:
+	loop_zone(body, spawn_left, Zone.ZoneType.FOREST, 3)
+
+
+func loop_zone(
+	body: Node2D, 
+	spawn_point: Marker2D,
+	zone_type: Zone.ZoneType,
+	zone_number: int
+) -> void:
+	if body.is_in_group("player"):
+		
+		# FIXME: - I don't like this...
+		zone_trans_started()
+		forest_map._fade_zone()
+		player.kill_movement()
+		player.position = spawn_point.global_position
+		
+		var zone = forest_map.get_zone(zone_type, zone_number)
+		
+		if zone:
+			var zone_id = Zone.get_zone_id(zone.zone_type, zone.zone_number)
+			var check_id = Zone.get_zone_id(zone_type, zone_number)
+			
+			if zone_id == check_id:
+				zone.set_camera_bounds(player, spawn_point.global_position)
+				zone.set_music()
+		else:
+			print("Invalid zone")
+
+
+func curse_activated(active: bool):
+	AudioManager.stop_music(AudioManager.current_music)
+	
+	if active:
+		AudioManager.play_music(AudioData.Music.MONSTERDANCE)
+		player.speed_multiplier = 1.5
+		player.jump_multiplier = 1.25
+	else:
+		AudioManager.play_music(AudioData.Music.BLOODYTEARS)
+		player.speed_multiplier = 1.0
+		player.jump_multiplier = 1.0

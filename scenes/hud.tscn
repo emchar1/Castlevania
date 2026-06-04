@@ -1,0 +1,178 @@
+[gd_scene format=3 uid="uid://cq0y2hvwbtoew"]
+
+[ext_resource type="Script" uid="uid://c4iflh13t27v8" path="res://scripts/hud.gd" id="1_5ysmq"]
+[ext_resource type="FontFile" uid="uid://5fm5qvh53ma0" path="res://assets/fonts/Jersey10-Regular.ttf" id="1_oo0fn"]
+[ext_resource type="Texture2D" uid="uid://4cs57tjkxmud" path="res://assets/images/hud.png" id="2_oo0fn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ysmq"]
+atlas = ExtResource("2_oo0fn")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uo2fv"]
+atlas = ExtResource("2_oo0fn")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_047uy"]
+atlas = ExtResource("2_oo0fn")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pdws"]
+atlas = ExtResource("2_oo0fn")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hd3ao"]
+atlas = ExtResource("2_oo0fn")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i1j5"]
+atlas = ExtResource("2_oo0fn")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eld54"]
+atlas = ExtResource("2_oo0fn")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3swnk"]
+atlas = ExtResource("2_oo0fn")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkknv"]
+atlas = ExtResource("2_oo0fn")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxdf7"]
+atlas = ExtResource("2_oo0fn")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5357l"]
+atlas = ExtResource("2_oo0fn")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iypfu"]
+atlas = ExtResource("2_oo0fn")
+region = Rect2(8, 8, 8, 8)
+
+[node name="Hud" type="CanvasLayer" unique_id=169172673]
+script = ExtResource("1_5ysmq")
+
+[node name="Background" type="ColorRect" parent="." unique_id=259010942]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Health" type="Control" parent="." unique_id=614903911]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Health" unique_id=1602578176]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 48.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("1_oo0fn")
+theme_override_font_sizes/font_size = 12
+text = "HEALTH:"
+
+[node name="Container" type="Control" parent="Health" unique_id=1268750974]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health0" type="Sprite2D" parent="Health/Container" unique_id=1160097639]
+texture_filter = 1
+position = Vector2(40, 16)
+texture = SubResource("AtlasTexture_5ysmq")
+offset = Vector2(4, -4)
+
+[node name="Health1" type="Sprite2D" parent="Health/Container" unique_id=745693921]
+texture_filter = 1
+position = Vector2(48, 16)
+texture = SubResource("AtlasTexture_uo2fv")
+offset = Vector2(4, -4)
+
+[node name="Health2" type="Sprite2D" parent="Health/Container" unique_id=1367222089]
+texture_filter = 1
+position = Vector2(56, 16)
+texture = SubResource("AtlasTexture_047uy")
+offset = Vector2(4, -4)
+
+[node name="Health3" type="Sprite2D" parent="Health/Container" unique_id=2093256215]
+texture_filter = 1
+position = Vector2(64, 16)
+texture = SubResource("AtlasTexture_5pdws")
+offset = Vector2(4, -4)
+
+[node name="Health4" type="Sprite2D" parent="Health/Container" unique_id=57286777]
+texture_filter = 1
+position = Vector2(72, 16)
+texture = SubResource("AtlasTexture_hd3ao")
+offset = Vector2(4, -4)
+
+[node name="Health5" type="Sprite2D" parent="Health/Container" unique_id=531804303]
+texture_filter = 1
+position = Vector2(80, 16)
+texture = SubResource("AtlasTexture_0i1j5")
+offset = Vector2(4, -4)
+
+[node name="Curse" type="Control" parent="." unique_id=135878843]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 56.0
+
+[node name="Label" type="Label" parent="Curse" unique_id=1211399012]
+layout_mode = 0
+offset_top = 6.0
+offset_right = 40.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("1_oo0fn")
+theme_override_font_sizes/font_size = 12
+text = "CURSE:"
+
+[node name="Container" type="Control" parent="Curse" unique_id=1963613191]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Curse0" type="Sprite2D" parent="Curse/Container" unique_id=1453873199]
+texture_filter = 1
+position = Vector2(32, 16)
+texture = SubResource("AtlasTexture_eld54")
+offset = Vector2(4, -4)
+
+[node name="Curse1" type="Sprite2D" parent="Curse/Container" unique_id=1274479028]
+texture_filter = 1
+position = Vector2(40, 16)
+texture = SubResource("AtlasTexture_3swnk")
+offset = Vector2(4, -4)
+
+[node name="Curse2" type="Sprite2D" parent="Curse/Container" unique_id=168943351]
+texture_filter = 1
+position = Vector2(48, 16)
+texture = SubResource("AtlasTexture_qkknv")
+offset = Vector2(4, -4)
+
+[node name="Curse3" type="Sprite2D" parent="Curse/Container" unique_id=2014265487]
+texture_filter = 1
+position = Vector2(56, 16)
+texture = SubResource("AtlasTexture_uxdf7")
+offset = Vector2(4, -4)
+
+[node name="Curse4" type="Sprite2D" parent="Curse/Container" unique_id=993947789]
+texture_filter = 1
+position = Vector2(64, 16)
+texture = SubResource("AtlasTexture_5357l")
+offset = Vector2(4, -4)
+
+[node name="Curse5" type="Sprite2D" parent="Curse/Container" unique_id=430053770]
+texture_filter = 1
+position = Vector2(72, 16)
+texture = SubResource("AtlasTexture_iypfu")
+offset = Vector2(4, -4)
