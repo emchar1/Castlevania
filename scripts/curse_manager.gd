@@ -10,7 +10,7 @@ const STEP_MAX = 3
 const TIMER_SPEED = 1
 
 # Curse values
-var current := 5
+var current := 0
 var step := 0
 
 var timer: Timer

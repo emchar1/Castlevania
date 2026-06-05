@@ -78,6 +78,7 @@ func hurt_enemy(dmg: int):
 
 
 func kill_enemy():
+	CurseManager.increment_curse()
 	died.emit()
 	queue_free()
 
