@@ -27,6 +27,7 @@ var zone_id: String
 @onready var spawn_right = $SpawnPoints/SpawnRight
 @onready var spawn_top_left = get_node_or_null("SpawnPoints/SpawnTopLeft")
 @onready var spawn_top_right = get_node_or_null("SpawnPoints/SpawnTopRight")
+@onready var enemy_spawners = $EnemySpawners
 
 @onready var floor_tiles = $TileMapLayers/Floor
 @onready var bg_tiles = $TileMapLayers/Background
@@ -95,6 +96,9 @@ func _on_dead_body_entered(body: Node2D) -> void:
 
 
 func _on_zone_entered(body: Node2D, direction: Direction):
+	for spawner in enemy_spawners.get_children():
+		spawner.reset_spawn()
+
 	if body.is_in_group("player"):
 		zone_entered.emit(self, direction)
 		
@@ -121,7 +125,6 @@ func _on_zone_entered(body: Node2D, direction: Direction):
 		var enemy = body as Enemy
 		
 		if enemy:
-			print("reached zone end.")
 			enemy.change_directions()
 
 

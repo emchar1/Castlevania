@@ -9,8 +9,8 @@ signal dead()
 
 @onready var sword = $Sword
 @onready var sword_sprite = $Sword/SpriteSword
-@onready var sword_collision = $Sword/CollisionPolygon2D
 @onready var player_sprite = $SpritePlayer
+@onready var animation_player = $AnimationPlayer
 @onready var collision_stand = $CollisionStand
 @onready var collision_crouch = $CollisionCrouch
 @onready var camera = $Camera2D
@@ -59,6 +59,8 @@ func kill_player():
 	set_process(false)
 	set_physics_process(false)
 	player_sprite.stop()
+	sword_sprite.stop()
+	animation_player.stop()
 
 
 func kill_movement():
@@ -121,7 +123,7 @@ func _process_jumping():
 
 func _process_animation():
 	if is_attacking:
-		player_sprite.play("crouch_attack" if is_crouching else "attack")
+		animation_player.play("crouch_attack" if is_crouching else "attack")
 		sword_sprite.play("attack")
 		return
 	
@@ -145,23 +147,14 @@ func _player_attack():
 		return
 		
 	if allow_input and Input.is_action_just_pressed("attack"):
-		# FIXME: - delete this
-		if not CurseManager.active:
-			CurseManager.increment_curse()
-		
-		
-		
 		var speed_multiplier_orig = speed_multiplier
 		
 		is_attacking = true
 		speed_multiplier = 0.0
 		
-		await get_tree().create_timer(ATTACK_DURATION / 2).timeout
-		sword_collision.disabled = false
-		await get_tree().create_timer(ATTACK_DURATION / 2).timeout
+		await get_tree().create_timer(ATTACK_DURATION).timeout
 		
 		speed_multiplier = speed_multiplier_orig
-		sword_collision.disabled = true
 		is_attacking = false
 
 
@@ -170,4 +163,5 @@ func _on_sword_body_entered(body: Node2D) -> void:
 		var enemy = body as Enemy
 		
 		if enemy:
+			print("enemy hit!!!!")
 			enemy.hurt_enemy(attack_dmg)

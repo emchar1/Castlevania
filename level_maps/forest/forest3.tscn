@@ -143,6 +143,8 @@ position = Vector2(32, 192)
 [node name="SpawnRight" type="Marker2D" parent="SpawnPoints" unique_id=1367886966]
 position = Vector2(992, 176)
 
+[node name="EnemySpawners" type="Node2D" parent="." unique_id=366738266]
+
 [connection signal="body_entered" from="ExitAreas/ExitLeft" to="." method="_on_exit_left_body_entered"]
 [connection signal="body_entered" from="ExitAreas/ExitRight" to="." method="_on_exit_right_body_entered"]
 [connection signal="body_entered" from="ExitAreas/Dead" to="." method="_on_dead_body_entered"]

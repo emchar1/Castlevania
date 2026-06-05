@@ -68,7 +68,7 @@ shape = SubResource("RectangleShape2D_md0e3")
 debug_color = Color(1, 0, 1, 0.41960785)
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1753183563]
-target_position = Vector2(16, 24)
+target_position = Vector2(16, 16)
 collision_mask = 4
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
