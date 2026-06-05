@@ -5,7 +5,7 @@ class_name Player
 
 signal dead()
 
-@export var attack_dmg := 1.0
+@export var attack_dmg = 1
 
 @onready var sword = $Sword
 @onready var sword_sprite = $Sword/SpriteSword
