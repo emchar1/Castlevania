@@ -208,6 +208,7 @@ frame = 3
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sword" unique_id=543024179]
 position = Vector2(26, 40)
 polygon = PackedVector2Array(-26, -40, -60, -40, -59, -49, -55, -58, -50, -64, -43, -70, -35, -73, -26, -74, -17, -73, -9, -70)
+disabled = true
 
 [node name="SpritePlayer" type="AnimatedSprite2D" parent="." unique_id=977459593]
 texture_filter = 1
@@ -223,7 +224,7 @@ shape = SubResource("RectangleShape2D_qhqgy")
 disabled = true
 debug_color = Color(0.68120867, 0.50354284, 0, 0.41960785)
 
-[node name="SpawnTrigger" type="Area2D" parent="." unique_id=1242803610]
+[node name="SpawnTrigger" type="Area2D" parent="." unique_id=1242803610 groups=["spawn_trigger"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnTrigger" unique_id=448859901]
 position = Vector2(0, -64)
@@ -235,3 +236,5 @@ limit_left = 0
 limit_top = 0
 limit_right = 1024
 limit_bottom = 240
+
+[connection signal="body_entered" from="Sword" to="." method="_on_sword_body_entered"]

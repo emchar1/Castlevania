@@ -5,8 +5,11 @@ class_name Player
 
 signal dead()
 
+@export var attack_dmg := 1.0
+
 @onready var sword = $Sword
 @onready var sword_sprite = $Sword/SpriteSword
+@onready var sword_collision = $Sword/CollisionPolygon2D
 @onready var player_sprite = $SpritePlayer
 @onready var collision_stand = $CollisionStand
 @onready var collision_crouch = $CollisionCrouch
@@ -153,7 +156,18 @@ func _player_attack():
 		is_attacking = true
 		speed_multiplier = 0.0
 		
-		await get_tree().create_timer(ATTACK_DURATION).timeout
+		await get_tree().create_timer(ATTACK_DURATION / 2).timeout
+		sword_collision.disabled = false
+		await get_tree().create_timer(ATTACK_DURATION / 2).timeout
 		
 		speed_multiplier = speed_multiplier_orig
+		sword_collision.disabled = true
 		is_attacking = false
+
+
+func _on_sword_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		var enemy = body as Enemy
+		
+		if enemy:
+			enemy.hurt_enemy(attack_dmg)

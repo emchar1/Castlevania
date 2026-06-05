@@ -7,6 +7,8 @@ enum Type {
 	ZOMBIE, SKELETON, FRANKENSTEIN, SLIME, BAT
 }
 
+signal died
+
 @export var speed = 50.0
 @export var hp = 1
 @export var attack_dmg = 1
@@ -49,8 +51,35 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func set_direction(player_pos: Vector2):
+	dir = -1 if global_position > player_pos else 1
+
+
 func change_directions():
 	dir *= -1
+
+
+# TODO: - build this out, add hurt animation, death, etc.
+func hurt_enemy(dmg: int):
+	hp -= dmg
+	if hp <= 0:
+		kill_enemy()
+		return
+	
+	var orig_speed = speed
+	
+	modulate = Color.RED
+	speed = 0
+	
+	await get_tree().create_timer(0.6).timeout
+	
+	modulate = Color.WHITE
+	speed = orig_speed
+
+
+func kill_enemy():
+	died.emit()
+	queue_free()
 
 
 # HELPER FUNCTIONS

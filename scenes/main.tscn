@@ -17,7 +17,6 @@ metadata/_edit_horizontal_guides_ = [0.0, 240.0]
 metadata/_edit_vertical_guides_ = [256.0, 0.0]
 
 [node name="Hud" parent="." unique_id=732583890 instance=ExtResource("4_jyhfs")]
-visible = false
 
 [node name="ForestMap" parent="." unique_id=2116938927 instance=ExtResource("1_0wfyh")]
 
