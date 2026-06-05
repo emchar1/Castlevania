@@ -5,9 +5,9 @@ class_name Player
 
 signal dead()
 
-@onready var player_sprite = $SpritePlayer
 @onready var sword = $Sword
 @onready var sword_sprite = $Sword/SpriteSword
+@onready var player_sprite = $SpritePlayer
 @onready var collision_stand = $CollisionStand
 @onready var collision_crouch = $CollisionCrouch
 @onready var camera = $Camera2D

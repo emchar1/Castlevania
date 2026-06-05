@@ -115,18 +115,24 @@ position = Vector2(1024, 240)
 [node name="ExitAreas" type="Node2D" parent="." unique_id=184054780]
 
 [node name="ExitLeft" type="Area2D" parent="ExitAreas" unique_id=877064047]
+collision_layer = 64
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitAreas/ExitLeft" unique_id=2023571043]
 position = Vector2(-4, 144)
 shape = SubResource("RectangleShape2D_2pb6f")
 
 [node name="ExitTopLeft" type="Area2D" parent="ExitAreas" unique_id=1939333408]
+collision_layer = 64
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitAreas/ExitTopLeft" unique_id=116886766]
 position = Vector2(-4, -48)
 shape = SubResource("RectangleShape2D_ypny4")
 
 [node name="ExitRight" type="Area2D" parent="ExitAreas" unique_id=1741090480]
+collision_layer = 64
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitAreas/ExitRight" unique_id=788561672]
 position = Vector2(1028, 48)
@@ -134,6 +140,8 @@ shape = SubResource("RectangleShape2D_wqa8s")
 debug_color = Color(0, 0.6, 0.7019608, 0.41960785)
 
 [node name="Dead" type="Area2D" parent="ExitAreas" unique_id=1967567821]
+collision_layer = 64
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitAreas/Dead" unique_id=1210878389]
 position = Vector2(512, 244)

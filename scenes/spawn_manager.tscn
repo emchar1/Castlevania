@@ -1,13 +1,12 @@
 [gd_scene format=3 uid="uid://dnr4tcrjgy05i"]
 
 [ext_resource type="Script" uid="uid://bgawlas5ofynu" path="res://scripts/spawn_manager.gd" id="1_2f4nx"]
-[ext_resource type="PackedScene" uid="uid://br22fefx4l7ia" path="res://scenes/enemy.tscn" id="2_2syu8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3sj15"]
+size = Vector2(16, 16)
 
 [node name="SpawnManager" type="Area2D" unique_id=98162249]
 script = ExtResource("1_2f4nx")
-enemy_scene = ExtResource("2_2syu8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=485919623]
 shape = SubResource("RectangleShape2D_3sj15")

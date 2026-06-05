@@ -2,19 +2,16 @@ extends Area2D
 
 # PROPERTIES
 
-enum EnemyType {
-	ZOMBIE, SKELETON, FRANKENSTEIN, SPIDER, BAT
-}
-
 @export var enemy_scene: PackedScene
-@export var enemy_type: EnemyType
+@export var enemy_type: Enemy.Type
 
 
 # FUNCTIONS
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	var enemy = enemy_scene.instantiate()
+	add_child(enemy)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

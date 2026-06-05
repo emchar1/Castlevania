@@ -45,8 +45,8 @@ size = Vector2(16, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
 size = Vector2(16, 32)
 
-[node name="Enemy" type="CharacterBody2D" unique_id=2010845909]
-collision_layer = 0
+[node name="Enemy" type="CharacterBody2D" unique_id=2010845909 groups=["enemy"]]
+collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_md0e3")
 
@@ -54,7 +54,7 @@ script = ExtResource("1_md0e3")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_xwavj")
 autoplay = "default"
-frame_progress = 0.1889417
+frame_progress = 0.43877837
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1308076128]
 position = Vector2(0, -1)
@@ -66,5 +66,9 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1859674643]
 shape = SubResource("RectangleShape2D_md0e3")
 debug_color = Color(1, 0, 1, 0.41960785)
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1753183563]
+target_position = Vector2(16, 24)
+collision_mask = 4
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

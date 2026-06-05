@@ -191,7 +191,7 @@ size = Vector2(12, 20)
 size = Vector2(288, 240)
 
 [node name="Player" type="CharacterBody2D" unique_id=1500777258 groups=["player"]]
-collision_mask = 6
+collision_mask = 4
 script = ExtResource("1_g2els")
 
 [node name="Sword" type="Area2D" parent="." unique_id=920218633]

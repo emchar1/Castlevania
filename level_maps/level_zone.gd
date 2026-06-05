@@ -116,6 +116,14 @@ func _on_zone_entered(body: Node2D, direction: Direction):
 			player.kill_movement()
 			set_camera_bounds(player, spawn_pos)
 			set_music()
+	
+	if body.is_in_group("enemy"):
+		var enemy = body as Enemy
+		
+		if enemy:
+			print("reached zone end.")
+			enemy.change_directions()
+
 
 
 func curse_activated(cursed: bool):

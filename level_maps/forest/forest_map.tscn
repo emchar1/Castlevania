@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://c5cduiq7sqrys" path="res://level_maps/forest/forest2.tscn" id="2_tobf8"]
 [ext_resource type="PackedScene" uid="uid://ehytp1wqehtt" path="res://level_maps/forest/forest1.tscn" id="4_rhfp7"]
 [ext_resource type="PackedScene" uid="uid://4e53mg1qib5n" path="res://level_maps/forest/forest3.tscn" id="5_dg22i"]
+[ext_resource type="PackedScene" uid="uid://dnr4tcrjgy05i" path="res://scenes/spawn_manager.tscn" id="6_yngqp"]
+[ext_resource type="PackedScene" uid="uid://br22fefx4l7ia" path="res://scenes/enemy.tscn" id="7_hrco0"]
 
 [node name="ForestMap" type="Node2D" unique_id=2116938927]
 script = ExtResource("1_c8ny8")
@@ -32,3 +34,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="EnemySpawners" type="Node" parent="." unique_id=1610151442]
+
+[node name="SpawnManager" parent="EnemySpawners" unique_id=541113447 instance=ExtResource("6_yngqp")]
+position = Vector2(656, 176)
+enemy_scene = ExtResource("7_hrco0")
+
+[node name="SpawnManager2" parent="EnemySpawners" unique_id=98162249 instance=ExtResource("6_yngqp")]
+position = Vector2(368, 192)
+enemy_scene = ExtResource("7_hrco0")
+
+[node name="SpawnManager3" parent="EnemySpawners" unique_id=1026234273 instance=ExtResource("6_yngqp")]
+position = Vector2(144, 192)
+enemy_scene = ExtResource("7_hrco0")
