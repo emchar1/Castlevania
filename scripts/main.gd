@@ -36,7 +36,7 @@ func zone_trans_ended():
 func kill_player():
 	AudioManager.stop_all_music()
 	
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(2.0).timeout
 	
 	GameState.reset_health()
 	CurseManager.reset_curse()

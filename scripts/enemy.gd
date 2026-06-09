@@ -20,6 +20,7 @@ signal died
 var dir := 1.0
 var is_on_ground := false
 var was_on_ground := false
+var timer: Timer
 
 
 # FUNCTIONS
@@ -71,7 +72,18 @@ func hurt_enemy(dmg: int):
 	modulate = Color.RED
 	speed = 0
 	
-	await get_tree().create_timer(0.6).timeout
+	if timer:
+		timer.stop()
+		timer.queue_free()
+		timer = null
+	
+	timer = Timer.new()
+	timer.wait_time = 0.6
+	timer.one_shot = true
+	add_child(timer)
+	timer.start()
+
+	await timer.timeout
 	
 	modulate = Color.WHITE
 	speed = orig_speed
