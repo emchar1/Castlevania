@@ -92,7 +92,7 @@ func _on_dead_body_entered(body: Node2D) -> void:
 		var player = body as Player
 		
 		if player:
-			player.kill_player()
+			player.kill_player(0.25)
 
 
 func _on_zone_entered(body: Node2D, direction: Direction):

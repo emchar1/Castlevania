@@ -18,6 +18,7 @@ signal dead()
 const SPEED = 60.0
 const ATTACK_DURATION = 0.4
 const JUMP_VELOCITY = -250.0
+const KNOCKBACK_VELOCITY = Vector2(50.0, -150.0)
 
 var move_dir := Vector2.ZERO
 var speed_multiplier := 1.0
@@ -28,6 +29,8 @@ var allow_input := true
 var is_jumping := false
 var is_attacking := false
 var is_crouching := false
+var is_hurt := false
+var is_dead := false
 
 
 # FUNCTIONS
@@ -51,11 +54,14 @@ func _process_gravity(delta: float):
 
 # PLAYER RESET FUNCTIONS
 
-func kill_player():
+func kill_player(delay: float):
+	is_dead = true
+	allow_input = false
 	GameState.update_health(0)
 	dead.emit()
 	
-	await get_tree().create_timer(0.25).timeout
+	await get_tree().create_timer(delay).timeout
+
 	set_process(false)
 	set_physics_process(false)
 	player_sprite.stop()
@@ -122,6 +128,15 @@ func _process_jumping():
 
 
 func _process_animation():
+	if is_dead:
+		if player_sprite.animation != "die":
+			player_sprite.play("die")
+		return
+
+	if is_hurt:
+		player_sprite.play("hurt")
+		return
+
 	if is_attacking:
 		animation_player.play("crouch_attack" if is_crouching else "attack")
 		sword_sprite.play("attack")
@@ -163,5 +178,25 @@ func _on_sword_body_entered(body: Node2D) -> void:
 		var enemy = body as Enemy
 		
 		if enemy:
-			print("enemy hit!!!!")
+			print("player hurt enemy!!!!")
 			enemy.hurt_enemy(attack_dmg)
+
+
+func hurt_player(dmg: int, enemy_pos: Vector2):
+	if is_hurt or is_dead:
+		return
+	
+	is_hurt = true
+	GameState.update_health_by(-dmg)
+
+	velocity = Vector2(
+		(global_position - enemy_pos).normalized().x * KNOCKBACK_VELOCITY.x,
+		KNOCKBACK_VELOCITY.y
+	)
+
+	if GameState.is_health_gone():
+		kill_player(2.0)
+		return
+	
+	await get_tree().create_timer(0.25).timeout
+	is_hurt = false

@@ -17,6 +17,7 @@ signal died
 @onready var sprite = $AnimatedSprite2D
 @onready var ground_ray = $RayCast2D
 
+var orig_speed = 50.0
 var dir := 1.0
 var is_on_ground := false
 var was_on_ground := false
@@ -26,7 +27,7 @@ var timer: Timer
 # FUNCTIONS
 
 func _ready() -> void:
-	_configure_enemy()
+	pass
 
 
 func _physics_process(delta: float) -> void:
@@ -67,10 +68,9 @@ func hurt_enemy(dmg: int):
 		kill_enemy()
 		return
 	
-	var orig_speed = speed
-	
 	modulate = Color.RED
 	speed = 0
+	AudioManager.play(AudioData.AudioKey.ATTACK_SWING)
 	
 	if timer:
 		timer.stop()
@@ -90,35 +90,60 @@ func hurt_enemy(dmg: int):
 
 
 func kill_enemy():
+	modulate = Color.BLACK
+	speed = 0
+	sprite.stop()
+	AudioManager.play(AudioData.AudioKey.ATTACK_KILL)
+
+	if timer:
+		timer.stop()
+		timer.queue_free()
+		timer = null
+	
+	timer = Timer.new()
+	timer.wait_time = 0.2
+	timer.one_shot = true
+	add_child(timer)
+	timer.start()
+
+	await timer.timeout
+
 	CurseManager.increment_curse()
 	died.emit()
 	queue_free()
 
 
-# HELPER FUNCTIONS
+func configure_enemy(_type: Type):
+	type = _type
 
-func _configure_enemy():
 	match type:
 		Type.ZOMBIE:
+			sprite.play("zombie")
 			speed = 50
 			hp = 1
 			attack_dmg = 1
 		Type.SKELETON:
-			speed = 100
+			sprite.play("skeleton")
+			speed = 75
 			hp = 2
 			attack_dmg = 1
 		Type.FRANKENSTEIN:
+			sprite.play("frankenstein")
 			speed = 30
 			hp = 4
 			attack_dmg = 2
 		Type.SLIME:
+			sprite.play("slime")
 			speed = 10
 			hp = 1
 			attack_dmg = 1
 		Type.BAT:
+			sprite.play("bat")
 			speed = 150
 			hp = 1
 			attack_dmg = 1
+
+	orig_speed = speed
 
 
 # SIGNAL FUNCTIONS

@@ -163,9 +163,11 @@ position = Vector2(992, 192)
 
 [node name="SpawnManager" parent="EnemySpawners" unique_id=98162249 instance=ExtResource("4_1y3g8")]
 position = Vector2(760, 200)
+enemy_type = 1
 
 [node name="SpawnManager2" parent="EnemySpawners" unique_id=1146841769 instance=ExtResource("4_1y3g8")]
 position = Vector2(608, 184)
+enemy_type = 1
 
 [node name="SpawnManager3" parent="EnemySpawners" unique_id=202349453 instance=ExtResource("4_1y3g8")]
 position = Vector2(416, 184)

@@ -30,6 +30,7 @@ func _spawn_enemy(player_pos: Vector2):
 	add_child(enemy)
 	
 	enemy.set_direction(player_pos)
+	enemy.configure_enemy(enemy_type)
 	
 	enemy_count += 1
 
