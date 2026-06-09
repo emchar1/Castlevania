@@ -113,4 +113,7 @@ func _configure_enemy():
 
 func _on_player_detector_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		print("Enemy touched player.")
+		var player = body as Player
+		if player:
+			player.hurt_player(attack_dmg, global_position)
+			print("Enemy hurt player.")

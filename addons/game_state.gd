@@ -34,5 +34,13 @@ func decrement_health():
 	update_health(health_current - 1)
 
 
+func update_health_by(amount: int):
+	update_health(health_current + amount)
+
+
 func reset_health():
 	update_health(HEALTH_MAX)
+
+
+func is_health_gone() -> bool:
+	return health_current <= 0
