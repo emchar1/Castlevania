@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ddj10s3b3qnmk" path="res://level_maps/level_zone.gd" id="1_5karn"]
 [ext_resource type="Texture2D" uid="uid://d13lktxnievkk" path="res://assets/images/tilemap_forest.png" id="2_5karn"]
-[ext_resource type="Texture2D" uid="uid://xbhychbhqnjk" path="res://assets/images/tilemap_forest_curse.png" id="2_t5mp4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w3k6w"]
 texture = ExtResource("2_5karn")
@@ -164,8 +163,6 @@ size = Vector2(1024, 8)
 [node name="Forest3" type="Node2D" unique_id=2116938927 groups=["zone"]]
 script = ExtResource("1_5karn")
 music = 2
-cursed_texture = ExtResource("2_t5mp4")
-normal_texture = ExtResource("2_5karn")
 zone_number = 3
 metadata/_edit_vertical_guides_ = [0.0, 256.0, 512.0, 768.0, 1024.0]
 metadata/_edit_horizontal_guides_ = [0.0, 240.0]

@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://ehytp1wqehtt"]
 
 [ext_resource type="Script" uid="uid://ddj10s3b3qnmk" path="res://level_maps/level_zone.gd" id="1_2pb6f"]
-[ext_resource type="Texture2D" uid="uid://xbhychbhqnjk" path="res://assets/images/tilemap_forest_curse.png" id="2_wtdjs"]
 [ext_resource type="Texture2D" uid="uid://d13lktxnievkk" path="res://assets/images/tilemap_forest.png" id="2_xsdtm"]
 [ext_resource type="PackedScene" uid="uid://dnr4tcrjgy05i" path="res://scenes/spawn_manager.tscn" id="4_1y3g8"]
 
@@ -165,8 +164,6 @@ size = Vector2(1024, 8)
 [node name="Forest1" type="Node2D" unique_id=2116938927 groups=["zone"]]
 script = ExtResource("1_2pb6f")
 music = 2
-cursed_texture = ExtResource("2_wtdjs")
-normal_texture = ExtResource("2_xsdtm")
 zone_number = 1
 metadata/_edit_vertical_guides_ = [0.0, 256.0, 512.0, 768.0, 1024.0]
 metadata/_edit_horizontal_guides_ = [0.0, 240.0]
