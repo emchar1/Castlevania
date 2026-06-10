@@ -64,7 +64,7 @@ func kill_player(delay: float):
 	dead.emit()
 	
 	await get_tree().create_timer(delay).timeout
-
+	
 	set_process(false)
 	set_physics_process(false)
 	player_sprite.stop()
@@ -135,11 +135,11 @@ func _process_animation():
 		if player_sprite.animation != "die":
 			player_sprite.play("die")
 		return
-
+	
 	if is_hurt:
 		player_sprite.play("hurt")
 		return
-
+	
 	if is_attacking:
 		animation_player.play("crouch_attack" if is_crouching else "attack")
 		sword_sprite.play("attack")
@@ -194,12 +194,12 @@ func hurt_player(dmg: int, enemy_pos: Vector2):
 	allow_input = false
 	turn_on_invincibility(true)
 	GameState.update_health_by(-dmg)
-
+	
 	velocity = Vector2(
 		(global_position - enemy_pos).normalized().x * KNOCKBACK_VELOCITY.x,
 		KNOCKBACK_VELOCITY.y
 	)
-
+	
 	if GameState.is_health_gone():
 		kill_player(2.0)
 		return
@@ -207,20 +207,20 @@ func hurt_player(dmg: int, enemy_pos: Vector2):
 	await get_tree().create_timer(0.25).timeout
 	allow_input = true
 	is_hurt = false
-
+	
 	await get_tree().create_timer(0.75).timeout
 	turn_on_invincibility(false)
 
 
 func turn_on_invincibility(on: bool):
 	is_invincible = on
-
+	
 	if tween:
 		tween.kill()
-
+	
 	if on:
 		tween = create_tween()
-
+	
 		for i in range(20):
 			tween.tween_property(self, "modulate:a", 0.0, 0.05)
 			tween.tween_property(self, "modulate:a", 1.0, 0.05)

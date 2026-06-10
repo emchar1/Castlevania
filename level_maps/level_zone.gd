@@ -15,8 +15,6 @@ enum Direction {
 }
 
 @export var music: AudioData.Music
-@export var cursed_texture: Texture2D
-@export var normal_texture: Texture2D
 @export var zone_type: ZoneType
 @export var zone_number: int
 var zone_id: String
@@ -33,6 +31,8 @@ var zone_id: String
 @onready var bg_tiles = $TileMapLayers/Background
 @onready var decor_tiles = $TileMapLayers/Decor
 
+var original_coords: Dictionary
+
 
 # FUNCTIONS
 
@@ -40,6 +40,14 @@ var zone_id: String
 func _ready() -> void:
 	zone_id = Zone.get_zone_id(zone_type, zone_number)
 	CurseManager.activated.connect(curse_activated)
+	
+	# Populate original coordinates
+	for tilemap in [floor_tiles, bg_tiles, decor_tiles]:
+		original_coords[tilemap.name] = {}
+		
+		for cell in tilemap.get_used_cells():
+			var tiles = tilemap.get_cell_atlas_coords(cell)
+			original_coords[tilemap.name][cell] = tiles
 
 
 # Sets camera bounds with player's camera.
@@ -98,7 +106,7 @@ func _on_dead_body_entered(body: Node2D) -> void:
 func _on_zone_entered(body: Node2D, direction: Direction):
 	for spawner in enemy_spawners.get_children():
 		spawner.reset_spawn()
-
+	
 	if body.is_in_group("player"):
 		zone_entered.emit(self, direction)
 		
@@ -128,13 +136,13 @@ func _on_zone_entered(body: Node2D, direction: Direction):
 			enemy.change_directions()
 
 
-
 func curse_activated(cursed: bool):
 	set_textures(cursed)
 
 
 func set_textures(cursed: bool):
 	for tilemap in [bg_tiles, decor_tiles, floor_tiles]:
-		var source = tilemap.tile_set.get_source(0) as TileSetAtlasSource
-		if source:
-			source.texture = cursed_texture if cursed else normal_texture
+		for cell in original_coords[tilemap.name]:
+			var coords: Vector2i = original_coords[tilemap.name][cell]
+			var y_offset: int = 3 if cursed else 0
+			tilemap.set_cell(cell, 0, coords + Vector2i(0, y_offset))

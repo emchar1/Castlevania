@@ -75,11 +75,11 @@ func hurt_enemy(dmg: int):
 		tween.kill()
 	
 	tween = create_tween()
-
+	
 	for i in range(20):
 		tween.tween_property(self, "modulate", Color.DEEP_PINK, 0.05)
 		tween.tween_property(self, "modulate", Color.DARK_CYAN, 0.05)
-
+	
 	speed = 0
 	AudioManager.play(AudioData.AudioKey.ATTACK_SWING)
 	
@@ -93,7 +93,7 @@ func hurt_enemy(dmg: int):
 	timer.one_shot = true
 	add_child(timer)
 	timer.start()
-
+	
 	await timer.timeout
 	
 	if tween:
@@ -106,7 +106,7 @@ func hurt_enemy(dmg: int):
 func kill_enemy():
 	if tween:
 		tween.kill()
-
+	
 	if timer:
 		timer.stop()
 		timer.queue_free()
@@ -116,23 +116,23 @@ func kill_enemy():
 	speed = 0
 	sprite.stop()
 	AudioManager.play(AudioData.AudioKey.ATTACK_KILL)
-
+	
 	timer = Timer.new()
 	timer.wait_time = 0.2
 	timer.one_shot = true
 	add_child(timer)
 	timer.start()
-
+	
 	await timer.timeout
-
-	CurseManager.increment_curse()
+	
+	CurseManager.increment_curse()	
 	died.emit()
 	queue_free()
 
 
 func configure_enemy(_type: Type):
 	type = _type
-
+	
 	match type:
 		Type.ZOMBIE:
 			sprite.play("zombie")
@@ -159,7 +159,7 @@ func configure_enemy(_type: Type):
 			speed = 150
 			hp = 1
 			attack_dmg = 1
-
+	
 	orig_speed = speed
 
 
@@ -167,13 +167,13 @@ func configure_enemy(_type: Type):
 
 func handle_collisions():
 	var bodies = player_detector.get_overlapping_bodies()
-
+	
 	for body in bodies:
-	if body.is_in_group("player"):
-		var player = body as Player
-		if player:
-			player.hurt_player(attack_dmg, global_position)
-			print("Enemy hurt player.")
+		if body.is_in_group("player"):
+			var player = body as Player
+			if player:
+				player.hurt_player(attack_dmg, global_position)
+				print("Enemy hurt player.")
 
 
 func _on_player_detector_body_entered(body: Node2D) -> void:
