@@ -176,5 +176,5 @@ func handle_collisions():
 				print("Enemy hurt player.")
 
 
-func _on_player_detector_body_entered(body: Node2D) -> void:
+func _on_player_detector_body_entered(_body: Node2D) -> void:
 	pass
