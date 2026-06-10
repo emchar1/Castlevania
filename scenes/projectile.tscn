@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c8d5br86yi5e1"]
+
+[ext_resource type="Script" uid="uid://df81yvbkjaxul" path="res://scripts/projectile.gd" id="1_q3m7n"]
+[ext_resource type="Texture2D" uid="uid://c48jy06fvddkg" path="res://assets/images/skeleton_bone.png" id="2_softn"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6q2a6"]
+a = Vector2(8, 0)
+
+[node name="Projectile" type="Area2D" unique_id=1666794217]
+collision_layer = 16
+script = ExtResource("1_q3m7n")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=398580473]
+texture_filter = 1
+texture = ExtResource("2_softn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=856489931]
+position = Vector2(-4, -5)
+shape = SubResource("SegmentShape2D_6q2a6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

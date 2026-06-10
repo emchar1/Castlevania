@@ -9,6 +9,8 @@ enum Type {
 
 signal died
 
+const JUMP_FORCE = -300.0
+
 @export var speed = 50.0
 @export var hp = 1
 @export var attack_dmg = 1
@@ -16,15 +18,18 @@ signal died
 
 @onready var sprite = $AnimatedSprite2D
 @onready var player_detector = $PlayerDetector
-@onready var ground_ray = $RayCast2D
+@onready var ground_ray = $FloorRayCast
+@onready var player_ray = $PlayerRayCast
 
 var timer: Timer
 var tween: Tween
+var projectile_scene = preload("res://scenes/projectile.tscn")
 
 var orig_speed = 50.0
 var dir := 1.0
 var is_on_ground := false
 var was_on_ground := false
+var secondary_movement := false
 
 
 # INIT FUNCTIONS
@@ -66,7 +71,7 @@ func configure_enemy(_type: Type):
 			attack_dmg = 1
 		Type.SKELETON2:
 			sprite.play("skeleton2")
-			speed = 75
+			speed = 60
 			hp = 3
 			attack_dmg = 1
 		Type.FRANKENSTEIN:
@@ -143,16 +148,46 @@ func _handle_movement(delta: float):
 	if is_on_floor():
 		velocity.x = speed * dir
 	
-	# Check raycasting
+	# Ground raycasting
 	was_on_ground = is_on_ground
 	is_on_ground = ground_ray.is_colliding()
-	
+
+	if was_on_ground and not is_on_ground and type != Type.SKELETON2:
+		change_directions()
+
+	# Player raycasting
+	if player_ray.is_colliding():
+		_player_detection_secondary_movement()
+	else:
+		secondary_movement = false
+
 	# Update positions
 	ground_ray.target_position.x = abs(ground_ray.target_position.x) * dir
+	player_ray.target_position.x = abs(player_ray.target_position.x) * dir
 	sprite.flip_h = dir < 0
-	
-	if was_on_ground and not is_on_ground:
-		change_directions()
+
+
+func _player_detection_secondary_movement():
+	if secondary_movement:
+		return
+
+	secondary_movement = true
+
+	if type == Type.SKELETON2:
+		if not is_on_floor():
+			return
+
+		var target = position + Vector2(randf_range(50.0, 100.0) * dir, 0.0)
+		
+		velocity.x = -speed * dir
+		velocity.y = JUMP_FORCE
+		
+		await get_tree().create_timer(0.25).timeout
+		
+		var projectile = projectile_scene.instantiate()
+		projectile.position = position
+		get_parent().add_child(projectile)
+		projectile.launch_at(target)
 
 
 func _handle_collisions():

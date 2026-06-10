@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b1elsbfa0osxl" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://ch5dhay75wck0" path="res://assets/images/skeleton.png" id="2_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://o8q75uyabjkl" path="res://assets/images/zombie.png" id="3_4ra3w"]
+[ext_resource type="Texture2D" uid="uid://dk45v43vnm407" path="res://assets/images/skeleton2.png" id="3_5uy6h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xwavj"]
 atlas = ExtResource("2_4ra3w")
@@ -10,6 +11,14 @@ region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nenq2"]
 atlas = ExtResource("2_4ra3w")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qclf"]
+atlas = ExtResource("3_5uy6h")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8i8w"]
+atlas = ExtResource("3_5uy6h")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5uy6h"]
@@ -43,6 +52,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_8qclf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8i8w")
+}],
+"loop": true,
+"name": &"skeleton2",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5uy6h")
 }, {
 "duration": 1.0,
@@ -73,8 +93,8 @@ script = ExtResource("1_md0e3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=463126635]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_xwavj")
-animation = &"skeleton"
-frame_progress = 0.43341842
+animation = &"skeleton2"
+frame_progress = 0.07893287
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1308076128]
 position = Vector2(0, -1)
@@ -87,8 +107,11 @@ collision_layer = 2
 shape = SubResource("RectangleShape2D_md0e3")
 debug_color = Color(1, 0, 1, 0.41960785)
 
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1753183563]
+[node name="FloorRayCast" type="RayCast2D" parent="." unique_id=1753183563]
 target_position = Vector2(16, 16)
 collision_mask = 4
+
+[node name="PlayerRayCast" type="RayCast2D" parent="." unique_id=1323236393]
+target_position = Vector2(40, -8)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
