@@ -20,6 +20,7 @@ const ATTACK_DURATION = 0.4
 const JUMP_VELOCITY = -250.0
 const KNOCKBACK_VELOCITY = Vector2(50.0, -150.0)
 
+var tween: Tween
 var move_dir := Vector2.ZERO
 var speed_multiplier := 1.0
 var jump_multiplier := 1.0
@@ -29,6 +30,7 @@ var allow_input := true
 var is_jumping := false
 var is_attacking := false
 var is_crouching := false
+var is_invincible := false
 var is_hurt := false
 var is_dead := false
 
@@ -57,6 +59,7 @@ func _process_gravity(delta: float):
 func kill_player(delay: float):
 	is_dead = true
 	allow_input = false
+	turn_on_invincibility(false)
 	GameState.update_health(0)
 	dead.emit()
 	
@@ -166,6 +169,7 @@ func _player_attack():
 		
 		is_attacking = true
 		speed_multiplier = 0.0
+		AudioManager.play(AudioData.AudioKey.ATTACK_MISS)
 		
 		await get_tree().create_timer(ATTACK_DURATION).timeout
 		
@@ -183,10 +187,12 @@ func _on_sword_body_entered(body: Node2D) -> void:
 
 
 func hurt_player(dmg: int, enemy_pos: Vector2):
-	if is_hurt or is_dead:
+	if is_hurt or is_dead or is_invincible:
 		return
 	
 	is_hurt = true
+	allow_input = false
+	turn_on_invincibility(true)
 	GameState.update_health_by(-dmg)
 
 	velocity = Vector2(
@@ -199,4 +205,24 @@ func hurt_player(dmg: int, enemy_pos: Vector2):
 		return
 	
 	await get_tree().create_timer(0.25).timeout
+	allow_input = true
 	is_hurt = false
+
+	await get_tree().create_timer(0.75).timeout
+	turn_on_invincibility(false)
+
+
+func turn_on_invincibility(on: bool):
+	is_invincible = on
+
+	if tween:
+		tween.kill()
+
+	if on:
+		tween = create_tween()
+
+		for i in range(20):
+			tween.tween_property(self, "modulate:a", 0.0, 0.05)
+			tween.tween_property(self, "modulate:a", 1.0, 0.05)
+	else:
+		modulate.a = 1.0

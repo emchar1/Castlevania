@@ -15,6 +15,7 @@ signal died
 @export var type: Type
 
 @onready var sprite = $AnimatedSprite2D
+@onready var player_detector = $PlayerDetector
 @onready var ground_ray = $RayCast2D
 
 var orig_speed = 50.0
@@ -22,6 +23,7 @@ var dir := 1.0
 var is_on_ground := false
 var was_on_ground := false
 var timer: Timer
+var tween: Tween
 
 
 # FUNCTIONS
@@ -51,6 +53,7 @@ func _physics_process(delta: float) -> void:
 		change_directions()
 	
 	move_and_slide()
+	handle_collisions()
 
 
 func set_direction(player_pos: Vector2):
@@ -68,7 +71,15 @@ func hurt_enemy(dmg: int):
 		kill_enemy()
 		return
 	
-	modulate = Color.RED
+	if tween:
+		tween.kill()
+	
+	tween = create_tween()
+
+	for i in range(20):
+		tween.tween_property(self, "modulate", Color.DEEP_PINK, 0.05)
+		tween.tween_property(self, "modulate", Color.DARK_CYAN, 0.05)
+
 	speed = 0
 	AudioManager.play(AudioData.AudioKey.ATTACK_SWING)
 	
@@ -85,21 +96,27 @@ func hurt_enemy(dmg: int):
 
 	await timer.timeout
 	
+	if tween:
+		tween.kill()
+	
 	modulate = Color.WHITE
 	speed = orig_speed
 
 
 func kill_enemy():
-	modulate = Color.BLACK
-	speed = 0
-	sprite.stop()
-	AudioManager.play(AudioData.AudioKey.ATTACK_KILL)
+	if tween:
+		tween.kill()
 
 	if timer:
 		timer.stop()
 		timer.queue_free()
 		timer = null
 	
+	modulate = Color.BLACK
+	speed = 0
+	sprite.stop()
+	AudioManager.play(AudioData.AudioKey.ATTACK_KILL)
+
 	timer = Timer.new()
 	timer.wait_time = 0.2
 	timer.one_shot = true
@@ -148,9 +165,16 @@ func configure_enemy(_type: Type):
 
 # SIGNAL FUNCTIONS
 
-func _on_player_detector_body_entered(body: Node2D) -> void:
+func handle_collisions():
+	var bodies = player_detector.get_overlapping_bodies()
+
+	for body in bodies:
 	if body.is_in_group("player"):
 		var player = body as Player
 		if player:
 			player.hurt_player(attack_dmg, global_position)
 			print("Enemy hurt player.")
+
+
+func _on_player_detector_body_entered(body: Node2D) -> void:
+	pass
