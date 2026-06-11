@@ -105,7 +105,9 @@ func hurt_enemy(dmg: int):
 	_setup_timer(0.6, true)
 
 	speed = 0
-	AudioManager.play(AudioData.AudioKey.ATTACK_SWING)
+
+	if not AudioManager.is_playing(AudioData.AudioKey.ATTACK_SWING):
+		AudioManager.play(AudioData.AudioKey.ATTACK_SWING)
 
 	tween = create_tween()
 	for i in range(20):
@@ -128,7 +130,9 @@ func kill_enemy():
 	modulate = Color.BLACK
 	speed = 0
 	sprite.stop()
-	AudioManager.play(AudioData.AudioKey.ATTACK_KILL)
+
+	if not AudioManager.is_playing(AudioData.AudioKey.ATTACK_KILL):
+		AudioManager.play(AudioData.AudioKey.ATTACK_KILL)
 	
 	await timer.timeout
 	

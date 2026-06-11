@@ -164,6 +164,16 @@ func is_music_playing(music: AudioData.Music) -> bool:
 	return current_music == music
 
 
+# Checks if specific sound (or music) is playing.
+func is_playing(sound: AudioData.AudioKey) -> bool:
+	for bus_player in players.values():
+		for player in bus_player:
+			if player.playing and player.stream == AudioData.sounds[sound]["stream"]:
+				return true
+	
+	return false
+
+
 # Primes all looped music (prevents game loop stuttering on Web builds).
 # Does this by playing sound for one game frame.
 func prime_audio():

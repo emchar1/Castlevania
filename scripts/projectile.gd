@@ -4,7 +4,7 @@ class_name Projectile
 # PROPERTIES
 
 var tween: Tween
-var attack_pwr := 1
+var attack_dmg := 1
 
 
 # FUNCTIONS
@@ -51,7 +51,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		var player = body as Player
 		if player:
-			player.hurt_player(attack_pwr, global_position)
+			player.hurt_player(attack_dmg, global_position)
 			
 			if not (player.is_dead or player.is_hurt):
 				remove_projectile(true)

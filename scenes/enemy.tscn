@@ -94,7 +94,7 @@ script = ExtResource("1_md0e3")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_xwavj")
 animation = &"skeleton2"
-frame_progress = 0.07893287
+frame_progress = 0.1671772
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1308076128]
 position = Vector2(0, -1)
