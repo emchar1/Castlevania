@@ -162,7 +162,7 @@ func _process_animation():
 		if CurseManager.active:
 			animation_player.play("attack_wolf")
 		else:
-		animation_player.play("crouch_attack" if is_crouching else "attack")
+			animation_player.play("crouch_attack" if is_crouching else "attack")
 
 		sword_sprite.play("attack")
 		claw_sprite.play("attack")
