@@ -84,9 +84,5 @@ func curse_activated(active: bool):
 	
 	if active:
 		AudioManager.play_music(AudioData.Music.MONSTERDANCE)
-		player.speed_multiplier = 1.5
-		player.jump_multiplier = 1.25
 	else:
 		AudioManager.play_music(AudioData.Music.BLOODYTEARS)
-		player.speed_multiplier = 1.0
-		player.jump_multiplier = 1.0
