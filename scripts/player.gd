@@ -21,6 +21,8 @@ signal dead()
 @onready var animation_player = $AnimationPlayer
 @onready var camera = $Camera2D
 
+const ATTACK_DMG_HUMAN = 1
+const ATTACK_DMG_WEREWOLF = 2
 const SPEED_HUMAN = 60.0
 const SPEED_WEREWOLF = 90.0
 const ATTACK_DURATION_HUMAN = 0.4
@@ -263,7 +265,7 @@ func turn_on_invincibility(on: bool):
 
 func _on_curse_activated(cursed: bool):
 	if cursed:
-		attack_dmg = 2
+		attack_dmg = ATTACK_DMG_WEREWOLF
 		speed = SPEED_WEREWOLF
 		attack_duration = ATTACK_DURATION_WEREWOLF
 		jump_velocity = JUMP_VELOCITY_WEREWOLF
@@ -280,7 +282,7 @@ func _on_curse_activated(cursed: bool):
 		claw.visible = true
 		claw_sprite.visible = true
 	else:
-		attack_dmg = 1
+		attack_dmg = ATTACK_DMG_HUMAN
 		speed = SPEED_HUMAN
 		attack_duration = ATTACK_DURATION_HUMAN
 		jump_velocity = JUMP_VELOCITY_HUMAN
