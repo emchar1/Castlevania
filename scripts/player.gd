@@ -47,7 +47,7 @@ var is_hurt := false
 var is_dead := false
 
 
-# FUNCTIONS
+# INIT FUNCTIONS
 
 func _ready() -> void:
 	# Order matters here! Connect first, then sync state.
@@ -172,7 +172,7 @@ func _process_animation():
 			player_sprite.play("crouch" if is_crouching else "run")
 
 
-# ATTACK FUNCTIONS
+# ATTACK/HURT FUNCTIONS
 
 func _player_attack():
 	if is_attacking:
@@ -241,7 +241,7 @@ func turn_on_invincibility(on: bool):
 		modulate.a = 1.0
 
 
-# SIGNAL CALLBACKS
+# SIGNAL CALLBACK FUNCTIONS
 
 func _on_curse_activated(cursed: bool):
 	if cursed:
