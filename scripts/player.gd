@@ -44,6 +44,7 @@ var combo_timer: Timer
 var combo_count := 0
 var combo_max := 1
 
+var transformation_timer: Timer
 var tween: Tween
 var move_dir := Vector2.ZERO
 var allow_input := true
@@ -65,10 +66,13 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	_process_gravity(delta)
+	move_and_slide()
+	
+	if transformation_timer:
+		return
 	
 	_move_player()
 	_player_attack()
-	move_and_slide()
 
 
 func _process_gravity(delta: float):
@@ -301,6 +305,18 @@ func turn_on_invincibility(on: bool):
 
 func _on_curse_activated(cursed: bool):
 	if cursed:
+		werewolf_sprite.play("transformation")
+
+		if transformation_timer:
+			transformation_timer.queue_free()
+		
+		transformation_timer = Timer.new()
+		transformation_timer.wait_time = 2.0
+		transformation_timer.one_shot = true
+		transformation_timer.timeout.connect(_on_transformation_timeout)
+		add_child(transformation_timer)
+		transformation_timer.start()
+
 		attack_dmg = ATTACK_DMG_WEREWOLF
 		speed = SPEED_WEREWOLF
 		attack_duration = ATTACK_DURATION_WEREWOLF
@@ -339,3 +355,8 @@ func _on_curse_activated(cursed: bool):
 func _on_combo_timeout():
 	combo_timer.queue_free()
 	combo_count = 0
+
+
+func _on_transformation_timeout():
+	transformation_timer.queue_free()
+	werewolf_sprite.play_backwards("transformation")
