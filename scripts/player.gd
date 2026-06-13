@@ -61,7 +61,7 @@ var is_dead := false
 func _ready() -> void:
 	# Order matters here! Connect first, then sync state.
 	CurseManager.activated.connect(_on_curse_activated)
-	_on_curse_activated(CurseManager.active)
+	_on_curse_activated(CurseManager.active, false)
 
 
 func _physics_process(delta: float) -> void:
@@ -303,7 +303,9 @@ func turn_on_invincibility(on: bool):
 
 # CALLBACK FUNCTIONS
 
-func _on_curse_activated(cursed: bool):
+func _on_curse_activated(cursed: bool, should_flash: bool = true):
+	_flash_player(cursed, should_flash)
+
 	if cursed:
 		attack_dmg = ATTACK_DMG_WEREWOLF
 		speed = SPEED_WEREWOLF
@@ -313,11 +315,9 @@ func _on_curse_activated(cursed: bool):
 
 		sword.visible = false
 		sword_sprite.visible = false
-		player_sprite.visible = false
 		collision_stand.disabled = true
 		collision_crouch.disabled = true
 
-		werewolf_sprite.visible = true
 		collision_ww_stand.disabled = false
 		claw.visible = true
 		claw_sprite.visible = true
@@ -346,11 +346,9 @@ func _on_curse_activated(cursed: bool):
 
 		sword.visible = true
 		sword_sprite.visible = true
-		player_sprite.visible = true
 		collision_stand.disabled = false
 		collision_crouch.disabled = false
 
-		werewolf_sprite.visible = false
 		collision_ww_stand.disabled = true
 		claw.visible = false
 		claw_sprite.visible = false
@@ -363,4 +361,22 @@ func _on_combo_timeout():
 
 func _on_transformation_timeout():
 	transformation_timer.queue_free()
-	werewolf_sprite.play_backwards("transformation")
+
+
+func _flash_player(cursed: bool, should_flash: bool):
+	if not should_flash:
+		player_sprite.modulate.a = 0.0 if cursed else 1.0
+		werewolf_sprite.modulate.a = 1.0 if cursed else 0.0
+		return
+
+	var tween_wolf = create_tween()
+	var tween_player = create_tween()
+	
+	for i in range(4):
+		tween_wolf.tween_property(werewolf_sprite, "modulate:a", 0.0 if cursed else 1.0, 0.1)
+		tween_wolf.tween_property(werewolf_sprite, "modulate:a", 1.0 if cursed else 0.0, 0.1)
+
+		tween_player.tween_property(player_sprite, "modulate:a", 1.0 if cursed else 0.0, 0.1)
+		tween_player.tween_property(player_sprite, "modulate:a", 0.0 if cursed else 1.0, 0.1)
+	
+	await tween_wolf.finished
