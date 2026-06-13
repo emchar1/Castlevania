@@ -66,13 +66,13 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	_process_gravity(delta)
-	move_and_slide()
 	
 	if transformation_timer:
 		return
 	
 	_move_player()
 	_player_attack()
+	move_and_slide()
 
 
 func _process_gravity(delta: float):
@@ -305,18 +305,6 @@ func turn_on_invincibility(on: bool):
 
 func _on_curse_activated(cursed: bool):
 	if cursed:
-		werewolf_sprite.play("transformation")
-
-		if transformation_timer:
-			transformation_timer.queue_free()
-		
-		transformation_timer = Timer.new()
-		transformation_timer.wait_time = 2.0
-		transformation_timer.one_shot = true
-		transformation_timer.timeout.connect(_on_transformation_timeout)
-		add_child(transformation_timer)
-		transformation_timer.start()
-
 		attack_dmg = ATTACK_DMG_WEREWOLF
 		speed = SPEED_WEREWOLF
 		attack_duration = ATTACK_DURATION_WEREWOLF
@@ -333,6 +321,22 @@ func _on_curse_activated(cursed: bool):
 		collision_ww_stand.disabled = false
 		claw.visible = true
 		claw_sprite.visible = true
+
+		# Werewolf transformation animation and sound
+		werewolf_sprite.play("transformation")
+
+		if transformation_timer:
+			transformation_timer.queue_free()
+		
+		transformation_timer = Timer.new()
+		transformation_timer.wait_time = 2.0
+		transformation_timer.one_shot = true
+		transformation_timer.timeout.connect(_on_transformation_timeout)
+		add_child(transformation_timer)
+		transformation_timer.start()
+
+		await get_tree().create_timer(0.25).timeout
+		AudioManager.play(AudioData.AudioKey.HOWL)
 	else:
 		attack_dmg = ATTACK_DMG_HUMAN
 		speed = SPEED_HUMAN

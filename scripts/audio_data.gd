@@ -10,7 +10,8 @@ enum AudioKey {
 	MONSTERDANCE,
 	ATTACK_SWING,
 	ATTACK_KILL,
-	ATTACK_MISS
+	ATTACK_MISS,
+	HOWL
 }
 
 enum Music {
@@ -68,5 +69,9 @@ var sounds := {
 	AudioKey.ATTACK_MISS: {
 		"type": Type.SOUND,
 		"stream": preload("res://assets/sounds/attack_miss.ogg")
+	},
+	AudioKey.HOWL: {
+		"type": Type.SOUND,
+		"stream": preload("res://assets/sounds/howl.ogg")
 	}
 }
