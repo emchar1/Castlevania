@@ -40,6 +40,10 @@ var knockback_velocity := Vector2(100.0, -200.0)
 var speed_multiplier := 1.0
 var jump_velocity_x := 0.0
 
+var combo_timer: Timer
+var combo_count := 0
+var combo_max := 1
+
 var tween: Tween
 var move_dir := Vector2.ZERO
 var allow_input := true
@@ -162,12 +166,17 @@ func _process_animation():
 	
 	if is_attacking:
 		if CurseManager.active:
-			animation_player.play("attack_wolf")
+			match combo_count:
+				0:
+					animation_player.play("attack_wolf1")
+					claw_sprite.play("attack1")
+				1: 
+					animation_player.play("attack_wolf2")
+					claw_sprite.play("attack2")
 		else:
 			animation_player.play("crouch_attack" if is_crouching else "attack")
+			sword_sprite.play("attack")
 
-		sword_sprite.play("attack")
-		claw_sprite.play("attack")
 		return
 	
 	if is_jumping:
@@ -176,14 +185,19 @@ func _process_animation():
 	
 	if move_dir.x == 0:
 		player_sprite.play("crouch" if is_crouching else "idle")
+		werewolf_sprite.play("idle")
 	else:
 		if is_on_floor():
 			player_sprite.flip_h = move_dir.x > 0
 			sword.scale.x = -1 if player_sprite.flip_h else 1
+			werewolf_sprite.flip_h = move_dir.x > 0
+			claw.scale.x = -1 if werewolf_sprite.flip_h else 1
+
 			player_sprite.play("crouch" if is_crouching else "run")
+			werewolf_sprite.play("run")
 
 
-# ATTACK/HURT FUNCTIONS
+# ATTACK FUNCTIONS
 
 func _player_attack():
 	if is_attacking:
@@ -193,6 +207,7 @@ func _player_attack():
 		
 		is_attacking = true
 		speed_multiplier = 0.0
+		_start_combo()
 		AudioManager.play(AudioData.AudioKey.ATTACK_MISS)
 		
 		await get_tree().create_timer(attack_duration).timeout
@@ -201,14 +216,33 @@ func _player_attack():
 		is_attacking = false
 
 
+func _start_combo():
+	if not CurseManager.active:
+		return
+
+	if combo_timer:
+		combo_timer.queue_free()
+		combo_count += 1
+	else:
+		combo_count = 0
+
+	if combo_count > combo_max:
+		combo_count = 0
+	
+	combo_timer = Timer.new()
+	combo_timer.wait_time = 0.8
+	combo_timer.one_shot = true
+	combo_timer.timeout.connect(_on_combo_timeout)
+	add_child(combo_timer)
+	combo_timer.start()
+
+
 func _on_sword_body_entered(body: Node2D) -> void:
 	_attack_body_entered(body)
-	print("sword attack")
 
 
 func _on_claw_body_entered(body: Node2D) -> void:
 	_attack_body_entered(body)
-	print("claw attack")
 
 
 func _attack_body_entered(body: Node2D):
@@ -218,6 +252,8 @@ func _attack_body_entered(body: Node2D):
 		if enemy:
 			enemy.hurt_enemy(attack_dmg)
 
+
+# HURT FUNCTIONS
 
 func hurt_player(dmg: int, enemy_pos: Vector2):
 	if is_hurt or is_dead or is_invincible:
@@ -261,7 +297,7 @@ func turn_on_invincibility(on: bool):
 		modulate.a = 1.0
 
 
-# SIGNAL CALLBACK FUNCTIONS
+# CALLBACK FUNCTIONS
 
 func _on_curse_activated(cursed: bool):
 	if cursed:
@@ -298,3 +334,8 @@ func _on_curse_activated(cursed: bool):
 		collision_ww_stand.disabled = true
 		claw.visible = false
 		claw_sprite.visible = false
+
+
+func _on_combo_timeout():
+	combo_timer.queue_free()
+	combo_count = 0
