@@ -13,10 +13,11 @@ signal dead()
 @onready var collision_crouch = $CollisionCrouch
 
 # Werewolf
-@onready var werewolf_sprite = $SpriteWerewolf
-@onready var collision_ww_stand = $CollisionWWStand
 @onready var claw = $Claw
 @onready var claw_sprite = $Claw/SpriteClaw
+@onready var werewolf_sprite = $SpriteWerewolf
+@onready var collision_ww_stand = $CollisionWWStand
+@onready var collision_ww_crouch = $CollisionWWCrouch
 
 @onready var animation_player = $AnimationPlayer
 @onready var camera = $Camera2D
@@ -30,7 +31,7 @@ const ATTACK_DURATION_WEREWOLF = 0.4
 const JUMP_VELOCITY_HUMAN = -250.0
 const JUMP_VELOCITY_WEREWOLF = -300.0
 const KNOCKBACK_VELOCITY_HUMAN = Vector2(50.0, -150.0)
-const KNOCKBACK_VELOCITY_WEREWOLF = Vector2(0.0, 0.0)
+const KNOCKBACK_VELOCITY_WEREWOLF = Vector2(1.0, -1.0)
 
 var attack_dmg := 1
 var speed := 1.0
@@ -87,6 +88,7 @@ func kill_player(delay: float):
 	allow_input = false
 	turn_on_invincibility(false)
 	GameState.update_health(0)
+	AudioManager.play(AudioData.AudioKey.DEATH)
 	dead.emit()
 	
 	await get_tree().create_timer(delay).timeout
@@ -137,15 +139,22 @@ func _process_crouching():
 	if is_crouching:
 		sword.position.y = 8
 		collision_crouch.disabled = false
+		collision_ww_crouch.disabled = false
 		collision_stand.disabled = true
+		collision_ww_stand.disabled = true
 	else:
 		sword.position.y = 0
 		collision_crouch.disabled = true
+		collision_ww_crouch.disabled = true
 		collision_stand.disabled = false
+		collision_ww_stand.disabled = false
 
 
 func _process_jumping():
 	if is_on_floor():
+		if is_jumping:
+			AudioManager.play(AudioData.AudioKey.LAND)
+
 		is_jumping = false
 	
 	if is_jumping:
@@ -162,6 +171,10 @@ func _process_animation():
 	if is_dead:
 		if player_sprite.animation != "die":
 			player_sprite.play("die")
+		
+		if werewolf_sprite.animation != "die":
+			werewolf_sprite.play("die")
+		
 		return
 	
 	if is_hurt:
@@ -185,11 +198,12 @@ func _process_animation():
 	
 	if is_jumping:
 		player_sprite.play("jump")
+		werewolf_sprite.play("jump")
 		return
 	
 	if move_dir.x == 0:
 		player_sprite.play("crouch" if is_crouching else "idle")
-		werewolf_sprite.play("idle")
+		werewolf_sprite.play("crouch" if is_crouching else "idle")
 	else:
 		if is_on_floor():
 			player_sprite.flip_h = move_dir.x > 0
@@ -198,7 +212,7 @@ func _process_animation():
 			claw.scale.x = -1 if werewolf_sprite.flip_h else 1
 
 			player_sprite.play("crouch" if is_crouching else "run")
-			werewolf_sprite.play("run")
+			werewolf_sprite.play("crouch" if is_crouching else "run")
 
 
 # ATTACK FUNCTIONS
@@ -327,15 +341,6 @@ func _on_curse_activated(cursed: bool, should_flash: bool = true):
 		jump_velocity = JUMP_VELOCITY_WEREWOLF
 		knockback_velocity = KNOCKBACK_VELOCITY_WEREWOLF
 
-		sword.visible = false
-		sword_sprite.visible = false
-		collision_stand.disabled = true
-		collision_crouch.disabled = true
-
-		collision_ww_stand.disabled = false
-		claw.visible = true
-		claw_sprite.visible = true
-
 		await get_tree().create_timer(0.25).timeout
 		AudioManager.play(AudioData.AudioKey.HOWL)
 	else:
@@ -344,15 +349,16 @@ func _on_curse_activated(cursed: bool, should_flash: bool = true):
 		attack_duration = ATTACK_DURATION_HUMAN
 		jump_velocity = JUMP_VELOCITY_HUMAN
 		knockback_velocity = KNOCKBACK_VELOCITY_HUMAN
+	
+	sword.visible = not cursed
+	sword_sprite.visible = not cursed
+	collision_stand.disabled = cursed
+	collision_crouch.disabled = cursed
 
-		sword.visible = true
-		sword_sprite.visible = true
-		collision_stand.disabled = false
-		collision_crouch.disabled = false
-
-		collision_ww_stand.disabled = true
-		claw.visible = false
-		claw_sprite.visible = false
+	claw.visible = cursed
+	claw_sprite.visible = cursed
+	collision_ww_stand.disabled = not cursed
+	collision_ww_crouch.disabled = not cursed
 
 
 func _on_combo_timeout():
