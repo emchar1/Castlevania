@@ -306,6 +306,20 @@ func turn_on_invincibility(on: bool):
 func _on_curse_activated(cursed: bool, should_flash: bool = true):
 	_flash_player(cursed, should_flash)
 
+	if should_flash:
+		# Werewolf transformation animation and sound
+		werewolf_sprite.play("transformation")
+
+		if transformation_timer:
+			transformation_timer.queue_free()
+		
+		transformation_timer = Timer.new()
+		transformation_timer.wait_time = 2.0 if cursed else 1.0
+		transformation_timer.one_shot = true
+		transformation_timer.timeout.connect(_on_transformation_timeout)
+		add_child(transformation_timer)
+		transformation_timer.start()
+
 	if cursed:
 		attack_dmg = ATTACK_DMG_WEREWOLF
 		speed = SPEED_WEREWOLF
@@ -321,19 +335,6 @@ func _on_curse_activated(cursed: bool, should_flash: bool = true):
 		collision_ww_stand.disabled = false
 		claw.visible = true
 		claw_sprite.visible = true
-
-		# Werewolf transformation animation and sound
-		werewolf_sprite.play("transformation")
-
-		if transformation_timer:
-			transformation_timer.queue_free()
-		
-		transformation_timer = Timer.new()
-		transformation_timer.wait_time = 2.0
-		transformation_timer.one_shot = true
-		transformation_timer.timeout.connect(_on_transformation_timeout)
-		add_child(transformation_timer)
-		transformation_timer.start()
 
 		await get_tree().create_timer(0.25).timeout
 		AudioManager.play(AudioData.AudioKey.HOWL)

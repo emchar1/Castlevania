@@ -35,7 +35,7 @@ var secondary_movement := false
 # INIT FUNCTIONS
 
 func _ready() -> void:
-	pass
+	CurseManager.activated.connect(curse_activated)
 
 
 func _physics_process(delta: float) -> void:
@@ -227,3 +227,11 @@ func _setup_timer(wait_time: float, one_shot: bool):
 
 func _on_player_detector_body_entered(_body: Node2D) -> void:
 	pass
+
+
+func curse_activated(cursed: bool):
+	speed = 0
+
+	await get_tree().create_timer(2.0 if cursed else 1.0).timeout
+
+	speed = orig_speed

@@ -141,8 +141,22 @@ func curse_activated(cursed: bool):
 
 
 func set_textures(cursed: bool):
+	await fade_textures([0.75, 0.5, 0.25, 0.0])
+
 	for tilemap in [bg_tiles, decor_tiles, floor_tiles]:
 		for cell in original_coords[tilemap.name]:
 			var coords: Vector2i = original_coords[tilemap.name][cell]
 			var y_offset: int = 3 if cursed else 0
 			tilemap.set_cell(cell, 0, coords + Vector2i(0, y_offset))
+
+	if cursed:
+		await get_tree().create_timer(0.6).timeout
+
+	fade_textures([0.25, 0.5, 0.75, 1.0])
+
+
+func fade_textures(values: Array):
+	for value in values:
+		for tilemap in [bg_tiles, decor_tiles, floor_tiles]:
+			tilemap.modulate = Color(value, value, value)
+			await get_tree().create_timer(0.05).timeout
