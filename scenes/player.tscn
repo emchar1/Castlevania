@@ -883,6 +883,7 @@ shape = SubResource("RectangleShape2D_qlg0r")
 [node name="CollisionWWCrouch" type="CollisionShape2D" parent="." unique_id=1023802443]
 position = Vector2(-2, 0.5)
 shape = SubResource("RectangleShape2D_tuyoq")
+disabled = true
 debug_color = Color(0.68120867, 0.50354284, 0, 0.41960785)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1957502997]

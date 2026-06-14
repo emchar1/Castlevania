@@ -136,7 +136,9 @@ func kill_enemy():
 	
 	await timer.timeout
 	
-	CurseManager.increment_curse()	
+	if not CurseManager.active:
+		CurseManager.increment_curse()	
+	
 	died.emit()
 	queue_free()
 

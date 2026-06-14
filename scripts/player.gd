@@ -135,19 +135,18 @@ func _process_crouching():
 		and move_dir.x == 0
 		and Input.is_action_pressed("move_down")
 	)
-		
-	if is_crouching:
-		sword.position.y = 8
-		collision_crouch.disabled = false
-		collision_ww_crouch.disabled = false
-		collision_stand.disabled = true
-		collision_ww_stand.disabled = true
-	else:
-		sword.position.y = 0
-		collision_crouch.disabled = true
-		collision_ww_crouch.disabled = true
-		collision_stand.disabled = false
-		collision_ww_stand.disabled = false
+
+	sword.position.y = 8 if is_crouching else 0
+
+	var cursed = CurseManager.active
+
+	# human collisions
+	collision_crouch.disabled = cursed or not is_crouching
+	collision_stand.disabled = cursed or is_crouching
+
+	# werewolf collisions
+	collision_ww_crouch.disabled = not cursed or not is_crouching
+	collision_ww_stand.disabled = not cursed or is_crouching
 
 
 func _process_jumping():
