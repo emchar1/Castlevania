@@ -2,8 +2,33 @@
 
 [ext_resource type="Script" uid="uid://b1elsbfa0osxl" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://ch5dhay75wck0" path="res://assets/images/skeleton.png" id="2_4ra3w"]
+[ext_resource type="Texture2D" uid="uid://bcrgqgbx670ft" path="res://assets/images/bat.png" id="2_c4w8v"]
 [ext_resource type="Texture2D" uid="uid://o8q75uyabjkl" path="res://assets/images/zombie.png" id="3_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://dk45v43vnm407" path="res://assets/images/skeleton2.png" id="3_5uy6h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otmr2"]
+atlas = ExtResource("2_c4w8v")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtq4b"]
+atlas = ExtResource("2_c4w8v")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0cyh"]
+atlas = ExtResource("2_c4w8v")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0wcc"]
+atlas = ExtResource("2_c4w8v")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1ycm"]
+atlas = ExtResource("2_c4w8v")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shcg2"]
+atlas = ExtResource("2_c4w8v")
+region = Rect2(48, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xwavj"]
 atlas = ExtResource("2_4ra3w")
@@ -39,6 +64,34 @@ region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xwavj"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otmr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtq4b")
+}],
+"loop": true,
+"name": &"bat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0cyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0wcc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s1ycm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shcg2")
+}],
+"loop": true,
+"name": &"bat_idle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xwavj")
@@ -93,8 +146,7 @@ script = ExtResource("1_md0e3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=463126635]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_xwavj")
-animation = &"skeleton2"
-frame_progress = 0.1671772
+animation = &"bat"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1308076128]
 position = Vector2(0, -1)
@@ -106,6 +158,9 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1859674643]
 shape = SubResource("RectangleShape2D_md0e3")
 debug_color = Color(1, 0, 1, 0.41960785)
+
+[node name="BatRayCast" type="RayCast2D" parent="." unique_id=1498958022]
+target_position = Vector2(128, 128)
 
 [node name="FloorRayCast" type="RayCast2D" parent="." unique_id=1753183563]
 target_position = Vector2(16, 16)

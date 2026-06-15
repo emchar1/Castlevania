@@ -8,6 +8,7 @@ enum AudioKey {
 	BLOODYTEARS_INTRO,
 	BLOODYTEARS_LOOP,
 	MONSTERDANCE,
+	SWITCHWITHME,
 	ENERGIA,
 	ATTACK_SWING,
 	ATTACK_KILL,
@@ -18,7 +19,7 @@ enum AudioKey {
 }
 
 enum Music {
-	NONE, SILENCE, BLOODYTEARS, MONSTERDANCE, ENERGIA
+	NONE, SILENCE, BLOODYTEARS, MONSTERDANCE, SWITCHWITHME, ENERGIA
 }
 
 enum Type {
@@ -37,6 +38,10 @@ var music_map := {
 	Music.MONSTERDANCE: {
 		"intro": null,
 		"loop": AudioKey.MONSTERDANCE
+	},
+	Music.SWITCHWITHME: {
+		"intro": null,
+		"loop": AudioKey.SWITCHWITHME
 	},
 	Music.ENERGIA: {
 		"intro": null,
@@ -64,6 +69,10 @@ var sounds := {
 	AudioKey.MONSTERDANCE: {
 		"type": Type.MUSIC_LOOP,
 		"stream": preload("res://assets/sounds/monsterdance.ogg")
+	},
+	AudioKey.SWITCHWITHME: {
+		"type": Type.MUSIC_LOOP,
+		"stream": preload("res://assets/sounds/switchwithme.ogg")
 	},
 	AudioKey.ENERGIA: {
 		"type": Type.MUSIC_LOOP,
