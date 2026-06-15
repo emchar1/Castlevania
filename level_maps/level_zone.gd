@@ -34,6 +34,9 @@ var zone_id: String
 var all_tilemaps: Array
 var original_coords: Dictionary
 
+# var energia_bpm_interval: float = 60 / 133.6
+# var energia_length: float = 40 * 4
+
 
 # FUNCTIONS
 
@@ -141,6 +144,61 @@ func _on_zone_entered(body: Node2D, direction: Direction):
 func curse_activated(cursed: bool):
 	set_textures(cursed)
 
+	# if cursed:
+	# 	await get_tree().create_timer(1.0 + 3 * energia_bpm_interval).timeout
+
+	# 	var energia_range_last = energia_length - 1
+	# 	var color_index := 0
+	# 	var rhythm_index := 0
+
+	# 	var colors = [
+	# 		Color.RED,
+	# 		Color.GREEN,
+	# 		Color.CYAN,
+	# 		Color.MAGENTA
+	# 	]
+		
+	# 	var rhythm = [
+	# 		{ "note_length": 4.0, "count": 1 * 1 },
+	# 		{ "note_length": 1.0, "count": 11 * 4 },
+	# 		{ "note_length": 4.0, "count": 2 * 1 },
+	# 		{ "note_length": 2.0, "count": 2 * 2 },
+	# 		{ "note_length": 1.0, "count": 1 * 4 },
+	# 		{ "note_length": 0.5, "count": 1 * 8 },
+	# 		{ "note_length": 0.25, "count": 2 * 16 },
+	# 		{ "note_length": 1.0, "count": 20 * 4 },
+	# 	]
+
+	# 	print("curse activated!")
+	# 	for i in range(energia_length):
+	# 		var note_count = rhythm[rhythm_index]["count"]
+	# 		var note_length = rhythm[rhythm_index]["note_length"]
+
+	# 		for _j in range(note_count):
+	# 			# Revert to orginal color at end of curse sequence
+	# 			if not CurseManager.active:
+	# 				color_textures(Color.WHITE)
+	# 				break
+
+	# 			# Last index also gets original color
+	# 			color_textures(colors[color_index] if i < energia_range_last else Color.WHITE)
+
+	# 			await get_tree().create_timer(energia_bpm_interval * note_length).timeout
+
+	# 			# Cycle through colors, resetting at end
+	# 			color_index += 1
+	# 			if color_index >= colors.size():
+	# 				color_index = 0
+
+	# 		# Same with rhythm...
+	# 		rhythm_index += 1
+	# 		if rhythm_index >= rhythm.size():
+	# 			rhythm_index = 0			
+	# else:
+	# 	color_textures(Color.WHITE)
+
+
+# TEXTURE FUNCTIONS
 
 func set_textures(cursed: bool):
 	await fade_textures([0.75, 0.5, 0.25, 0.0])
@@ -162,3 +220,8 @@ func fade_textures(values: Array):
 		for tilemap in all_tilemaps:
 			tilemap.modulate = Color(value, value, value)
 			await get_tree().create_timer(0.05).timeout
+
+
+func color_textures(color: Color):
+	for tilemap in all_tilemaps:
+		tilemap.modulate = Color.WHITE.lerp(color, 0.25)
