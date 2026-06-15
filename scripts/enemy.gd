@@ -20,6 +20,7 @@ const JUMP_FORCE = -300.0
 @onready var player_detector = $PlayerDetector
 @onready var ground_ray = $FloorRayCast
 @onready var player_ray = $PlayerRayCast
+@onready var bat_ray = $BatRayCast
 
 var timer: Timer
 var tween: Tween
@@ -85,8 +86,8 @@ func configure_enemy(_type: Type):
 			hp = 1
 			attack_dmg = 1
 		Type.BAT:
-			sprite.play("bat")
-			speed = 150
+			sprite.play("bat_idle")
+			speed = 80
 			hp = 1
 			attack_dmg = 1
 	
@@ -137,7 +138,7 @@ func kill_enemy():
 	await timer.timeout
 	
 	if not CurseManager.active:
-		CurseManager.increment_curse()	
+		CurseManager.increment_curse()
 	
 	died.emit()
 	queue_free()
