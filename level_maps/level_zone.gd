@@ -31,6 +31,7 @@ var zone_id: String
 @onready var bg_tiles = $TileMapLayers/Background
 @onready var decor_tiles = $TileMapLayers/Decor
 
+var all_tilemaps: Array
 var original_coords: Dictionary
 
 
@@ -38,11 +39,12 @@ var original_coords: Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	all_tilemaps = [floor_tiles, bg_tiles, decor_tiles]
 	zone_id = Zone.get_zone_id(zone_type, zone_number)
 	CurseManager.activated.connect(curse_activated)
 	
 	# Populate original coordinates
-	for tilemap in [floor_tiles, bg_tiles, decor_tiles]:
+	for tilemap in all_tilemaps:
 		original_coords[tilemap.name] = {}
 		
 		for cell in tilemap.get_used_cells():
@@ -143,7 +145,7 @@ func curse_activated(cursed: bool):
 func set_textures(cursed: bool):
 	await fade_textures([0.75, 0.5, 0.25, 0.0])
 
-	for tilemap in [bg_tiles, decor_tiles, floor_tiles]:
+	for tilemap in all_tilemaps:
 		for cell in original_coords[tilemap.name]:
 			var coords: Vector2i = original_coords[tilemap.name][cell]
 			var y_offset: int = 3 if cursed else 0
@@ -157,6 +159,6 @@ func set_textures(cursed: bool):
 
 func fade_textures(values: Array):
 	for value in values:
-		for tilemap in [bg_tiles, decor_tiles, floor_tiles]:
+		for tilemap in all_tilemaps:
 			tilemap.modulate = Color(value, value, value)
 			await get_tree().create_timer(0.05).timeout

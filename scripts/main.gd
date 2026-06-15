@@ -83,7 +83,7 @@ func curse_activated(active: bool):
 	AudioManager.stop_music(AudioManager.current_music)
 	
 	if active:
-		await get_tree().create_timer(2.0).timeout
-		AudioManager.play_music(AudioData.Music.MONSTERDANCE)
+		await get_tree().create_timer(1.0).timeout
+		AudioManager.play_music(AudioData.Music.ENERGIA)
 	else:
 		AudioManager.play_music(AudioData.Music.BLOODYTEARS)
