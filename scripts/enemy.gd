@@ -24,13 +24,16 @@ const JUMP_FORCE = -300.0
 
 var timer: Timer
 var tween: Tween
+var movement_type: Callable
 var projectile_scene = preload("res://scenes/projectile.tscn")
 
 var orig_speed = 50.0
 var dir := 1.0
+
 var is_on_ground := false
 var was_on_ground := false
 var secondary_movement := false
+var should_chase := false
 
 
 # INIT FUNCTIONS
@@ -65,31 +68,37 @@ func configure_enemy(_type: Type):
 			speed = 50
 			hp = 1
 			attack_dmg = 1
+			movement_type = _movement1
 		Type.SKELETON:
 			sprite.play("skeleton")
 			speed = 75
 			hp = 2
 			attack_dmg = 1
+			movement_type = _movement1
 		Type.SKELETON2:
 			sprite.play("skeleton2")
 			speed = 60
 			hp = 3
 			attack_dmg = 1
+			movement_type = _movement2
 		Type.FRANKENSTEIN:
 			sprite.play("frankenstein")
 			speed = 30
 			hp = 4
 			attack_dmg = 2
+			movement_type = _movement1
 		Type.SLIME:
 			sprite.play("slime")
 			speed = 10
 			hp = 1
 			attack_dmg = 1
+			movement_type = _movement1
 		Type.BAT:
 			sprite.play("bat_idle")
 			speed = 80
 			hp = 1
 			attack_dmg = 1
+			movement_type = _movement3
 	
 	orig_speed = speed
 
@@ -144,9 +153,20 @@ func kill_enemy():
 	queue_free()
 
 
-# HELPER FUNCTIONS
+# MOVEMENT FUNCTIONS
 
 func _handle_movement(delta: float):
+	if movement_type:
+		movement_type.call(delta)
+	
+	# Update positions
+	ground_ray.target_position.x = abs(ground_ray.target_position.x) * dir
+	player_ray.target_position.x = abs(player_ray.target_position.x) * dir
+	bat_ray.target_position.x = abs(bat_ray.target_position.x) * dir
+	sprite.flip_h = dir < 0
+
+
+func _movement1(delta: float):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -159,8 +179,19 @@ func _handle_movement(delta: float):
 	was_on_ground = is_on_ground
 	is_on_ground = ground_ray.is_colliding()
 
-	if was_on_ground and not is_on_ground and type != Type.SKELETON2:
+	if was_on_ground and not is_on_ground:
 		change_directions()
+
+
+
+func _movement2(delta: float):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle movement
+	if is_on_floor():
+		velocity.x = speed * dir
 
 	# Player raycasting
 	if player_ray.is_colliding():
@@ -168,10 +199,16 @@ func _handle_movement(delta: float):
 	else:
 		secondary_movement = false
 
-	# Update positions
-	ground_ray.target_position.x = abs(ground_ray.target_position.x) * dir
-	player_ray.target_position.x = abs(player_ray.target_position.x) * dir
-	sprite.flip_h = dir < 0
+
+func _movement3(_delta: float):
+	# if should_chase:
+	# 	velocity.x = speed * dir
+
+	# Bat raycasting
+	if bat_ray.is_colliding():
+		should_chase = true
+		sprite.play("bat")
+		velocity.x = speed * dir
 
 
 func _player_detection_secondary_movement():
@@ -180,22 +217,23 @@ func _player_detection_secondary_movement():
 
 	secondary_movement = true
 
-	if type == Type.SKELETON2:
-		if not is_on_floor():
-			return
+	if not is_on_floor():
+		return
 
-		var target = position + Vector2(randf_range(50.0, 100.0) * dir, 0.0)
-		
-		velocity.x = -speed * dir
-		velocity.y = JUMP_FORCE
-		
-		await get_tree().create_timer(0.25).timeout
-		
-		var projectile = projectile_scene.instantiate()
-		projectile.position = position
-		get_parent().add_child(projectile)
-		projectile.launch_at(target)
+	var target = position + Vector2(randf_range(50.0, 100.0) * dir, 0.0)
+	
+	velocity.x = -speed * dir
+	velocity.y = JUMP_FORCE
+	
+	await get_tree().create_timer(0.25).timeout
+	
+	var projectile = projectile_scene.instantiate()
+	projectile.position = position
+	get_parent().add_child(projectile)
+	projectile.launch_at(target)
 
+
+# MISC FUNCTIONS
 
 func _handle_collisions():
 	var bodies = player_detector.get_overlapping_bodies()
