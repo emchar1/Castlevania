@@ -226,7 +226,7 @@ func set_textures(cursed: bool):
 			tilemap.set_cell(cell, 0, coords + Vector2i(0, y_offset))
 	
 	if cursed:
-		await get_tree().create_timer(0.6).timeout
+		await get_tree().create_timer(0.3).timeout
 	
 	fade_textures([0.25, 0.5, 0.75, 1.0])
 
