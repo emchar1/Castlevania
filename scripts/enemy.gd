@@ -141,6 +141,8 @@ func kill_enemy():
 	
 	modulate = Color.BLACK
 	speed = 0
+	velocity = Vector2.ZERO
+	player_detector.monitoring = false
 	sprite.stop()
 	
 	if not AudioManager.is_playing(AudioData.AudioKey.ATTACK_KILL):
@@ -249,6 +251,9 @@ func _player_detection_secondary_movement():
 # MISC FUNCTIONS
 
 func _handle_collisions():
+	if player_detector.monitoring == false:
+		return
+	
 	var bodies = player_detector.get_overlapping_bodies()
 	
 	for body in bodies:
