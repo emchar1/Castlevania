@@ -11,7 +11,7 @@ enum ZoneType {
 }
 
 enum Direction {
-	LEFT, RIGHT, TOP_LEFT, TOP_RIGHT
+	LEFT, RIGHT, TOP_LEFT, TOP_RIGHT, TOP
 }
 
 @export var music: AudioData.Music
@@ -99,6 +99,10 @@ func _on_exit_top_right_body_entered(body: Node2D) -> void:
 	_on_zone_entered(body, Direction.TOP_RIGHT)
 
 
+func _on_exit_top_body_entered(body: Node2D) -> void:
+	_on_zone_entered(body, Direction.TOP)
+
+
 func _on_dead_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		zone_dead.emit()
@@ -139,19 +143,22 @@ func _on_zone_entered(body: Node2D, direction: Direction):
 		var enemy = body as Enemy
 		
 		if enemy:
-			enemy.change_directions()
+			if direction == Direction.TOP:
+				enemy.queue_free()
+			else:
+				enemy.change_directions()
 
 
 func curse_activated(cursed: bool):
 	set_textures(cursed)
-
+	
 	if cursed:
 		await get_tree().create_timer(1.0 + 2 * energia_bpm_interval).timeout
-
+		
 		var energia_range_last = energia_length - 1
 		var color_index := 0
 		var rhythm_index := 0
-
+		
 		var colors = [
 			Color.RED,
 			Color.GREEN,
@@ -170,38 +177,39 @@ func curse_activated(cursed: bool):
 			{ "note_length": 0.125, "count": 1 * 32, "should_fade": false },
 			{ "note_length": 1.0, "count": 20 * 4, "should_fade": true },
 		]
-
+		
 		for i in range(energia_length):
 			var note_length = rhythm[rhythm_index]["note_length"]
 			var note_count = rhythm[rhythm_index]["count"]
 			var should_fade = rhythm[rhythm_index]["should_fade"]
-
+			var timer_duration = energia_bpm_interval * note_length
+			
 			for _j in range(note_count):
 				# Revert to orginal color at end of curse sequence
 				if not CurseManager.active:
 					color_textures(Color.WHITE)
 					break
-
+				
 				# Last index also gets original color
 				var flash_color = colors[color_index]
-
+				
 				color_textures(
 					flash_color if i < energia_range_last else Color.WHITE,
 					should_fade,
 					note_length
 				)
-
-				await get_tree().create_timer(energia_bpm_interval * note_length).timeout
-
+				
+				await get_tree().create_timer(timer_duration).timeout
+				
 				# Cycle through colors, resetting at end
 				color_index += 1
 				if color_index >= colors.size():
 					color_index = 0
-
+			
 			# Same with rhythm...
 			rhythm_index += 1
 			if rhythm_index >= rhythm.size():
-				rhythm_index = 0			
+				rhythm_index = 0
 	else:
 		color_textures(Color.WHITE)
 
@@ -210,16 +218,16 @@ func curse_activated(cursed: bool):
 
 func set_textures(cursed: bool):
 	await fade_textures([0.75, 0.5, 0.25, 0.0])
-
+	
 	for tilemap in all_tilemaps:
 		for cell in original_coords[tilemap.name]:
 			var coords: Vector2i = original_coords[tilemap.name][cell]
 			var y_offset: int = 3 if cursed else 0
 			tilemap.set_cell(cell, 0, coords + Vector2i(0, y_offset))
-
+	
 	if cursed:
 		await get_tree().create_timer(0.6).timeout
-
+	
 	fade_textures([0.25, 0.5, 0.75, 1.0])
 
 
@@ -230,13 +238,17 @@ func fade_textures(values: Array):
 			await get_tree().create_timer(0.05).timeout
 
 
-func color_textures(color: Color, should_fade: bool = false, fade_out: float = 0.0):
+func color_textures(
+	color: Color,
+	should_fade: bool = false,
+	fade_out: float = 0.0
+):
 	for tilemap in all_tilemaps:
 		tilemap.modulate = color
-
+		
 		if energia_tween:
 			energia_tween.kill()
-
+		
 		if should_fade:
 			energia_tween = create_tween()
 			energia_tween.tween_property(

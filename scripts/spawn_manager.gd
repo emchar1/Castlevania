@@ -20,7 +20,8 @@ func _on_area_entered(area: Area2D) -> void:
 			call_deferred("_spawn_enemy", player.global_position)
 
 
-# Spawns an enemy if the spawner is not at max capacity. Called when the player enters the spawner's area.
+# Spawns an enemy if the spawner is not at max capacity.
+# Called when the player enters the spawner's area.
 func _spawn_enemy(player_pos: Vector2):
 	if enemy_count >= max_enemies:
 		return
@@ -40,7 +41,8 @@ func _despawn_enemy():
 	enemy_count -= 1
 
 
-# Resets the spawner by despawning all enemies it has spawned. Called when the player enters a new zone.
+# Resets the spawner by despawning all enemies it has spawned.
+# Called when the player enters a new zone.
 func reset_spawn():
 	for child in get_children():
 		var enemy = child as Enemy

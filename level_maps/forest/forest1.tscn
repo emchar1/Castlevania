@@ -158,6 +158,9 @@ size = Vector2(8, 240)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqa8s"]
 size = Vector2(8, 240)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtdjs"]
+size = Vector2(1024, 8)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xsdtm"]
 size = Vector2(1024, 8)
 
@@ -211,6 +214,14 @@ position = Vector2(1028, 120)
 shape = SubResource("RectangleShape2D_wqa8s")
 debug_color = Color(0, 0.6, 0.7019608, 0.41960785)
 
+[node name="ExitTop" type="Area2D" parent="ExitAreas" unique_id=2043368177]
+collision_layer = 64
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitAreas/ExitTop" unique_id=788413502]
+position = Vector2(512, -4)
+shape = SubResource("RectangleShape2D_wtdjs")
+
 [node name="Dead" type="Area2D" parent="ExitAreas" unique_id=373496559]
 collision_layer = 64
 collision_mask = 3
@@ -243,6 +254,11 @@ position = Vector2(416, 184)
 [node name="SpawnManager4" parent="EnemySpawners" unique_id=147167305 instance=ExtResource("4_1y3g8")]
 position = Vector2(264, 200)
 
+[node name="SpawnManager5" parent="EnemySpawners" unique_id=204438310 instance=ExtResource("4_1y3g8")]
+position = Vector2(552, 112)
+enemy_type = 5
+
 [connection signal="body_entered" from="ExitAreas/ExitLeft" to="." method="_on_exit_left_body_entered"]
 [connection signal="body_entered" from="ExitAreas/ExitRight" to="." method="_on_exit_right_body_entered"]
+[connection signal="body_entered" from="ExitAreas/ExitTop" to="." method="_on_exit_top_body_entered"]
 [connection signal="body_entered" from="ExitAreas/Dead" to="." method="_on_dead_body_entered"]

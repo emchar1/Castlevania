@@ -823,6 +823,7 @@ texture_filter = 1
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_bj30b")
 animation = &"attack1"
+frame = 3
 
 [node name="Claw" type="Area2D" parent="." unique_id=302858085]
 position = Vector2(0, -15)

@@ -135,15 +135,15 @@ func _process_crouching():
 		and move_dir.x == 0
 		and Input.is_action_pressed("move_down")
 	)
-
+	
 	sword.position.y = 8 if is_crouching else 0
-
+	
 	var cursed = CurseManager.active
-
+	
 	# human collisions
 	collision_crouch.disabled = cursed or not is_crouching
 	collision_stand.disabled = cursed or is_crouching
-
+	
 	# werewolf collisions
 	collision_ww_crouch.disabled = not cursed or not is_crouching
 	collision_ww_stand.disabled = not cursed or is_crouching
@@ -153,7 +153,7 @@ func _process_jumping():
 	if is_on_floor():
 		if is_jumping:
 			AudioManager.play(AudioData.AudioKey.LAND)
-
+		
 		is_jumping = false
 	
 	if is_jumping:
@@ -192,7 +192,7 @@ func _process_animation():
 		else:
 			animation_player.play("crouch_attack" if is_crouching else "attack")
 			sword_sprite.play("attack")
-
+		
 		return
 	
 	if is_jumping:
@@ -209,7 +209,7 @@ func _process_animation():
 			sword.scale.x = -1 if player_sprite.flip_h else 1
 			werewolf_sprite.flip_h = move_dir.x > 0
 			claw.scale.x = -1 if werewolf_sprite.flip_h else 1
-
+			
 			player_sprite.play("crouch" if is_crouching else "run")
 			werewolf_sprite.play("crouch" if is_crouching else "run")
 
@@ -219,7 +219,7 @@ func _process_animation():
 func _player_attack():
 	if is_attacking:
 		return
-		
+	
 	if allow_input and Input.is_action_just_pressed("attack"):
 		
 		is_attacking = true
@@ -242,7 +242,7 @@ func _start_combo():
 		combo_count += 1
 	else:
 		combo_count = 0
-
+	
 	if combo_count > combo_max:
 		combo_count = 0
 	
@@ -306,7 +306,7 @@ func turn_on_invincibility(on: bool):
 	
 	if on:
 		tween = create_tween()
-	
+		
 		for i in range(20):
 			tween.tween_property(self, "modulate:a", 0.0, 0.05)
 			tween.tween_property(self, "modulate:a", 1.0, 0.05)
@@ -318,11 +318,11 @@ func turn_on_invincibility(on: bool):
 
 func _on_curse_activated(cursed: bool, should_flash: bool = true):
 	_flash_player(cursed, should_flash)
-
+	
 	if should_flash:
 		# Werewolf transformation animation and sound
 		werewolf_sprite.play("transformation")
-
+		
 		if transformation_timer:
 			transformation_timer.queue_free()
 		
@@ -332,14 +332,14 @@ func _on_curse_activated(cursed: bool, should_flash: bool = true):
 		transformation_timer.timeout.connect(_on_transformation_timeout)
 		add_child(transformation_timer)
 		transformation_timer.start()
-
+	
 	if cursed:
 		attack_dmg = ATTACK_DMG_WEREWOLF
 		speed = SPEED_WEREWOLF
 		attack_duration = ATTACK_DURATION_WEREWOLF
 		jump_velocity = JUMP_VELOCITY_WEREWOLF
 		knockback_velocity = KNOCKBACK_VELOCITY_WEREWOLF
-
+		
 		await get_tree().create_timer(0.25).timeout
 		AudioManager.play(AudioData.AudioKey.HOWL)
 	else:
@@ -353,7 +353,7 @@ func _on_curse_activated(cursed: bool, should_flash: bool = true):
 	sword_sprite.visible = not cursed
 	collision_stand.disabled = cursed
 	collision_crouch.disabled = cursed
-
+	
 	claw.visible = cursed
 	claw_sprite.visible = cursed
 	collision_ww_stand.disabled = not cursed
@@ -374,15 +374,17 @@ func _flash_player(cursed: bool, should_flash: bool):
 		player_sprite.modulate.a = 0.0 if cursed else 1.0
 		werewolf_sprite.modulate.a = 1.0 if cursed else 0.0
 		return
-
+	
+	var off: float = 0.0 if cursed else 1.0
+	var on: float = 1.0 if cursed else 0.0
 	var tween_wolf = create_tween()
 	var tween_player = create_tween()
 	
 	for i in range(4):
-		tween_wolf.tween_property(werewolf_sprite, "modulate:a", 0.0 if cursed else 1.0, 0.1)
-		tween_wolf.tween_property(werewolf_sprite, "modulate:a", 1.0 if cursed else 0.0, 0.1)
-
-		tween_player.tween_property(player_sprite, "modulate:a", 1.0 if cursed else 0.0, 0.1)
-		tween_player.tween_property(player_sprite, "modulate:a", 0.0 if cursed else 1.0, 0.1)
+		tween_wolf.tween_property(werewolf_sprite, "modulate:a", off, 0.1)
+		tween_wolf.tween_property(werewolf_sprite, "modulate:a", on, 0.1)
+		
+		tween_player.tween_property(player_sprite, "modulate:a", on, 0.1)
+		tween_player.tween_property(player_sprite, "modulate:a", off, 0.1)
 	
 	await tween_wolf.finished

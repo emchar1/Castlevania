@@ -22,13 +22,13 @@ region = Rect2(0, 16, 16, 16)
 atlas = ExtResource("2_c4w8v")
 region = Rect2(16, 16, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_shcg2"]
+atlas = ExtResource("2_c4w8v")
+region = Rect2(0, 16, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_s1ycm"]
 atlas = ExtResource("2_c4w8v")
 region = Rect2(32, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_shcg2"]
-atlas = ExtResource("2_c4w8v")
-region = Rect2(48, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xwavj"]
 atlas = ExtResource("2_4ra3w")
@@ -73,7 +73,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"bat",
-"speed": 5.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -83,10 +83,10 @@ animations = [{
 "texture": SubResource("AtlasTexture_g0wcc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_s1ycm")
+"texture": SubResource("AtlasTexture_shcg2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_shcg2")
+"texture": SubResource("AtlasTexture_s1ycm")
 }],
 "loop": true,
 "name": &"bat_idle",
@@ -146,7 +146,8 @@ script = ExtResource("1_md0e3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=463126635]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_xwavj")
-animation = &"skeleton"
+animation = &"bat_idle"
+frame_progress = 0.45082292
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1308076128]
 position = Vector2(0, -1)

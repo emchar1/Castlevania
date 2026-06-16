@@ -34,6 +34,7 @@ var is_on_ground := false
 var was_on_ground := false
 var secondary_movement := false
 var should_chase := false
+var did_hit_floor := false
 
 
 # INIT FUNCTIONS
@@ -45,7 +46,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_handle_movement(delta)
 	_handle_collisions()
-
+	
 	move_and_slide()
 
 
@@ -113,12 +114,12 @@ func hurt_enemy(dmg: int):
 	
 	_reset_timers()
 	_setup_timer(0.6, true)
-
+	
 	speed = 0
-
+	
 	if not AudioManager.is_playing(AudioData.AudioKey.ATTACK_SWING):
 		AudioManager.play(AudioData.AudioKey.ATTACK_SWING)
-
+	
 	tween = create_tween()
 	for i in range(20):
 		tween.tween_property(self, "modulate", Color.DEEP_PINK, 0.05)
@@ -136,11 +137,11 @@ func hurt_enemy(dmg: int):
 func kill_enemy():
 	_reset_timers()
 	_setup_timer(0.2, true)
-
+	
 	modulate = Color.BLACK
 	speed = 0
 	sprite.stop()
-
+	
 	if not AudioManager.is_playing(AudioData.AudioKey.ATTACK_KILL):
 		AudioManager.play(AudioData.AudioKey.ATTACK_KILL)
 	
@@ -178,21 +179,20 @@ func _movement1(delta: float):
 	# Ground raycasting
 	was_on_ground = is_on_ground
 	is_on_ground = ground_ray.is_colliding()
-
+	
 	if was_on_ground and not is_on_ground:
 		change_directions()
-
 
 
 func _movement2(delta: float):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	
 	# Handle movement
 	if is_on_floor():
 		velocity.x = speed * dir
-
+	
 	# Player raycasting
 	if player_ray.is_colliding():
 		_player_detection_secondary_movement()
@@ -200,26 +200,33 @@ func _movement2(delta: float):
 		secondary_movement = false
 
 
-func _movement3(_delta: float):
-	# if should_chase:
-	# 	velocity.x = speed * dir
-
+func _movement3(delta: float):
+	if should_chase:
+		velocity.x = speed * dir
+	
+		if is_on_floor():
+			did_hit_floor = true
+		
+		if did_hit_floor:
+			velocity -= get_gravity() * delta * 0.05
+		else:
+			velocity += get_gravity() * delta * 0.25
+	
 	# Bat raycasting
-	if bat_ray.is_colliding():
+	if bat_ray.is_colliding() and not should_chase:
 		should_chase = true
 		sprite.play("bat")
-		velocity.x = speed * dir
 
 
 func _player_detection_secondary_movement():
 	if secondary_movement:
 		return
-
+	
 	secondary_movement = true
-
+	
 	if not is_on_floor():
 		return
-
+	
 	var target = position + Vector2(randf_range(50.0, 100.0) * dir, 0.0)
 	
 	velocity.x = -speed * dir
@@ -272,7 +279,5 @@ func _on_player_detector_body_entered(_body: Node2D) -> void:
 
 func curse_activated(cursed: bool):
 	speed = 0
-
 	await get_tree().create_timer(2.0 if cursed else 1.0).timeout
-
 	speed = orig_speed

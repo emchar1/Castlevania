@@ -157,6 +157,9 @@ size = Vector2(8, 240)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqa8s"]
 size = Vector2(8, 240)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5mp4"]
+size = Vector2(1024, 8)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5karn"]
 size = Vector2(1024, 8)
 
@@ -208,6 +211,14 @@ position = Vector2(1028, 120)
 shape = SubResource("RectangleShape2D_wqa8s")
 debug_color = Color(0, 0.6, 0.7019608, 0.41960785)
 
+[node name="ExitTop" type="Area2D" parent="ExitAreas" unique_id=1736087846]
+collision_layer = 64
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitAreas/ExitTop" unique_id=1226909856]
+position = Vector2(512, -4)
+shape = SubResource("RectangleShape2D_t5mp4")
+
 [node name="Dead" type="Area2D" parent="ExitAreas" unique_id=745891484]
 collision_layer = 64
 collision_mask = 3
@@ -228,4 +239,5 @@ position = Vector2(992, 176)
 
 [connection signal="body_entered" from="ExitAreas/ExitLeft" to="." method="_on_exit_left_body_entered"]
 [connection signal="body_entered" from="ExitAreas/ExitRight" to="." method="_on_exit_right_body_entered"]
+[connection signal="body_entered" from="ExitAreas/ExitTop" to="." method="_on_exit_top_body_entered"]
 [connection signal="body_entered" from="ExitAreas/Dead" to="." method="_on_dead_body_entered"]
