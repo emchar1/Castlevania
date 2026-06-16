@@ -27,7 +27,8 @@ func _spawn_enemy(player_pos: Vector2):
 		return
 	
 	var enemy = enemy_scene.instantiate()
-	enemy.died.connect(_despawn_enemy)
+	enemy.died.connect(CurseManager.on_enemy_died)
+	enemy.removed.connect(_despawn_enemy)
 	add_child(enemy)
 	
 	enemy.set_direction(player_pos)

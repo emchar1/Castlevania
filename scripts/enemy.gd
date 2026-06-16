@@ -8,6 +8,7 @@ enum Type {
 }
 
 signal died
+signal removed
 
 const JUMP_FORCE = -300.0
 
@@ -147,10 +148,15 @@ func kill_enemy():
 	
 	await timer.timeout
 	
-	if not CurseManager.active:
-		CurseManager.increment_curse()
-	
 	died.emit()
+	removed.emit()
+	queue_free()
+
+
+func flee():
+	_reset_timers()
+	speed = 0
+	removed.emit()
 	queue_free()
 
 
@@ -203,7 +209,7 @@ func _movement2(delta: float):
 func _movement3(delta: float):
 	if should_chase:
 		velocity.x = speed * dir
-	
+		
 		if is_on_floor():
 			did_hit_floor = true
 		

@@ -106,3 +106,10 @@ func is_curse_empty() -> bool:
 
 func _on_timer_tick():
 	decrement_curse()
+
+
+# SIGNAL CALLBACK FUNCTIONS
+
+func on_enemy_died():
+	if not active:
+		increment_curse()

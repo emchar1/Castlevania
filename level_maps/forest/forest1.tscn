@@ -258,6 +258,10 @@ position = Vector2(264, 200)
 position = Vector2(552, 112)
 enemy_type = 5
 
+[node name="SpawnManager6" parent="EnemySpawners" unique_id=309964904 instance=ExtResource("4_1y3g8")]
+position = Vector2(360, 112)
+enemy_type = 5
+
 [connection signal="body_entered" from="ExitAreas/ExitLeft" to="." method="_on_exit_left_body_entered"]
 [connection signal="body_entered" from="ExitAreas/ExitRight" to="." method="_on_exit_right_body_entered"]
 [connection signal="body_entered" from="ExitAreas/ExitTop" to="." method="_on_exit_top_body_entered"]

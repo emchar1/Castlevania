@@ -114,10 +114,10 @@ func _on_dead_body_entered(body: Node2D) -> void:
 
 
 func _on_zone_entered(body: Node2D, direction: Direction):
-	for spawner in enemy_spawners.get_children():
-		spawner.reset_spawn()
-	
 	if body.is_in_group("player"):
+		for spawner in enemy_spawners.get_children():
+			spawner.reset_spawn()
+		
 		zone_entered.emit(self, direction)
 		
 		var player = body as Player
@@ -144,7 +144,7 @@ func _on_zone_entered(body: Node2D, direction: Direction):
 		
 		if enemy:
 			if direction == Direction.TOP:
-				enemy.queue_free()
+				enemy.flee()
 			else:
 				enemy.change_directions()
 
