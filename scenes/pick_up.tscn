@@ -64,10 +64,13 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m8fyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujb1p")
 }],
 "loop": true,
 "name": &"heart",
-"speed": 5.0
+"speed": 6.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ujb1p"]
@@ -81,7 +84,8 @@ script = ExtResource("1_adew5")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=671654932]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_m8fyp")
-animation = &"curse_gem"
+animation = &"heart"
+frame_progress = 0.55504346
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=950147235]
 shape = SubResource("CapsuleShape2D_ujb1p")
