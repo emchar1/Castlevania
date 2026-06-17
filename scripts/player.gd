@@ -43,7 +43,7 @@ var jump_velocity_x := 0.0
 
 var combo_timer: Timer
 var combo_count := 0
-var combo_max := 1
+var combo_max := 2
 
 var transformation_timer: Timer
 var tween: Tween
@@ -189,6 +189,9 @@ func _process_animation():
 				1: 
 					animation_player.play("attack_wolf2")
 					claw_sprite.play("attack2")
+				2: 
+					animation_player.play("attack_wolf3")
+					claw_sprite.play("attack3")
 		else:
 			animation_player.play("crouch_attack" if is_crouching else "attack")
 			sword_sprite.play("attack")
@@ -221,7 +224,6 @@ func _player_attack():
 		return
 	
 	if allow_input and Input.is_action_just_pressed("attack"):
-		
 		is_attacking = true
 		speed_multiplier = 0.0
 		_start_combo()

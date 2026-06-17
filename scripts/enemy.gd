@@ -16,6 +16,7 @@ const JUMP_FORCE = -300.0
 @export var hp = 1
 @export var attack_dmg = 1
 @export var type: Type
+@export var pickup_scene: PackedScene
 
 @onready var sprite = $AnimatedSprite2D
 @onready var player_detector = $PlayerDetector
@@ -150,6 +151,8 @@ func kill_enemy():
 	
 	await timer.timeout
 	
+	spawn_pickup()
+
 	died.emit()
 	removed.emit()
 	queue_free()
@@ -280,6 +283,19 @@ func _setup_timer(wait_time: float, one_shot: bool):
 	timer.one_shot = one_shot
 	add_child(timer)
 	timer.start()
+
+
+# PICKUP ITEM FUNCTIONS
+
+func spawn_pickup():
+	if pickup_scene == null:
+		return
+	
+	var item = pickup_scene.instantiate()
+	item.global_position = global_position
+	get_tree().current_scene.add_child(item)
+	
+	item.configure_pickup(randi_range(0, 1))
 
 
 # SIGNAL FUNCTIONS

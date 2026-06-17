@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b1elsbfa0osxl" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://ch5dhay75wck0" path="res://assets/images/skeleton.png" id="2_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://bcrgqgbx670ft" path="res://assets/images/bat.png" id="2_c4w8v"]
+[ext_resource type="PackedScene" uid="uid://c5kawr646vcfy" path="res://scenes/pick_up.tscn" id="2_xwavj"]
 [ext_resource type="Texture2D" uid="uid://o8q75uyabjkl" path="res://assets/images/zombie.png" id="3_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://dk45v43vnm407" path="res://assets/images/skeleton2.png" id="3_5uy6h"]
 
@@ -142,6 +143,7 @@ size = Vector2(16, 32)
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_md0e3")
+pickup_scene = ExtResource("2_xwavj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=463126635]
 texture_filter = 1

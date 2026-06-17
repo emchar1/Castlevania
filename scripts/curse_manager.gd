@@ -108,8 +108,6 @@ func _on_timer_tick():
 	decrement_curse()
 
 
-# SIGNAL CALLBACK FUNCTIONS
-
-func on_enemy_died():
+func pickup_curse_powerup():
 	if not active:
 		increment_curse()

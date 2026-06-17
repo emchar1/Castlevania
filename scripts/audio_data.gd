@@ -14,6 +14,9 @@ enum AudioKey {
 	ATTACK_KILL,
 	ATTACK_MISS,
 	HOWL,
+	HOWL_SHORT,
+	CURSE_PICKUP,
+	HEALTH_PICKUP,
 	LAND,
 	DEATH
 }
@@ -93,6 +96,18 @@ var sounds := {
 	AudioKey.HOWL: {
 		"type": Type.SOUND,
 		"stream": preload("res://assets/sounds/howl.ogg")
+	},
+	AudioKey.HOWL_SHORT: {
+		"type": Type.SOUND,
+		"stream": preload("res://assets/sounds/howl_short.ogg")
+	},
+	AudioKey.CURSE_PICKUP: {
+		"type": Type.SOUND,
+		"stream": preload("res://assets/sounds/curse_pickup.ogg")
+	},
+	AudioKey.HEALTH_PICKUP: {
+		"type": Type.SOUND,
+		"stream": preload("res://assets/sounds/health_pickup.ogg")
 	},
 	AudioKey.LAND: {
 		"type": Type.SOUND,
