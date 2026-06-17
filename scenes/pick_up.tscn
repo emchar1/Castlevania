@@ -32,6 +32,10 @@ region = Rect2(40, 0, 8, 8)
 atlas = ExtResource("3_tsqy0")
 region = Rect2(0, 0, 8, 8)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujb1p"]
+atlas = ExtResource("3_tsqy0")
+region = Rect2(8, 0, 8, 8)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_m8fyp"]
 animations = [{
 "frames": [{
