@@ -45,6 +45,10 @@ var combo_timer: Timer
 var combo_count := 0
 var combo_max := 2
 
+var rush_timer: Timer
+var is_rushing := false
+var did_rush := false
+
 var transformation_timer: Timer
 var tween: Tween
 var move_dir := Vector2.ZERO
@@ -73,12 +77,17 @@ func _physics_process(delta: float) -> void:
 	
 	_move_player()
 	_player_attack()
+	_rush_attack()
 	move_and_slide()
 
 
 func _process_gravity(delta: float):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	
+	# Rush attacks suspend gravity but for a brief moment...
+	if is_rushing:
+		velocity.y = 0
 
 
 # PLAYER RESET FUNCTIONS
@@ -155,9 +164,11 @@ func _process_jumping():
 			AudioManager.play(AudioData.AudioKey.LAND)
 		
 		is_jumping = false
+		did_rush = false
 	
 	if is_jumping:
-		velocity.x = jump_velocity_x
+		var rush_multiplier = 2.0 if is_rushing else 1.0
+		velocity.x = jump_velocity_x * rush_multiplier
 		return
 	
 	if allow_input and Input.is_action_just_pressed("jump") and is_on_floor():
@@ -182,16 +193,20 @@ func _process_animation():
 	
 	if is_attacking:
 		if CurseManager.active:
-			match combo_count:
-				0:
-					animation_player.play("attack_wolf1")
-					claw_sprite.play("attack1")
-				1: 
-					animation_player.play("attack_wolf2")
-					claw_sprite.play("attack2")
-				2: 
-					animation_player.play("attack_wolf3")
-					claw_sprite.play("attack3")
+			if did_rush:
+				animation_player.play("attack_wolf3")
+				claw_sprite.play("attack3")
+			else:
+				match combo_count:
+					0:
+						animation_player.play("attack_wolf1")
+						claw_sprite.play("attack1")
+					1: 
+						animation_player.play("attack_wolf2")
+						claw_sprite.play("attack2")
+					2: 
+						animation_player.play("attack_wolf3")
+						claw_sprite.play("attack3")
 		else:
 			animation_player.play("crouch_attack" if is_crouching else "attack")
 			sword_sprite.play("attack")
@@ -254,6 +269,27 @@ func _start_combo():
 	combo_timer.timeout.connect(_on_combo_timeout)
 	add_child(combo_timer)
 	combo_timer.start()
+
+
+func _rush_attack():
+	if is_rushing or did_rush:
+		return
+	
+	if not is_jumping or not is_attacking or not CurseManager.active:
+		return
+	
+	is_rushing = true
+	did_rush = true
+	
+	if rush_timer:
+		rush_timer.queue_free()
+	
+	rush_timer = Timer.new()
+	rush_timer.wait_time = 0.25
+	rush_timer.one_shot = true
+	rush_timer.timeout.connect(_on_rush_timeout)
+	add_child(rush_timer)
+	rush_timer.start()
 
 
 func _on_sword_body_entered(body: Node2D) -> void:
@@ -365,6 +401,10 @@ func _on_curse_activated(cursed: bool, should_flash: bool = true):
 func _on_combo_timeout():
 	combo_timer.queue_free()
 	combo_count = 0
+
+
+func _on_rush_timeout():
+	is_rushing = false
 
 
 func _on_transformation_timeout():

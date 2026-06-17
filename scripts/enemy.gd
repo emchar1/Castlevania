@@ -291,11 +291,16 @@ func spawn_pickup():
 	if pickup_scene == null:
 		return
 	
+	var random_chance = randi_range(0, 3)
+	if random_chance > 0:
+		return
+
 	var item = pickup_scene.instantiate()
 	item.global_position = global_position
 	get_tree().current_scene.add_child(item)
 	
-	item.configure_pickup(randi_range(0, 1))
+	var random_item = randi_range(0, 1)
+	item.configure_pickup(random_item)
 
 
 # SIGNAL FUNCTIONS
