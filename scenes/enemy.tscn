@@ -181,24 +181,20 @@ pickup_scene = ExtResource("2_xwavj")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_xwavj")
 animation = &"bat_idle"
-frame_progress = 0.27014628
+frame_progress = 0.81585807
 
 [node name="CollisionFloorS" type="CollisionShape2D" parent="." unique_id=396053125]
-visible = false
 shape = SubResource("RectangleShape2D_md484")
 
 [node name="CollisionFloorM" type="CollisionShape2D" parent="." unique_id=1308076128]
-visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_nenq2")
 
 [node name="CollisionFloorL" type="CollisionShape2D" parent="." unique_id=1595049906]
-visible = false
 position = Vector2(0, -17)
 shape = SubResource("RectangleShape2D_ipns3")
 
 [node name="PlayerDetector" type="Area2D" parent="." unique_id=1668385089]
-visible = false
 collision_layer = 2
 
 [node name="CollisionShapeS" type="CollisionShape2D" parent="PlayerDetector" unique_id=868373023]
