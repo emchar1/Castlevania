@@ -24,6 +24,14 @@ const JUMP_FORCE = -300.0
 @onready var player_ray = $PlayerRayCast
 @onready var bat_ray = $BatRayCast
 
+# Collision boxes
+@onready var collision_floor_s = $CollisionFloorS
+@onready var collision_floor_m = $CollisionFloorM
+@onready var collision_floor_l = $CollisionFloorL
+@onready var collision_shape_s = $PlayerDetector/CollisionShapeS
+@onready var collision_shape_m = $PlayerDetector/CollisionShapeM
+@onready var collision_shape_l = $PlayerDetector/CollisionShapeL
+
 var timer: Timer
 var tween: Tween
 var movement_type: Callable
@@ -72,38 +80,61 @@ func configure_enemy(_type: Type):
 			hp = 1
 			attack_dmg = 1
 			movement_type = _movement1
+			_set_collisions(false, true, false)
 		Type.SKELETON:
 			sprite.play("skeleton")
 			speed = 75
 			hp = 2
 			attack_dmg = 1
 			movement_type = _movement1
+			_set_collisions(false, true, false)
 		Type.SKELETON2:
 			sprite.play("skeleton2")
 			speed = 60
 			hp = 3
 			attack_dmg = 1
 			movement_type = _movement2
+			_set_collisions(false, true, false)
 		Type.FRANKENSTEIN:
 			sprite.play("frankenstein")
 			speed = 30
-			hp = 4
+			hp = 6
 			attack_dmg = 2
-			movement_type = _movement1
+			movement_type = _movement1b
+			sprite.offset.y = -16
+			_set_collisions(false, false, true)
 		Type.SLIME:
 			sprite.play("slime")
 			speed = 10
 			hp = 1
 			attack_dmg = 1
 			movement_type = _movement1
+			_set_collisions(true, false, false)
 		Type.BAT:
 			sprite.play("bat_idle")
 			speed = 80
 			hp = 1
 			attack_dmg = 1
 			movement_type = _movement3
+			_set_collisions(true, false, false)
 	
 	orig_speed = speed
+
+
+func _set_collisions(small: bool, medium: bool, large: bool):
+	collision_floor_s.visible = small
+	collision_floor_s.disabled = not small
+	collision_floor_m.visible = medium
+	collision_floor_m.disabled = not medium
+	collision_floor_l.visible = large
+	collision_floor_l.disabled = not large
+	
+	collision_shape_s.visible = small
+	collision_shape_s.disabled = not small
+	collision_shape_m.visible = medium
+	collision_shape_m.disabled = not medium
+	collision_shape_l.visible = large
+	collision_shape_l.disabled = not large
 
 
 # DAMAGE FUNCTIONS
@@ -121,6 +152,8 @@ func hurt_enemy(dmg: int):
 	
 	if not AudioManager.is_playing(AudioData.AudioKey.ATTACK_SWING):
 		AudioManager.play(AudioData.AudioKey.ATTACK_SWING)
+	elif not AudioManager.is_playing(AudioData.AudioKey.ATTACK_SWING2):
+		AudioManager.play(AudioData.AudioKey.ATTACK_SWING2)
 	
 	tween = create_tween()
 	for i in range(20):
@@ -193,6 +226,16 @@ func _movement1(delta: float):
 	
 	if was_on_ground and not is_on_ground:
 		change_directions()
+
+
+func _movement1b(delta: float):
+	_movement1(delta)
+	
+	if is_on_floor():
+		if sprite.frame % 2 == 0:
+			velocity.x = speed * dir
+		else:
+			velocity.x = 0
 
 
 func _movement2(delta: float):
@@ -291,7 +334,7 @@ func spawn_pickup():
 	if pickup_scene == null:
 		return
 	
-	var random_chance = randi_range(0, 3)
+	var random_chance = randi_range(0, 1)
 	if random_chance > 0:
 		return
 

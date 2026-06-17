@@ -168,8 +168,9 @@ func is_music_playing(music: AudioData.Music) -> bool:
 func is_playing(sound: AudioData.AudioKey) -> bool:
 	for bus_player in players.values():
 		for player in bus_player:
-			if player.playing and \
-			player.stream == AudioData.sounds[sound]["stream"]:
+			var stream = AudioData.sounds[sound]["stream"]
+			
+			if player.playing and player.stream == stream:
 				return true
 	
 	return false

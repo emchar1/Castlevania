@@ -11,6 +11,7 @@ enum AudioKey {
 	SWITCHWITHME,
 	ENERGIA,
 	ATTACK_SWING,
+	ATTACK_SWING2,
 	ATTACK_KILL,
 	ATTACK_MISS,
 	HOWL,
@@ -84,6 +85,10 @@ var sounds := {
 	AudioKey.ATTACK_SWING: {
 		"type": Type.SOUND,
 		"stream": preload("res://assets/sounds/attack_swing.ogg")
+	},
+	AudioKey.ATTACK_SWING2: {
+		"type": Type.SOUND,
+		"stream": preload("res://assets/sounds/attack_swing2.ogg")
 	},
 	AudioKey.ATTACK_KILL: {
 		"type": Type.SOUND,

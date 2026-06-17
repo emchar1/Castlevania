@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c5kawr646vcfy" path="res://scenes/pick_up.tscn" id="2_xwavj"]
 [ext_resource type="Texture2D" uid="uid://o8q75uyabjkl" path="res://assets/images/zombie.png" id="3_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://dk45v43vnm407" path="res://assets/images/skeleton2.png" id="3_5uy6h"]
+[ext_resource type="Texture2D" uid="uid://bliy0rh12wfpv" path="res://assets/images/frankenstein.png" id="4_nenq2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_otmr2"]
 atlas = ExtResource("2_c4w8v")
@@ -30,6 +31,22 @@ region = Rect2(0, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_s1ycm"]
 atlas = ExtResource("2_c4w8v")
 region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ile5s"]
+atlas = ExtResource("4_nenq2")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1x4g4"]
+atlas = ExtResource("4_nenq2")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pwtc"]
+atlas = ExtResource("4_nenq2")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rogs8"]
+atlas = ExtResource("4_nenq2")
+region = Rect2(96, 0, 32, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xwavj"]
 atlas = ExtResource("2_4ra3w")
@@ -95,6 +112,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ile5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1x4g4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2pwtc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rogs8")
+}],
+"loop": true,
+"name": &"frankenstein",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xwavj")
 }, {
 "duration": 1.0,
@@ -133,11 +167,23 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_md484"]
+size = Vector2(16, 16)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nenq2"]
 size = Vector2(16, 30)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipns3"]
+size = Vector2(16, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8qclf"]
+size = Vector2(16, 16)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
 size = Vector2(16, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8i8w"]
+size = Vector2(22, 63)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=2010845909 groups=["enemy"]]
 collision_layer = 2
@@ -148,18 +194,38 @@ pickup_scene = ExtResource("2_xwavj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=463126635]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_xwavj")
-animation = &"bat_idle"
-frame_progress = 0.45082292
+animation = &"frankenstein"
+frame_progress = 0.8024597
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1308076128]
+[node name="CollisionFloorS" type="CollisionShape2D" parent="." unique_id=396053125]
+visible = false
+shape = SubResource("RectangleShape2D_md484")
+
+[node name="CollisionFloorM" type="CollisionShape2D" parent="." unique_id=1308076128]
+visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_nenq2")
 
+[node name="CollisionFloorL" type="CollisionShape2D" parent="." unique_id=1595049906]
+visible = false
+position = Vector2(0, -17)
+shape = SubResource("RectangleShape2D_ipns3")
+
 [node name="PlayerDetector" type="Area2D" parent="." unique_id=1668385089]
+visible = false
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1859674643]
+[node name="CollisionShapeS" type="CollisionShape2D" parent="PlayerDetector" unique_id=868373023]
+shape = SubResource("RectangleShape2D_8qclf")
+debug_color = Color(1, 0, 1, 0.41960785)
+
+[node name="CollisionShapeM" type="CollisionShape2D" parent="PlayerDetector" unique_id=1859674643]
 shape = SubResource("RectangleShape2D_md0e3")
+debug_color = Color(1, 0, 1, 0.41960785)
+
+[node name="CollisionShapeL" type="CollisionShape2D" parent="PlayerDetector" unique_id=543943185]
+position = Vector2(-3, -16.5)
+shape = SubResource("RectangleShape2D_w8i8w")
 debug_color = Color(1, 0, 1, 0.41960785)
 
 [node name="BatRayCast" type="RayCast2D" parent="." unique_id=1498958022]
