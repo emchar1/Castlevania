@@ -4,6 +4,7 @@ extends Area2D
 
 @export var enemy_type: Enemy.Type
 @export var max_enemies = 1
+@export var cursed = false
 
 var enemy_scene = preload("res://scenes/enemy.tscn")
 var enemy_count := 0
@@ -15,6 +16,9 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("spawn_trigger"):
 		var body = area.get_parent()
 		var player = body as Player
+		
+		if cursed and not CurseManager.active:
+			return
 		
 		if player:
 			call_deferred("_spawn_enemy", player.global_position)

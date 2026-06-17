@@ -24,14 +24,6 @@ region = Rect2(0, 16, 16, 16)
 atlas = ExtResource("2_c4w8v")
 region = Rect2(16, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_shcg2"]
-atlas = ExtResource("2_c4w8v")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s1ycm"]
-atlas = ExtResource("2_c4w8v")
-region = Rect2(32, 16, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ile5s"]
 atlas = ExtResource("4_nenq2")
 region = Rect2(0, 0, 32, 64)
@@ -99,12 +91,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g0wcc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_shcg2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s1ycm")
 }],
 "loop": true,
 "name": &"bat_idle",
@@ -194,8 +180,8 @@ pickup_scene = ExtResource("2_xwavj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=463126635]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_xwavj")
-animation = &"frankenstein"
-frame_progress = 0.8024597
+animation = &"bat_idle"
+frame_progress = 0.27014628
 
 [node name="CollisionFloorS" type="CollisionShape2D" parent="." unique_id=396053125]
 visible = false
