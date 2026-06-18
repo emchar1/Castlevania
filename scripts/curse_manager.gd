@@ -7,7 +7,7 @@ signal activated(cursed: bool)
 
 const MAX = 6
 const STEP_MAX = 3
-const TIMER_SPEED = 2
+const TIMER_SPEED = 3
 
 # Curse values
 var current := 0
