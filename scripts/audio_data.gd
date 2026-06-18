@@ -18,6 +18,7 @@ enum AudioKey {
 	HOWL_SHORT,
 	CURSE_PICKUP,
 	HEALTH_PICKUP,
+	COIN_PICKUP,
 	LAND,
 	DEATH
 }
@@ -113,6 +114,10 @@ var sounds := {
 	AudioKey.HEALTH_PICKUP: {
 		"type": Type.SOUND,
 		"stream": preload("res://assets/sounds/health_pickup.ogg")
+	},
+	AudioKey.COIN_PICKUP: {
+		"type": Type.SOUND,
+		"stream": preload("res://assets/sounds/coin.ogg")
 	},
 	AudioKey.LAND: {
 		"type": Type.SOUND,

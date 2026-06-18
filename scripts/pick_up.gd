@@ -39,7 +39,9 @@ func configure_pickup(_type: Type):
 			sfx = AudioData.AudioKey.HEALTH_PICKUP
 			action = GameState.increment_health
 		Type.GOLD:
-			pass
+			sprite.play("gold")
+			sfx = AudioData.AudioKey.COIN_PICKUP
+			action = GameState.increment_coins
 
 
 func _on_body_entered(body: Node2D) -> void:

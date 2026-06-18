@@ -39,6 +39,7 @@ var projectile_scene = preload("res://scenes/projectile.tscn")
 
 var orig_speed = 50.0
 var dir := 1.0
+var score := 0
 
 var is_on_ground := false
 var was_on_ground := false
@@ -79,6 +80,7 @@ func configure_enemy(_type: Type):
 			speed = 50
 			hp = 1
 			attack_dmg = 1
+			score = 10
 			movement_type = _movement1
 			_set_collisions(false, true, false)
 		Type.SKELETON:
@@ -86,6 +88,7 @@ func configure_enemy(_type: Type):
 			speed = 75
 			hp = 2
 			attack_dmg = 1
+			score = 20
 			movement_type = _movement1
 			_set_collisions(false, true, false)
 		Type.SKELETON2:
@@ -93,6 +96,7 @@ func configure_enemy(_type: Type):
 			speed = 60
 			hp = 3
 			attack_dmg = 1
+			score = 30
 			movement_type = _movement2
 			_set_collisions(false, true, false)
 		Type.FRANKENSTEIN:
@@ -100,6 +104,7 @@ func configure_enemy(_type: Type):
 			speed = 30
 			hp = 6
 			attack_dmg = 2
+			score = 100
 			movement_type = _movement1b
 			sprite.offset.y = -16
 			_set_collisions(false, false, true)
@@ -108,6 +113,7 @@ func configure_enemy(_type: Type):
 			speed = 15
 			hp = 1
 			attack_dmg = 1
+			score = 5
 			movement_type = _movement1
 			_set_collisions(true, false, false)
 		Type.ORANGE_SLIME:
@@ -115,6 +121,7 @@ func configure_enemy(_type: Type):
 			speed = 20
 			hp = 1
 			attack_dmg = 1
+			score = 25
 			movement_type = _movement1
 			_set_collisions(true, false, false)
 		Type.BAT:
@@ -122,6 +129,7 @@ func configure_enemy(_type: Type):
 			speed = 80
 			hp = 1
 			attack_dmg = 1
+			score = 15
 			movement_type = _movement3
 			_set_collisions(true, false, false)
 	
@@ -185,6 +193,8 @@ func kill_enemy():
 	velocity = Vector2.ZERO
 	player_detector.monitoring = false
 	sprite.stop()
+	
+	GameState.add_score(score)
 	
 	if not AudioManager.is_playing(AudioData.AudioKey.ATTACK_KILL):
 		AudioManager.play(AudioData.AudioKey.ATTACK_KILL)
@@ -349,7 +359,7 @@ func spawn_pickup():
 	item.global_position = global_position
 	get_tree().current_scene.add_child(item)
 	
-	var random_item = randi_range(0, 1)
+	var random_item = randi_range(0, 2)
 	item.configure_pickup(random_item)
 
 

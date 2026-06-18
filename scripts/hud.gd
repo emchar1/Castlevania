@@ -4,6 +4,8 @@ extends CanvasLayer
 
 @onready var health := $Health/Container.get_children()
 @onready var curse := $Curse/Container.get_children()
+@onready var score := $Score/Total
+@onready var coins := $Coins/Total
 
 var curse_meter_is_flashing := false
 
@@ -17,6 +19,8 @@ func _ready() -> void:
 	set_flash_cursed_meter(false)
 	
 	GameState.health_changed.connect(update_current_health)
+	GameState.coins_changed.connect(update_coins)
+	GameState.score_changed.connect(update_score)
 	CurseManager.changed.connect(update_current_curse)
 
 
@@ -76,6 +80,14 @@ func set_flash_cursed_meter(flash: bool):
 func update_current_health(value: int):
 	for i in health.size():
 		set_health_filled(i, i < value)
+
+
+func update_coins(_value: int):
+	coins.text = "%03d" % GameState.total_coins
+
+
+func update_score(_value: int):
+	score.text = "%06d" % GameState.current_score
 
 
 func update_current_curse(value: int, step_value: int):
