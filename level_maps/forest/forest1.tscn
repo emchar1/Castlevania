@@ -256,11 +256,11 @@ position = Vector2(264, 200)
 
 [node name="SpawnManager5" parent="EnemySpawners" unique_id=204438310 instance=ExtResource("4_1y3g8")]
 position = Vector2(552, 112)
-enemy_type = 5
+enemy_type = 6
 
 [node name="SpawnManager6" parent="EnemySpawners" unique_id=309964904 instance=ExtResource("4_1y3g8")]
 position = Vector2(360, 112)
-enemy_type = 5
+enemy_type = 6
 
 [node name="CursedSpawners" type="Node2D" parent="." unique_id=231369630]
 
@@ -311,7 +311,7 @@ cursed = true
 
 [node name="SpawnManager10" parent="CursedSpawners" unique_id=1469795038 instance=ExtResource("4_1y3g8")]
 position = Vector2(608, 120)
-enemy_type = 5
+enemy_type = 6
 cursed = true
 
 [node name="SpawnManager11" parent="CursedSpawners" unique_id=1787976462 instance=ExtResource("4_1y3g8")]
@@ -326,7 +326,7 @@ cursed = true
 
 [node name="SpawnManager13" parent="CursedSpawners" unique_id=245841413 instance=ExtResource("4_1y3g8")]
 position = Vector2(451.72726, 137.45453)
-enemy_type = 5
+enemy_type = 6
 max_enemies = 2
 cursed = true
 
@@ -347,7 +347,7 @@ cursed = true
 
 [node name="SpawnManager17" parent="CursedSpawners" unique_id=1958409535 instance=ExtResource("4_1y3g8")]
 position = Vector2(210.8182, 140.63635)
-enemy_type = 5
+enemy_type = 6
 max_enemies = 2
 cursed = true
 

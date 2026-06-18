@@ -4,7 +4,7 @@ class_name Enemy
 # PROPERTIES
 
 enum Type {
-	ZOMBIE, SKELETON, SKELETON2, FRANKENSTEIN, SLIME, BAT
+	ZOMBIE, SKELETON, SKELETON2, FRANKENSTEIN, GREEN_SLIME, ORANGE_SLIME, BAT
 }
 
 signal died
@@ -103,9 +103,16 @@ func configure_enemy(_type: Type):
 			movement_type = _movement1b
 			sprite.offset.y = -16
 			_set_collisions(false, false, true)
-		Type.SLIME:
-			sprite.play("slime")
-			speed = 10
+		Type.GREEN_SLIME:
+			sprite.play("green_slime")
+			speed = 15
+			hp = 1
+			attack_dmg = 1
+			movement_type = _movement1
+			_set_collisions(true, false, false)
+		Type.ORANGE_SLIME:
+			sprite.play("orange_slime")
+			speed = 20
 			hp = 1
 			attack_dmg = 1
 			movement_type = _movement1
