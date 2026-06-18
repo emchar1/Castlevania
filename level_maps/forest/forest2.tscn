@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ddj10s3b3qnmk" path="res://level_maps/level_zone.gd" id="1_2pb6f"]
 [ext_resource type="Texture2D" uid="uid://d13lktxnievkk" path="res://assets/images/tilemap_forest.png" id="2_4mbud"]
 [ext_resource type="PackedScene" uid="uid://dnr4tcrjgy05i" path="res://scenes/spawn_manager.tscn" id="4_dyrpl"]
+[ext_resource type="PackedScene" uid="uid://dk8ttbryav3kh" path="res://level_maps/cursed_spawners.tscn" id="4_ueqbn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xsdtm"]
 texture = ExtResource("2_4mbud")
@@ -256,6 +257,12 @@ position = Vector2(32, 16)
 [node name="SpawnManager" parent="EnemySpawners" unique_id=98162249 instance=ExtResource("4_dyrpl")]
 position = Vector2(745, 87)
 enemy_type = 2
+
+[node name="CursedSpawners" parent="." unique_id=1010766562 instance=ExtResource("4_ueqbn")]
+a_spawners_type = 6
+b_spawners_type = 4
+c_spawners_type = 6
+d_spawners_type = 4
 
 [connection signal="body_entered" from="ExitAreas/ExitLeft" to="." method="_on_exit_left_body_entered"]
 [connection signal="body_entered" from="ExitAreas/ExitTopLeft" to="." method="_on_exit_top_left_body_entered"]

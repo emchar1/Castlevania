@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ddj10s3b3qnmk" path="res://level_maps/level_zone.gd" id="1_2pb6f"]
 [ext_resource type="Texture2D" uid="uid://d13lktxnievkk" path="res://assets/images/tilemap_forest.png" id="2_xsdtm"]
 [ext_resource type="PackedScene" uid="uid://dnr4tcrjgy05i" path="res://scenes/spawn_manager.tscn" id="4_1y3g8"]
+[ext_resource type="PackedScene" uid="uid://dk8ttbryav3kh" path="res://level_maps/cursed_spawners.tscn" id="4_uf4uh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w3k6w"]
 texture = ExtResource("2_xsdtm")
@@ -262,99 +263,10 @@ enemy_type = 6
 position = Vector2(360, 112)
 enemy_type = 6
 
-[node name="CursedSpawners" type="Node2D" parent="." unique_id=231369630]
-
-[node name="SpawnManager" parent="CursedSpawners" unique_id=1622135182 instance=ExtResource("4_1y3g8")]
-position = Vector2(912, 104)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager2" parent="CursedSpawners" unique_id=291754053 instance=ExtResource("4_1y3g8")]
-position = Vector2(880, 152)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager3" parent="CursedSpawners" unique_id=399774922 instance=ExtResource("4_1y3g8")]
-position = Vector2(856, 112)
-enemy_type = 1
-cursed = true
-
-[node name="SpawnManager4" parent="CursedSpawners" unique_id=567509846 instance=ExtResource("4_1y3g8")]
-position = Vector2(832, 152)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager5" parent="CursedSpawners" unique_id=1011825526 instance=ExtResource("4_1y3g8")]
-position = Vector2(792, 112)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager6" parent="CursedSpawners" unique_id=711054199 instance=ExtResource("4_1y3g8")]
-position = Vector2(720, 88)
-enemy_type = 1
-cursed = true
-
-[node name="SpawnManager7" parent="CursedSpawners" unique_id=268120182 instance=ExtResource("4_1y3g8")]
-position = Vector2(696, 144)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager8" parent="CursedSpawners" unique_id=1808975786 instance=ExtResource("4_1y3g8")]
-position = Vector2(672, 104)
-enemy_type = 1
-cursed = true
-
-[node name="SpawnManager9" parent="CursedSpawners" unique_id=350940796 instance=ExtResource("4_1y3g8")]
-position = Vector2(648, 152)
-enemy_type = 1
-cursed = true
-
-[node name="SpawnManager10" parent="CursedSpawners" unique_id=1469795038 instance=ExtResource("4_1y3g8")]
-position = Vector2(608, 120)
-enemy_type = 6
-cursed = true
-
-[node name="SpawnManager11" parent="CursedSpawners" unique_id=1787976462 instance=ExtResource("4_1y3g8")]
-position = Vector2(520.36365, 131.09088)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager12" parent="CursedSpawners" unique_id=674300975 instance=ExtResource("4_1y3g8")]
-position = Vector2(486.72726, 109.727264)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager13" parent="CursedSpawners" unique_id=245841413 instance=ExtResource("4_1y3g8")]
-position = Vector2(451.72726, 137.45453)
-enemy_type = 6
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager14" parent="CursedSpawners" unique_id=196129834 instance=ExtResource("4_1y3g8")]
-position = Vector2(409, 111.09088)
-enemy_type = 1
-cursed = true
-
-[node name="SpawnManager15" parent="CursedSpawners" unique_id=695054188 instance=ExtResource("4_1y3g8")]
-position = Vector2(316.7273, 126.54544)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager16" parent="CursedSpawners" unique_id=1403073224 instance=ExtResource("4_1y3g8")]
-position = Vector2(241.7273, 126.09088)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager17" parent="CursedSpawners" unique_id=1958409535 instance=ExtResource("4_1y3g8")]
-position = Vector2(210.8182, 140.63635)
-enemy_type = 6
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager18" parent="CursedSpawners" unique_id=723461868 instance=ExtResource("4_1y3g8")]
-position = Vector2(170.36365, 126.09088)
-enemy_type = 1
-cursed = true
+[node name="CursedSpawners" parent="." unique_id=1010766562 instance=ExtResource("4_uf4uh")]
+a_spawners_type = 1
+b_spawners_type = 6
+c_spawners_type = 1
 
 [connection signal="body_entered" from="ExitAreas/ExitLeft" to="." method="_on_exit_left_body_entered"]
 [connection signal="body_entered" from="ExitAreas/ExitRight" to="." method="_on_exit_right_body_entered"]

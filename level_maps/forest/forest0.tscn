@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ddj10s3b3qnmk" path="res://level_maps/level_zone.gd" id="1_tobf8"]
 [ext_resource type="Texture2D" uid="uid://d13lktxnievkk" path="res://assets/images/tilemap_forest.png" id="3_wwmcb"]
 [ext_resource type="PackedScene" uid="uid://dnr4tcrjgy05i" path="res://scenes/spawn_manager.tscn" id="4_kmo3j"]
+[ext_resource type="PackedScene" uid="uid://dk8ttbryav3kh" path="res://level_maps/cursed_spawners.tscn" id="4_ukl2l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w3k6w"]
 texture = ExtResource("3_wwmcb")
@@ -256,111 +257,8 @@ enemy_type = 1
 position = Vector2(216, 128)
 enemy_type = 6
 
-[node name="CursedSpawners" type="Node2D" parent="." unique_id=115365654]
-
-[node name="SpawnManager" parent="CursedSpawners" unique_id=1151401389 instance=ExtResource("4_kmo3j")]
-position = Vector2(896, 152)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager2" parent="CursedSpawners" unique_id=1783108915 instance=ExtResource("4_kmo3j")]
-position = Vector2(864, 104)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager3" parent="CursedSpawners" unique_id=1317674546 instance=ExtResource("4_kmo3j")]
-position = Vector2(832, 152)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager4" parent="CursedSpawners" unique_id=141059536 instance=ExtResource("4_kmo3j")]
-position = Vector2(800, 104)
-enemy_type = 1
-cursed = true
-
-[node name="SpawnManager5" parent="CursedSpawners" unique_id=260210869 instance=ExtResource("4_kmo3j")]
-position = Vector2(736, 152)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager6" parent="CursedSpawners" unique_id=2079202658 instance=ExtResource("4_kmo3j")]
-position = Vector2(704, 104)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager7" parent="CursedSpawners" unique_id=2029338410 instance=ExtResource("4_kmo3j")]
-position = Vector2(672, 152)
-enemy_type = 1
-cursed = true
-
-[node name="SpawnManager8" parent="CursedSpawners" unique_id=70714098 instance=ExtResource("4_kmo3j")]
-position = Vector2(640, 104)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager9" parent="CursedSpawners" unique_id=186931043 instance=ExtResource("4_kmo3j")]
-position = Vector2(608, 152)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager10" parent="CursedSpawners" unique_id=1705300110 instance=ExtResource("4_kmo3j")]
-position = Vector2(568, 104)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager11" parent="CursedSpawners" unique_id=707376176 instance=ExtResource("4_kmo3j")]
-position = Vector2(536, 152)
-enemy_type = 1
-cursed = true
-
-[node name="SpawnManager12" parent="CursedSpawners" unique_id=2076073255 instance=ExtResource("4_kmo3j")]
-position = Vector2(480, 104)
-cursed = true
-
-[node name="SpawnManager13" parent="CursedSpawners" unique_id=1928517129 instance=ExtResource("4_kmo3j")]
-position = Vector2(440, 160)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager14" parent="CursedSpawners" unique_id=218368449 instance=ExtResource("4_kmo3j")]
-position = Vector2(408, 104)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager15" parent="CursedSpawners" unique_id=426292868 instance=ExtResource("4_kmo3j")]
-position = Vector2(352, 160)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager16" parent="CursedSpawners" unique_id=1238364503 instance=ExtResource("4_kmo3j")]
-position = Vector2(320, 104)
-enemy_type = 1
-cursed = true
-
-[node name="SpawnManager17" parent="CursedSpawners" unique_id=870690226 instance=ExtResource("4_kmo3j")]
-position = Vector2(288, 160)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager18" parent="CursedSpawners" unique_id=1085908091 instance=ExtResource("4_kmo3j")]
-position = Vector2(240, 104)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager19" parent="CursedSpawners" unique_id=1172871221 instance=ExtResource("4_kmo3j")]
-position = Vector2(192, 160)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager20" parent="CursedSpawners" unique_id=1702650221 instance=ExtResource("4_kmo3j")]
-position = Vector2(152, 104)
-max_enemies = 2
-cursed = true
-
-[node name="SpawnManager21" parent="CursedSpawners" unique_id=743371654 instance=ExtResource("4_kmo3j")]
-position = Vector2(120, 160)
-max_enemies = 2
-cursed = true
+[node name="CursedSpawners" parent="." unique_id=1010766562 instance=ExtResource("4_ukl2l")]
+c_spawners_type = 1
 
 [connection signal="body_entered" from="ExitAreas/ExitLeft" to="." method="_on_exit_left_body_entered"]
 [connection signal="body_entered" from="ExitAreas/ExitRight" to="." method="_on_exit_right_body_entered"]

@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://dk8ttbryav3kh"]
+
+[ext_resource type="Script" uid="uid://djb6gwy2nejh4" path="res://level_maps/cursed_spawners.gd" id="1_ic3by"]
+[ext_resource type="PackedScene" uid="uid://dnr4tcrjgy05i" path="res://scenes/spawn_manager.tscn" id="1_tyaf7"]
+
+[node name="CursedSpawners" type="Node2D" unique_id=1010766562]
+script = ExtResource("1_ic3by")
+metadata/_edit_vertical_guides_ = [256.0, 512.0, 768.0, 1024.0, 0.0]
+metadata/_edit_horizontal_guides_ = [240.0, 0.0]
+
+[node name="SpawnManager" parent="." unique_id=98162249 instance=ExtResource("1_tyaf7")]
+position = Vector2(992, 136)
+cursed = true
+
+[node name="SpawnManager2" parent="." unique_id=1178970301 instance=ExtResource("1_tyaf7")]
+position = Vector2(960, 112)
+cursed = true
+
+[node name="SpawnManager3" parent="." unique_id=1748384017 instance=ExtResource("1_tyaf7")]
+position = Vector2(928, 88)
+cursed = true
+
+[node name="SpawnManager4" parent="." unique_id=2107329250 instance=ExtResource("1_tyaf7")]
+position = Vector2(896, 64)
+cursed = true
+
+[node name="SpawnManager5" parent="." unique_id=690787634 instance=ExtResource("1_tyaf7")]
+position = Vector2(864, 64)
+cursed = true
+
+[node name="SpawnManager6" parent="." unique_id=1901343267 instance=ExtResource("1_tyaf7")]
+position = Vector2(832, 88)
+cursed = true
+
+[node name="SpawnManager7" parent="." unique_id=854903580 instance=ExtResource("1_tyaf7")]
+position = Vector2(800, 112)
+cursed = true
+
+[node name="SpawnManager8" parent="." unique_id=1832844953 instance=ExtResource("1_tyaf7")]
+position = Vector2(768, 136)
+cursed = true
+
+[node name="SpawnManager9" parent="." unique_id=683366283 instance=ExtResource("1_tyaf7")]
+position = Vector2(736, 136)
+cursed = true
+
+[node name="SpawnManager10" parent="." unique_id=1406809289 instance=ExtResource("1_tyaf7")]
+position = Vector2(704, 112)
+cursed = true
+
+[node name="SpawnManager11" parent="." unique_id=1751108944 instance=ExtResource("1_tyaf7")]
+position = Vector2(672, 88)
+cursed = true
+
+[node name="SpawnManager12" parent="." unique_id=980573636 instance=ExtResource("1_tyaf7")]
+position = Vector2(640, 64)
+cursed = true
+
+[node name="SpawnManager13" parent="." unique_id=459746514 instance=ExtResource("1_tyaf7")]
+position = Vector2(608, 64)
+cursed = true
+
+[node name="SpawnManager14" parent="." unique_id=315560273 instance=ExtResource("1_tyaf7")]
+position = Vector2(576, 88)
+cursed = true
+
+[node name="SpawnManager15" parent="." unique_id=685430408 instance=ExtResource("1_tyaf7")]
+position = Vector2(544, 112)
+cursed = true
+
+[node name="SpawnManager16" parent="." unique_id=1946035484 instance=ExtResource("1_tyaf7")]
+position = Vector2(512, 136)
+cursed = true
+
+[node name="SpawnManager17" parent="." unique_id=1646243468 instance=ExtResource("1_tyaf7")]
+position = Vector2(480, 136)
+cursed = true
+
+[node name="SpawnManager18" parent="." unique_id=1829010463 instance=ExtResource("1_tyaf7")]
+position = Vector2(448, 112)
+cursed = true
+
+[node name="SpawnManager19" parent="." unique_id=1231533609 instance=ExtResource("1_tyaf7")]
+position = Vector2(416, 88)
+cursed = true
+
+[node name="SpawnManager20" parent="." unique_id=1278794156 instance=ExtResource("1_tyaf7")]
+position = Vector2(384, 64)
+cursed = true
+
+[node name="SpawnManager21" parent="." unique_id=1646842861 instance=ExtResource("1_tyaf7")]
+position = Vector2(352, 64)
+cursed = true
+
+[node name="SpawnManager22" parent="." unique_id=4714577 instance=ExtResource("1_tyaf7")]
+position = Vector2(320, 88)
+cursed = true
+
+[node name="SpawnManager23" parent="." unique_id=808908850 instance=ExtResource("1_tyaf7")]
+position = Vector2(288, 112)
+cursed = true
+
+[node name="SpawnManager24" parent="." unique_id=623268098 instance=ExtResource("1_tyaf7")]
+position = Vector2(256, 136)
+cursed = true
+
+[node name="SpawnManager25" parent="." unique_id=2064388047 instance=ExtResource("1_tyaf7")]
+position = Vector2(224, 136)
+cursed = true
+
+[node name="SpawnManager26" parent="." unique_id=2039856026 instance=ExtResource("1_tyaf7")]
+position = Vector2(192, 112)
+cursed = true
+
+[node name="SpawnManager27" parent="." unique_id=2016136517 instance=ExtResource("1_tyaf7")]
+position = Vector2(160, 88)
+cursed = true
+
+[node name="SpawnManager28" parent="." unique_id=1795470656 instance=ExtResource("1_tyaf7")]
+position = Vector2(128, 64)
+cursed = true
+
+[node name="SpawnManager29" parent="." unique_id=256467127 instance=ExtResource("1_tyaf7")]
+position = Vector2(96, 64)
+cursed = true
+
+[node name="SpawnManager30" parent="." unique_id=1357415831 instance=ExtResource("1_tyaf7")]
+position = Vector2(64, 88)
+cursed = true
+
+[node name="SpawnManager31" parent="." unique_id=323825659 instance=ExtResource("1_tyaf7")]
+position = Vector2(32, 112)
+cursed = true
