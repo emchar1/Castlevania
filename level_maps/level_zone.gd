@@ -26,6 +26,7 @@ var zone_id: String
 @onready var spawn_top_left = get_node_or_null("SpawnPoints/SpawnTopLeft")
 @onready var spawn_top_right = get_node_or_null("SpawnPoints/SpawnTopRight")
 @onready var enemy_spawners = $EnemySpawners
+@onready var cursed_spawners = $CursedSpawners
 
 @onready var floor_tiles = $TileMapLayers/Floor
 @onready var bg_tiles = $TileMapLayers/Background
@@ -117,6 +118,8 @@ func _on_zone_entered(body: Node2D, direction: Direction):
 	if body.is_in_group("player"):
 		for spawner in enemy_spawners.get_children():
 			spawner.reset_spawn()
+		
+		cursed_spawners.reset_spawners()
 		
 		zone_entered.emit(self, direction)
 		
@@ -212,6 +215,7 @@ func curse_activated(cursed: bool):
 				rhythm_index = 0
 	else:
 		color_textures(Color.WHITE)
+		cursed_spawners.reset_spawners()
 
 
 # TEXTURE FUNCTIONS

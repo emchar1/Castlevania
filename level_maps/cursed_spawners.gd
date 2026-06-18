@@ -25,7 +25,7 @@ class_name CursedSpawners
 ]
 
 
-# FUNCTIONS
+# INIT FUNCTIONS
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,3 +53,10 @@ func _setup_spawners():
 	if d_spawners_type != Enemy.Type.ZOMBIE:
 		for spawner in spawners_d:
 			spawner.enemy_type = d_spawners_type
+
+
+# FUNCTIONS
+
+func reset_spawners():
+	for spawner in get_children():
+		spawner.reset_spawn()

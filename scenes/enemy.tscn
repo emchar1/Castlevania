@@ -269,7 +269,7 @@ shape = SubResource("RectangleShape2D_w8i8w")
 debug_color = Color(1, 0, 1, 0.41960785)
 
 [node name="BatRayCast" type="RayCast2D" parent="." unique_id=1498958022]
-target_position = Vector2(64, 64)
+target_position = Vector2(256, 240)
 
 [node name="FloorRayCast" type="RayCast2D" parent="." unique_id=1753183563]
 target_position = Vector2(16, 16)
