@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://d2xnvhj00vi1" path="res://level_maps/forest/forest0.tscn" id="1_30lic"]
 [ext_resource type="Script" uid="uid://dk3i1epxl4v2c" path="res://level_maps/level_map.gd" id="1_c8ny8"]
-[ext_resource type="PackedScene" uid="uid://c5cduiq7sqrys" path="res://level_maps/forest/forest2.tscn" id="2_tobf8"]
+[ext_resource type="PackedScene" uid="uid://c5cduiq7sqrys" path="res://level_maps/forest/forest3.tscn" id="2_tobf8"]
 [ext_resource type="PackedScene" uid="uid://ehytp1wqehtt" path="res://level_maps/forest/forest1.tscn" id="4_rhfp7"]
-[ext_resource type="PackedScene" uid="uid://4e53mg1qib5n" path="res://level_maps/forest/forest3.tscn" id="5_dg22i"]
+[ext_resource type="PackedScene" uid="uid://4e53mg1qib5n" path="res://level_maps/forest/forest2.tscn" id="5_dg22i"]
 
 [node name="ForestMap" type="Node2D" unique_id=2116938927]
 script = ExtResource("1_c8ny8")
@@ -15,12 +15,15 @@ metadata/_edit_horizontal_guides_ = [0.0, 240.0]
 
 [node name="Forest1" parent="." unique_id=64169509 instance=ExtResource("4_rhfp7")]
 position = Vector2(-1024, 0)
+music = 3
 
-[node name="Forest2" parent="." unique_id=684583834 instance=ExtResource("2_tobf8")]
+[node name="Forest2" parent="." unique_id=2079410581 instance=ExtResource("5_dg22i")]
 position = Vector2(-2048, 0)
+music = 1
 
-[node name="Forest3" parent="." unique_id=2079410581 instance=ExtResource("5_dg22i")]
-position = Vector2(-3072, 48)
+[node name="Forest3" parent="." unique_id=684583834 instance=ExtResource("2_tobf8")]
+position = Vector2(-3072, 0)
+music = 4
 
 [node name="Transition" type="CanvasLayer" parent="." unique_id=20464199]
 

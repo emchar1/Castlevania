@@ -137,6 +137,8 @@ func _on_zone_entered(body: Node2D, direction: Direction):
 					spawn_pos = spawn_top_left.global_position
 				Direction.TOP_RIGHT:
 					spawn_pos = spawn_top_right.global_position
+				Direction.TOP:
+					spawn_pos = spawn_right.global_position
 			
 			player.kill_movement()
 			set_camera_bounds(player, spawn_pos)
