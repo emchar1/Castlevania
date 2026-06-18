@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c4iflh13t27v8" path="res://scripts/hud.gd" id="1_5ysmq"]
 [ext_resource type="FontFile" uid="uid://5fm5qvh53ma0" path="res://assets/fonts/Jersey10-Regular.ttf" id="1_oo0fn"]
 [ext_resource type="Texture2D" uid="uid://4cs57tjkxmud" path="res://assets/images/hud.png" id="2_oo0fn"]
+[ext_resource type="Texture2D" uid="uid://cik2k1md7gg6o" path="res://assets/images/secondary.png" id="4_6fi6k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ysmq"]
 atlas = ExtResource("2_oo0fn")
@@ -52,8 +53,111 @@ region = Rect2(8, 8, 8, 8)
 atlas = ExtResource("2_oo0fn")
 region = Rect2(8, 8, 8, 8)
 
+[sub_resource type="FontFile" id="FontFile_5ysmq"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/54/0/ascent = 0.0
+cache/0/54/0/descent = 0.0
+cache/0/54/0/underline_position = 0.0
+cache/0/54/0/underline_thickness = 0.0
+cache/0/54/0/scale = 1.0
+cache/0/53/0/ascent = 0.0
+cache/0/53/0/descent = 0.0
+cache/0/53/0/underline_position = 0.0
+cache/0/53/0/underline_thickness = 0.0
+cache/0/53/0/scale = 1.0
+cache/0/52/0/ascent = 0.0
+cache/0/52/0/descent = 0.0
+cache/0/52/0/underline_position = 0.0
+cache/0/52/0/underline_thickness = 0.0
+cache/0/52/0/scale = 1.0
+cache/0/51/0/ascent = 0.0
+cache/0/51/0/descent = 0.0
+cache/0/51/0/underline_position = 0.0
+cache/0/51/0/underline_thickness = 0.0
+cache/0/51/0/scale = 1.0
+cache/0/50/0/ascent = 0.0
+cache/0/50/0/descent = 0.0
+cache/0/50/0/underline_position = 0.0
+cache/0/50/0/underline_thickness = 0.0
+cache/0/50/0/scale = 1.0
+cache/0/49/0/ascent = 0.0
+cache/0/49/0/descent = 0.0
+cache/0/49/0/underline_position = 0.0
+cache/0/49/0/underline_thickness = 0.0
+cache/0/49/0/scale = 1.0
+cache/0/48/0/ascent = 0.0
+cache/0/48/0/descent = 0.0
+cache/0/48/0/underline_position = 0.0
+cache/0/48/0/underline_thickness = 0.0
+cache/0/48/0/scale = 1.0
+cache/0/47/0/ascent = 0.0
+cache/0/47/0/descent = 0.0
+cache/0/47/0/underline_position = 0.0
+cache/0/47/0/underline_thickness = 0.0
+cache/0/47/0/scale = 1.0
+cache/0/46/0/ascent = 0.0
+cache/0/46/0/descent = 0.0
+cache/0/46/0/underline_position = 0.0
+cache/0/46/0/underline_thickness = 0.0
+cache/0/46/0/scale = 1.0
+cache/0/45/0/ascent = 0.0
+cache/0/45/0/descent = 0.0
+cache/0/45/0/underline_position = 0.0
+cache/0/45/0/underline_thickness = 0.0
+cache/0/45/0/scale = 1.0
+cache/0/44/0/ascent = 0.0
+cache/0/44/0/descent = 0.0
+cache/0/44/0/underline_position = 0.0
+cache/0/44/0/underline_thickness = 0.0
+cache/0/44/0/scale = 1.0
+cache/0/43/0/ascent = 0.0
+cache/0/43/0/descent = 0.0
+cache/0/43/0/underline_position = 0.0
+cache/0/43/0/underline_thickness = 0.0
+cache/0/43/0/scale = 1.0
+cache/0/42/0/ascent = 0.0
+cache/0/42/0/descent = 0.0
+cache/0/42/0/underline_position = 0.0
+cache/0/42/0/underline_thickness = 0.0
+cache/0/42/0/scale = 1.0
+cache/0/41/0/ascent = 0.0
+cache/0/41/0/descent = 0.0
+cache/0/41/0/underline_position = 0.0
+cache/0/41/0/underline_thickness = 0.0
+cache/0/41/0/scale = 1.0
+cache/0/40/0/ascent = 0.0
+cache/0/40/0/descent = 0.0
+cache/0/40/0/underline_position = 0.0
+cache/0/40/0/underline_thickness = 0.0
+cache/0/40/0/scale = 1.0
+cache/0/39/0/ascent = 0.0
+cache/0/39/0/descent = 0.0
+cache/0/39/0/underline_position = 0.0
+cache/0/39/0/underline_thickness = 0.0
+cache/0/39/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+
 [node name="Hud" type="CanvasLayer" unique_id=169172673]
 script = ExtResource("1_5ysmq")
+metadata/_edit_vertical_guides_ = [128.0, 0.0, 256.0]
+metadata/_edit_horizontal_guides_ = [20.0, 0.0, 40.0]
 
 [node name="Background" type="ColorRect" parent="." unique_id=259010942]
 anchors_preset = 10
@@ -229,3 +333,17 @@ offset_bottom = 29.0
 theme_override_fonts/font = ExtResource("1_oo0fn")
 theme_override_font_sizes/font_size = 12
 text = "000"
+
+[node name="Secondary" type="Label" parent="." unique_id=1430609713]
+offset_left = 106.0
+offset_top = 3.0
+offset_right = 182.0
+offset_bottom = 62.0
+theme_override_fonts/font = SubResource("FontFile_5ysmq")
+theme_override_font_sizes/font_size = 32
+text = "[   ]"
+
+[node name="Sprite2D" type="Sprite2D" parent="Secondary" unique_id=201279377]
+texture_filter = 1
+position = Vector2(22, 17)
+texture = ExtResource("4_6fi6k")
