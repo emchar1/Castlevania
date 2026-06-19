@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3sj15"]
 size = Vector2(16, 16)
 
-[node name="SpawnManager" type="Area2D" unique_id=98162249]
+[node name="SpawnManager" type="Area2D" unique_id=98162249 groups=["spawner"]]
 script = ExtResource("1_2f4nx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=485919623]

@@ -116,10 +116,8 @@ func _on_dead_body_entered(body: Node2D) -> void:
 
 func _on_zone_entered(body: Node2D, direction: Direction):
 	if body.is_in_group("player"):
-		for spawner in enemy_spawners.get_children():
+		for spawner in get_tree().get_nodes_in_group("spawner"):
 			spawner.reset_spawn()
-		
-		cursed_spawners.reset_spawners()
 		
 		zone_entered.emit(self, direction)
 		
