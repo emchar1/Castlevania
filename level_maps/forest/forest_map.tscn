@@ -22,7 +22,7 @@ position = Vector2(-2048, 0)
 music = 1
 
 [node name="Forest3" parent="." unique_id=684583834 instance=ExtResource("2_tobf8")]
-position = Vector2(-3072, 0)
+position = Vector2(-3072, -480)
 music = 4
 
 [node name="Transition" type="CanvasLayer" parent="." unique_id=20464199]
