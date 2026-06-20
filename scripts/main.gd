@@ -20,10 +20,12 @@ func _ready() -> void:
 	
 	CurseManager.activated.connect(curse_activated)
 	
+	# Connect all map types here!
 	forest_map.zone_trans_started.connect(zone_trans_started)
 	forest_map.zone_trans_ended.connect(zone_trans_ended)
 	graveyard_map.zone_trans_started.connect(zone_trans_started)
 	graveyard_map.zone_trans_ended.connect(zone_trans_ended)
+	
 	player.dead.connect(kill_player)
 	
 	await get_tree().create_timer(0.5).timeout
@@ -79,8 +81,6 @@ func loop_zone(
 			3: pass # mountains
 			4: pass # town
 		
-		
-		# FIXME: - I don't like this...
 		zone_trans_started()
 		zone_map._fade_zone()
 		player.kill_movement()
