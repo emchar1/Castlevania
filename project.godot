@@ -28,6 +28,10 @@ window/size/viewport_width=256
 window/size/viewport_height=240
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+zone=""
+
 [input]
 
 move_up={

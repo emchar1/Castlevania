@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://btgeak38cehpc"]
+
+[ext_resource type="Script" uid="uid://dk3i1epxl4v2c" path="res://level_maps/level_map.gd" id="1_rgvua"]
+[ext_resource type="PackedScene" uid="uid://2a4n7plj5etv" path="res://level_maps/graveyard/graveyard0.tscn" id="2_0vjuq"]
+[ext_resource type="PackedScene" uid="uid://cfv6paiija5ag" path="res://level_maps/graveyard/graveyard1.tscn" id="3_8pa0t"]
+
+[node name="GraveyardMap" type="Node2D" unique_id=2116938927]
+script = ExtResource("1_rgvua")
+metadata/_edit_vertical_guides_ = [0.0, 256.0, 512.0, 768.0, 1024.0]
+metadata/_edit_horizontal_guides_ = [0.0, 240.0]
+
+[node name="Graveyard0" parent="." unique_id=957525744 instance=ExtResource("2_0vjuq")]
+
+[node name="Graveyard1" parent="." unique_id=517519287 instance=ExtResource("3_8pa0t")]
+position = Vector2(256, 0)
+
+[node name="Transition" type="CanvasLayer" parent="." unique_id=20464199]
+
+[node name="FadeRect" type="ColorRect" parent="Transition" unique_id=1447522248]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

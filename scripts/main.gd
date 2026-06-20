@@ -4,6 +4,7 @@ extends Node
 
 @onready var player = $Player
 @onready var forest_map = $ForestMap
+@onready var graveyard_map = $GraveyardMap
 
 # TODO: - Build map looping logic
 @onready var spawn_left = $MapLoop/LoopRight/SpawnLeft
@@ -21,6 +22,8 @@ func _ready() -> void:
 	
 	forest_map.zone_trans_started.connect(zone_trans_started)
 	forest_map.zone_trans_ended.connect(zone_trans_ended)
+	graveyard_map.zone_trans_started.connect(zone_trans_started)
+	graveyard_map.zone_trans_ended.connect(zone_trans_ended)
 	player.dead.connect(kill_player)
 	
 	await get_tree().create_timer(0.5).timeout
@@ -51,7 +54,7 @@ func kill_player():
 
 # FIXME: - You have to "guess" the zone_type and number :(
 func _on_loop_left_body_entered(body: Node2D) -> void:
-	loop_zone(body, spawn_right, Zone.ZoneType.FOREST, 0)
+	loop_zone(body, spawn_right, Zone.ZoneType.GRAVEYARD, 1)
 
 
 func _on_loop_right_body_entered(body: Node2D) -> void:
@@ -67,14 +70,23 @@ func loop_zone(
 	zone_number: int
 ) -> void:
 	if body.is_in_group("player"):
+		var zone_map: Node2D
+		
+		match zone_type:
+			0: zone_map = forest_map
+			1: zone_map = graveyard_map
+			2: pass # catacombs
+			3: pass # mountains
+			4: pass # town
+		
 		
 		# FIXME: - I don't like this...
 		zone_trans_started()
-		forest_map._fade_zone()
+		zone_map._fade_zone()
 		player.kill_movement()
 		player.position = spawn_point.global_position
 		
-		var zone = forest_map.get_zone(zone_type, zone_number)
+		var zone = zone_map.get_zone(zone_type, zone_number)
 		
 		if zone:
 			var zone_id = Zone.get_zone_id(zone.zone_type, zone.zone_number)
@@ -115,5 +127,7 @@ func set_camera_bounds_to_player_global_position():
 			
 			zone.set_camera_bounds(player, global_position)
 			
+			# FIXME: - this doesn't work (for graveyard)
+			print("global_position.x: ", global_position.x, ", zone.position.x: ", zone.position.x)
 			if checkpoint_left:
 				player.set_direction(checkpoint_left)
