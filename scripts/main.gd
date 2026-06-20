@@ -14,12 +14,15 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+
 	CurseManager.activated.connect(curse_activated)
+	
 	forest_map.zone_trans_started.connect(zone_trans_started)
 	forest_map.zone_trans_ended.connect(zone_trans_ended)
 	player.dead.connect(kill_player)
 	
 	await get_tree().create_timer(0.5).timeout
+	set_camera_bounds_to_player_global_position()
 	forest_map.get_zone(0, 0).set_music()
 
 
@@ -43,6 +46,8 @@ func kill_player():
 	get_tree().call_deferred("reload_current_scene")
 
 
+
+
 # FIXME: - You have to "guess" the zone_type and number :(
 func _on_loop_left_body_entered(body: Node2D) -> void:
 	loop_zone(body, spawn_right, Zone.ZoneType.FOREST, 0)
@@ -50,6 +55,8 @@ func _on_loop_left_body_entered(body: Node2D) -> void:
 
 func _on_loop_right_body_entered(body: Node2D) -> void:
 	loop_zone(body, spawn_left, Zone.ZoneType.FOREST, 3)
+
+
 
 
 func loop_zone(
@@ -87,3 +94,14 @@ func curse_activated(active: bool):
 		AudioManager.play_music(AudioData.Music.ENERGIA)
 	else:
 		AudioManager.play_music(AudioData.Music.BLOODYTEARS)
+
+
+func set_camera_bounds_to_player_global_position():
+	var global_position = player.global_position
+
+	for node in get_tree().get_nodes_in_group("zone"):
+		var zone = node as Zone
+		
+		if zone and zone.is_point_in_bounds(global_position):
+			zone.set_camera_bounds(player, global_position)
+			print("Setting camera to zone: %s at global position: %s" % [zone.zone_id, global_position])

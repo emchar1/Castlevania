@@ -305,7 +305,8 @@ func _attack_body_entered(body: Node2D):
 		var enemy = body as Enemy
 		
 		if enemy:
-			enemy.hurt_enemy(attack_dmg)
+			var attack_dir = sign(global_position.x - enemy.global_position.x)
+			enemy.hurt_enemy(attack_dmg, attack_dir)
 
 
 # HURT FUNCTIONS

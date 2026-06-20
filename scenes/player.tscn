@@ -1103,10 +1103,6 @@ shape = SubResource("RectangleShape2D_dqkch")
 debug_color = Color(0.68120867, 0.50354284, 0, 0.41960785)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1128348600]
-limit_left = 0
-limit_top = 0
-limit_right = 1024
-limit_bottom = 240
 
 [connection signal="body_entered" from="Claw" to="." method="_on_claw_body_entered"]
 [connection signal="body_entered" from="Sword" to="." method="_on_sword_body_entered"]

@@ -112,7 +112,7 @@ radius = 4.0
 height = 10.0
 
 [node name="PickUp" type="Area2D" unique_id=27700304]
-collision_layer = 128
+collision_layer = 64
 script = ExtResource("1_adew5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=671654932]

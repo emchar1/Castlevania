@@ -81,7 +81,6 @@ start={
 2d_physics/layer_5="projectile"
 2d_physics/layer_6="npc"
 2d_physics/layer_7="zone"
-2d_physics/layer_8="pickup"
 
 [physics]
 

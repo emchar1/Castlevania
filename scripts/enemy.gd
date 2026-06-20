@@ -154,7 +154,9 @@ func _set_collisions(small: bool, medium: bool, large: bool):
 
 # DAMAGE FUNCTIONS
 
-func hurt_enemy(dmg: int):
+func hurt_enemy(dmg: int, attack_dir: float):
+	var did_change_dir := false
+
 	hp -= dmg
 	if hp <= 0:
 		kill_enemy()
@@ -163,7 +165,16 @@ func hurt_enemy(dmg: int):
 	_reset_timers()
 	_setup_timer(0.6, true)
 	
-	speed = 0
+	if type == Type.FRANKENSTEIN:
+		speed = orig_speed * 2
+		sprite.speed_scale = 2
+		
+		# Only change directions if attack frankenstein from behind.
+		if attack_dir != dir:
+			change_directions()
+			did_change_dir = true
+	else:
+		speed = 0
 	
 	if not AudioManager.is_playing(AudioData.AudioKey.ATTACK_SWING):
 		AudioManager.play(AudioData.AudioKey.ATTACK_SWING)
@@ -182,6 +193,10 @@ func hurt_enemy(dmg: int):
 	
 	modulate = Color.WHITE
 	speed = orig_speed
+	sprite.speed_scale = 1
+
+	if did_change_dir:
+		change_directions()
 
 
 func kill_enemy():
@@ -195,7 +210,7 @@ func kill_enemy():
 	sprite.stop()
 	
 	GameState.add_score(score)
-	
+
 	if not AudioManager.is_playing(AudioData.AudioKey.ATTACK_KILL):
 		AudioManager.play(AudioData.AudioKey.ATTACK_KILL)
 	

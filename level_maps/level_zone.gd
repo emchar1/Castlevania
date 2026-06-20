@@ -69,6 +69,7 @@ func set_camera_bounds(player: Player, spawn_pos: Vector2):
 	player.position = spawn_pos
 
 
+# Sets bgm based on music property set in Inspector.
 func set_music():
 	if CurseManager.active:
 		return
@@ -78,8 +79,18 @@ func set_music():
 		AudioManager.play_music(music)
 
 
+# Checks if a point is within the bounds of this zone.
+func is_point_in_bounds(point: Vector2) -> bool:
+	var x_in_bounds = point.x >= camera_bounds_tl.global_position.x and point.x <= camera_bounds_br.global_position.x
+	var y_in_bounds = point.y >= camera_bounds_tl.global_position.y and point.y <= camera_bounds_br.global_position.y
+
+	return x_in_bounds and y_in_bounds
+
+
+# Gets zone id format using type and number formula, e.g. 0-1 = forest-1
+# (See ZoneType enum above for type cases)
 static func get_zone_id(type: ZoneType, number: int) -> String:
-	return str(type) + str(number)
+	return str(type) + "-" + str(number)
 
 
 # ZONE ENTRANCE SIGNALS
