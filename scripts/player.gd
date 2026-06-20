@@ -253,7 +253,7 @@ func _player_attack():
 func _start_combo():
 	if not CurseManager.active:
 		return
-
+	
 	if combo_timer:
 		combo_timer.queue_free()
 		combo_count += 1

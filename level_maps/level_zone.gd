@@ -81,9 +81,13 @@ func set_music():
 
 # Checks if a point is within the bounds of this zone.
 func is_point_in_bounds(point: Vector2) -> bool:
-	var x_in_bounds = point.x >= camera_bounds_tl.global_position.x and point.x <= camera_bounds_br.global_position.x
-	var y_in_bounds = point.y >= camera_bounds_tl.global_position.y and point.y <= camera_bounds_br.global_position.y
-
+	var point_x_is_bigger = point.x >= camera_bounds_tl.global_position.x
+	var point_x_is_smaller = point.x <= camera_bounds_br.global_position.x
+	var point_y_is_bigger = point.y >= camera_bounds_tl.global_position.y
+	var point_y_is_smaller = point.y <= camera_bounds_br.global_position.y
+	var x_in_bounds = point_x_is_bigger and point_x_is_smaller
+	var y_in_bounds = point_y_is_bigger and point_y_is_smaller
+	
 	return x_in_bounds and y_in_bounds
 
 

@@ -155,19 +155,18 @@ func _set_collisions(small: bool, medium: bool, large: bool):
 # DAMAGE FUNCTIONS
 
 func hurt_enemy(dmg: int, attack_dir: float):
-	var did_change_dir := false
-
 	hp -= dmg
 	if hp <= 0:
 		kill_enemy()
 		return
 	
-	_reset_timers()
-	_setup_timer(0.6, true)
+	var stun_duration := 0.6
+	var did_change_dir := false
 	
 	if type == Type.FRANKENSTEIN:
 		speed = orig_speed * 2
 		sprite.speed_scale = 2
+		stun_duration = 1.2
 		
 		# Only change directions if attack frankenstein from behind.
 		if attack_dir != dir:
@@ -175,6 +174,9 @@ func hurt_enemy(dmg: int, attack_dir: float):
 			did_change_dir = true
 	else:
 		speed = 0
+	
+	_reset_timers()
+	_setup_timer(stun_duration, true)
 	
 	if not AudioManager.is_playing(AudioData.AudioKey.ATTACK_SWING):
 		AudioManager.play(AudioData.AudioKey.ATTACK_SWING)
@@ -191,12 +193,12 @@ func hurt_enemy(dmg: int, attack_dir: float):
 	if tween:
 		tween.kill()
 	
+	if did_change_dir:
+		change_directions()
+	
 	modulate = Color.WHITE
 	speed = orig_speed
 	sprite.speed_scale = 1
-
-	if did_change_dir:
-		change_directions()
 
 
 func kill_enemy():
@@ -210,14 +212,14 @@ func kill_enemy():
 	sprite.stop()
 	
 	GameState.add_score(score)
-
+	
 	if not AudioManager.is_playing(AudioData.AudioKey.ATTACK_KILL):
 		AudioManager.play(AudioData.AudioKey.ATTACK_KILL)
 	
 	await timer.timeout
 	
 	spawn_pickup()
-
+	
 	died.emit()
 	removed.emit()
 	queue_free()
@@ -369,7 +371,7 @@ func spawn_pickup():
 	var random_chance = randi_range(0, 1)
 	if random_chance > 0:
 		return
-
+	
 	var item = pickup_scene.instantiate()
 	item.global_position = global_position
 	get_tree().current_scene.add_child(item)
