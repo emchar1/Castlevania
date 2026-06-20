@@ -257,14 +257,12 @@ position = Vector2(32, 16)
 
 [node name="CheckpointL" parent="SpawnPoints" unique_id=1767796310 instance=ExtResource("3_0dpvi")]
 position = Vector2(32, 192)
-is_left_checkpoint = true
 
 [node name="CheckpointR" parent="SpawnPoints" unique_id=591747379 instance=ExtResource("3_0dpvi")]
 position = Vector2(992, 208)
 
 [node name="CheckpointTL" parent="SpawnPoints" unique_id=1844671757 instance=ExtResource("3_0dpvi")]
 position = Vector2(32, 32)
-is_left_checkpoint = true
 
 [node name="EnemySpawners" type="Node2D" parent="." unique_id=2069367675]
 

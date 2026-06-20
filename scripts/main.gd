@@ -16,7 +16,7 @@ extends Node
 func _ready() -> void:
 	set_checkpoint_if_exists()
 	set_camera_bounds_to_player_global_position()
-
+	
 	CurseManager.activated.connect(curse_activated)
 	
 	forest_map.zone_trans_started.connect(zone_trans_started)
@@ -104,10 +104,16 @@ func set_checkpoint_if_exists():
 
 func set_camera_bounds_to_player_global_position():
 	var global_position = player.global_position
-
+	var checkpoint_left = false
+	
 	for node in get_tree().get_nodes_in_group("zone"):
 		var zone = node as Zone
 		
 		if zone and zone.is_point_in_bounds(global_position):
+			var checkpoint_pos = global_position.x - zone.position.x
+			checkpoint_left = checkpoint_pos < GameState.screen_size.x / 2
+			
 			zone.set_camera_bounds(player, global_position)
-			print("Setting camera to zone: %s at global position: %s" % [zone.zone_id, global_position])
+			
+			if checkpoint_left:
+				player.set_direction(checkpoint_left)

@@ -241,7 +241,6 @@ position = Vector2(992, 176)
 
 [node name="CheckpointL" parent="SpawnPoints" unique_id=1767796310 instance=ExtResource("3_ukl2l")]
 position = Vector2(32, 208)
-is_left_checkpoint = true
 
 [node name="CheckpointR" parent="SpawnPoints" unique_id=1678088216 instance=ExtResource("3_ukl2l")]
 position = Vector2(992, 192)
