@@ -128,6 +128,7 @@ func set_camera_bounds_to_player_global_position():
 			zone.set_camera_bounds(player, global_position)
 			
 			# FIXME: - this doesn't work (for graveyard)
-			print("global_position.x: ", global_position.x, ", zone.position.x: ", zone.position.x)
+			print("global_position.x: ", global_position.x)
+			print("   zone.position.x: ", zone.position.x)
 			if checkpoint_left:
 				player.set_direction(checkpoint_left)

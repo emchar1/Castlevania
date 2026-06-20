@@ -25,8 +25,8 @@ var zone_id: String
 @onready var spawn_right = $SpawnPoints/SpawnRight
 @onready var spawn_top_left = get_node_or_null("SpawnPoints/SpawnTopLeft")
 @onready var spawn_top_right = get_node_or_null("SpawnPoints/SpawnTopRight")
-@onready var enemy_spawners = $EnemySpawners
-@onready var cursed_spawners = $CursedSpawners
+@onready var cursed_spawners = get_node_or_null("CursedSpawners")
+@onready var cursed_spawners2 = get_node_or_null("CursedSpawners2")
 
 @onready var floor_tiles = $TileMapLayers/Floor
 @onready var bg_tiles = $TileMapLayers/Background
@@ -230,7 +230,12 @@ func curse_activated(cursed: bool):
 				rhythm_index = 0
 	else:
 		color_textures(Color.WHITE)
-		cursed_spawners.reset_spawners()
+		
+		if cursed_spawners:
+			cursed_spawners.reset_spawners()
+		
+		if cursed_spawners2:
+			cursed_spawners2.reset_spawners()
 
 
 # TEXTURE FUNCTIONS
