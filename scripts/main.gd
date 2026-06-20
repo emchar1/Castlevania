@@ -14,6 +14,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	set_checkpoint_if_exists()
 	set_camera_bounds_to_player_global_position()
 
 	CurseManager.activated.connect(curse_activated)
@@ -94,6 +95,11 @@ func curse_activated(active: bool):
 		AudioManager.play_music(AudioData.Music.ENERGIA)
 	else:
 		AudioManager.play_music(AudioData.Music.BLOODYTEARS)
+
+
+func set_checkpoint_if_exists():
+	if GameState.checkpoint:
+		player.global_position = GameState.checkpoint
 
 
 func set_camera_bounds_to_player_global_position():

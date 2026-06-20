@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://d2xnvhj00vi1"]
 
 [ext_resource type="Script" uid="uid://ddj10s3b3qnmk" path="res://level_maps/level_zone.gd" id="1_tobf8"]
+[ext_resource type="PackedScene" uid="uid://ba2c5577q17kl" path="res://scenes/checkpoint.tscn" id="3_ukl2l"]
 [ext_resource type="Texture2D" uid="uid://d13lktxnievkk" path="res://assets/images/tilemap_forest.png" id="3_wwmcb"]
 [ext_resource type="PackedScene" uid="uid://dnr4tcrjgy05i" path="res://scenes/spawn_manager.tscn" id="4_kmo3j"]
 [ext_resource type="PackedScene" uid="uid://dk8ttbryav3kh" path="res://level_maps/cursed_spawners.tscn" id="4_ukl2l"]
@@ -237,6 +238,13 @@ position = Vector2(32, 192)
 
 [node name="SpawnRight" type="Marker2D" parent="SpawnPoints" unique_id=1367886966]
 position = Vector2(992, 176)
+
+[node name="CheckpointL" parent="SpawnPoints" unique_id=1767796310 instance=ExtResource("3_ukl2l")]
+position = Vector2(32, 208)
+is_left_checkpoint = true
+
+[node name="CheckpointR" parent="SpawnPoints" unique_id=1678088216 instance=ExtResource("3_ukl2l")]
+position = Vector2(992, 192)
 
 [node name="EnemySpawners" type="Node2D" parent="." unique_id=1724412508]
 

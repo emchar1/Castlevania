@@ -10,6 +10,7 @@ const HEALTH_MAX = 6
 var health_current := 6
 var total_coins := 0
 var current_score := 0
+var checkpoint: Vector2
 var screen_size: Vector2
 
 
@@ -42,6 +43,10 @@ func update_score(value: int):
 
 	current_score = value
 	score_changed.emit(value)
+
+
+func set_checkpoint(point: Vector2):
+	checkpoint = point
 
 
 # HEALTH CONVENIENCE FUNCTIONS

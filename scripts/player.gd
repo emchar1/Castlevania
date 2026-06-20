@@ -115,6 +115,14 @@ func kill_movement():
 	velocity = Vector2.ZERO
 
 
+func set_direction(face_right: bool):
+	player_sprite.flip_h = face_right
+	sword.scale.x = -1 if player_sprite.flip_h else 1
+	
+	werewolf_sprite.flip_h = face_right
+	claw.scale.x = -1 if werewolf_sprite.flip_h else 1
+
+
 # MOVEMENT FUNCTIONS
 
 func _move_player():
@@ -223,10 +231,7 @@ func _process_animation():
 		werewolf_sprite.play("crouch" if is_crouching else "idle")
 	else:
 		if is_on_floor():
-			player_sprite.flip_h = move_dir.x > 0
-			sword.scale.x = -1 if player_sprite.flip_h else 1
-			werewolf_sprite.flip_h = move_dir.x > 0
-			claw.scale.x = -1 if werewolf_sprite.flip_h else 1
+			set_direction(move_dir.x > 0)
 			
 			player_sprite.play("crouch" if is_crouching else "run")
 			werewolf_sprite.play("crouch" if is_crouching else "run")

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ddj10s3b3qnmk" path="res://level_maps/level_zone.gd" id="1_2pb6f"]
 [ext_resource type="Texture2D" uid="uid://d13lktxnievkk" path="res://assets/images/tilemap_forest.png" id="2_4mbud"]
 [ext_resource type="PackedScene" uid="uid://dnr4tcrjgy05i" path="res://scenes/spawn_manager.tscn" id="3_dyrpl"]
+[ext_resource type="PackedScene" uid="uid://ba2c5577q17kl" path="res://scenes/checkpoint.tscn" id="3_yhu25"]
 [ext_resource type="PackedScene" uid="uid://dk8ttbryav3kh" path="res://level_maps/cursed_spawners.tscn" id="4_ueqbn"]
 [ext_resource type="Texture2D" uid="uid://f6rhx2kop8px" path="res://assets/images/container.png" id="5_ueqbn"]
 
@@ -244,10 +245,17 @@ shape = SubResource("RectangleShape2D_5karn")
 [node name="SpawnPoints" type="Node2D" parent="." unique_id=1081633524]
 
 [node name="SpawnLeft" type="Marker2D" parent="SpawnPoints" unique_id=1878867375]
-position = Vector2(32, -296)
+position = Vector2(32, -288)
 
 [node name="SpawnRight" type="Marker2D" parent="SpawnPoints" unique_id=1367886966]
-position = Vector2(992, 152)
+position = Vector2(992, 160)
+
+[node name="CheckpointL" parent="SpawnPoints" unique_id=1767796310 instance=ExtResource("3_yhu25")]
+position = Vector2(32, -272)
+is_left_checkpoint = true
+
+[node name="CheckpointR" parent="SpawnPoints" unique_id=1783252124 instance=ExtResource("3_yhu25")]
+position = Vector2(992, 176)
 
 [node name="BatSpawners" type="Node2D" parent="." unique_id=661768552]
 
