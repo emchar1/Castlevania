@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d13lktxnievkk" path="res://assets/images/tilemap_forest.png" id="2_xsdtm"]
 [ext_resource type="PackedScene" uid="uid://ba2c5577q17kl" path="res://scenes/checkpoint.tscn" id="3_uf4uh"]
 [ext_resource type="PackedScene" uid="uid://dnr4tcrjgy05i" path="res://scenes/spawn_manager.tscn" id="4_1y3g8"]
-[ext_resource type="PackedScene" uid="uid://dk8ttbryav3kh" path="res://level_maps/cursed_spawners.tscn" id="4_uf4uh"]
+[ext_resource type="PackedScene" uid="uid://dk8ttbryav3kh" path="res://scenes/cursed_spawners.tscn" id="4_uf4uh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w3k6w"]
 texture = ExtResource("2_xsdtm")
