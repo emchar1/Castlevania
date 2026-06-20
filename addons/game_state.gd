@@ -40,7 +40,7 @@ func update_coins(value: int):
 func update_score(value: int):
 	if value < 0:
 		return
-
+	
 	current_score = value
 	score_changed.emit(value)
 
