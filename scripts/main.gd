@@ -14,6 +14,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	set_camera_bounds_to_player_global_position()
 
 	CurseManager.activated.connect(curse_activated)
 	
@@ -22,7 +23,6 @@ func _ready() -> void:
 	player.dead.connect(kill_player)
 	
 	await get_tree().create_timer(0.5).timeout
-	set_camera_bounds_to_player_global_position()
 	forest_map.get_zone(0, 0).set_music()
 
 
