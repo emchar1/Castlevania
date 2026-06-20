@@ -12,7 +12,7 @@ metadata/_edit_horizontal_guides_ = [0.0, 240.0]
 [node name="Graveyard0" parent="." unique_id=957525744 instance=ExtResource("2_0vjuq")]
 
 [node name="Graveyard1" parent="." unique_id=517519287 instance=ExtResource("3_8pa0t")]
-position = Vector2(256, 0)
+position = Vector2(1024, 0)
 
 [node name="Transition" type="CanvasLayer" parent="." unique_id=20464199]
 

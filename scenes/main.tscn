@@ -37,12 +37,12 @@ shape = SubResource("RectangleShape2D_sugp2")
 debug_color = Color(0.68120867, 0.50354284, 0, 0.41960785)
 
 [node name="SpawnRight" type="Marker2D" parent="MapLoop/LoopLeft" unique_id=1910574676]
-position = Vector2(1504, 192)
+position = Vector2(3040, 192)
 
 [node name="LoopRight" type="Area2D" parent="MapLoop" unique_id=1164579003]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapLoop/LoopRight" unique_id=1752134389]
-position = Vector2(1532, 120)
+position = Vector2(3068, 120)
 shape = SubResource("RectangleShape2D_jyhfs")
 debug_color = Color(0.68120867, 0.50354284, 0, 0.41960785)
 
