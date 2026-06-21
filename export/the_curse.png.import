@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ugsb4xxpba4r"
-path="res://.godot/imported/Castlevania.apple-touch-icon.png-2ba72a535003c64888d88a34b7d30377.ctex"
+uid="uid://cn8me2pgj3ffo"
+path="res://.godot/imported/the_curse.png-889f50f5e0f5c9e1f7978acab1455e7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://export/Castlevania.apple-touch-icon.png"
-dest_files=["res://.godot/imported/Castlevania.apple-touch-icon.png-2ba72a535003c64888d88a34b7d30377.ctex"]
+source_file="res://export/the_curse.png"
+dest_files=["res://.godot/imported/the_curse.png-889f50f5e0f5c9e1f7978acab1455e7c.ctex"]
 
 [params]
 
