@@ -5,6 +5,7 @@ extends Node
 @onready var player = $Player
 @onready var forest_map = $ForestMap
 @onready var graveyard_map = $GraveyardMap
+@onready var town_map = $TownMap
 
 # TODO: - Build map looping logic
 @onready var spawn_left = $MapLoop/LoopRight/SpawnLeft
@@ -25,6 +26,8 @@ func _ready() -> void:
 	forest_map.zone_trans_ended.connect(zone_trans_ended)
 	graveyard_map.zone_trans_started.connect(zone_trans_started)
 	graveyard_map.zone_trans_ended.connect(zone_trans_ended)
+	town_map.zone_trans_started.connect(zone_trans_started)
+	town_map.zone_trans_ended.connect(zone_trans_ended)
 	
 	player.dead.connect(kill_player)
 	
@@ -79,7 +82,7 @@ func loop_zone(
 			1: zone_map = graveyard_map
 			2: pass # catacombs
 			3: pass # mountains
-			4: pass # town
+			4: zone_map = town_map # town
 		
 		zone_trans_started()
 		zone_map._fade_zone()

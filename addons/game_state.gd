@@ -13,6 +13,9 @@ var current_score := 0
 var checkpoint: Vector2
 var screen_size: Vector2
 
+var music_volume := 1.0
+var sfx_volume := 1.0
+
 
 # FUNCTIONS
 

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://chv8jjjgcvihr" path="res://scenes/player.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cq0y2hvwbtoew" path="res://scenes/hud.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://btgeak38cehpc" path="res://level_maps/graveyard/graveyard_map.tscn" id="4_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://k0vqqw38lmr2" path="res://level_maps/town/town_map.tscn" id="5_tefeu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sugp2"]
 size = Vector2(8, 384)
@@ -20,34 +21,37 @@ metadata/_edit_vertical_guides_ = [256.0, 0.0]
 [node name="Hud" parent="." unique_id=732583890 instance=ExtResource("4_jyhfs")]
 
 [node name="ForestMap" parent="." unique_id=2116938927 instance=ExtResource("1_0wfyh")]
+position = Vector2(-1024, 0)
 
 [node name="GraveyardMap" parent="." unique_id=1346297758 instance=ExtResource("4_tbgi4")]
-position = Vector2(1024, 0)
+position = Vector2(256, 0)
+
+[node name="TownMap" parent="." unique_id=567726201 instance=ExtResource("5_tefeu")]
 
 [node name="Player" parent="." unique_id=1500777258 instance=ExtResource("2_sugp2")]
-position = Vector2(992, 176)
+position = Vector2(128, 24)
 
 [node name="MapLoop" type="Node2D" parent="." unique_id=1723038664]
 
 [node name="LoopLeft" type="Area2D" parent="MapLoop" unique_id=2126676376]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapLoop/LoopLeft" unique_id=1245937443]
-position = Vector2(-3068, -432)
+position = Vector2(-4092, -432)
 shape = SubResource("RectangleShape2D_sugp2")
 debug_color = Color(0.68120867, 0.50354284, 0, 0.41960785)
 
 [node name="SpawnRight" type="Marker2D" parent="MapLoop/LoopLeft" unique_id=1910574676]
-position = Vector2(4320, -864)
+position = Vector2(3552, -864)
 
 [node name="LoopRight" type="Area2D" parent="MapLoop" unique_id=1164579003]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapLoop/LoopRight" unique_id=1752134389]
-position = Vector2(4348, -900)
+position = Vector2(3580, -900)
 shape = SubResource("RectangleShape2D_jyhfs")
 debug_color = Color(0.68120867, 0.50354284, 0, 0.41960785)
 
 [node name="SpawnLeft" type="Marker2D" parent="MapLoop/LoopRight" unique_id=1752247443]
-position = Vector2(-3040, -304)
+position = Vector2(-4064, -304)
 
 [connection signal="body_entered" from="MapLoop/LoopLeft" to="." method="_on_loop_left_body_entered"]
 [connection signal="body_entered" from="MapLoop/LoopRight" to="." method="_on_loop_right_body_entered"]

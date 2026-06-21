@@ -340,6 +340,7 @@ theme_override_font_sizes/font_size = 12
 text = "000"
 
 [node name="Secondary" type="Label" parent="." unique_id=1430609713]
+visible = false
 offset_left = 106.0
 offset_top = 3.0
 offset_right = 182.0

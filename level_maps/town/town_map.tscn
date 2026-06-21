@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://k0vqqw38lmr2"]
+
+[ext_resource type="Script" uid="uid://dk3i1epxl4v2c" path="res://level_maps/level_map.gd" id="1_fxa1j"]
+[ext_resource type="PackedScene" uid="uid://cbndr6sp4axqg" path="res://level_maps/town/town0.tscn" id="2_o0sva"]
+
+[node name="TownMap" type="Node2D" unique_id=2116938927]
+script = ExtResource("1_fxa1j")
+metadata/_edit_vertical_guides_ = [0.0, 256.0, 512.0, 768.0, 1024.0]
+metadata/_edit_horizontal_guides_ = [0.0, 240.0]
+
+[node name="Town" parent="." unique_id=868089388 instance=ExtResource("2_o0sva")]
+
+[node name="Transition" type="CanvasLayer" parent="." unique_id=20464199]
+
+[node name="FadeRect" type="ColorRect" parent="Transition" unique_id=1447522248]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://blv77kgrx8r0m"]
+
+[ext_resource type="Script" uid="uid://gtoce0o22jrd" path="res://scripts/settings.gd" id="1_r6d6q"]
+[ext_resource type="FontFile" uid="uid://5fm5qvh53ma0" path="res://assets/fonts/Jersey10-Regular.ttf" id="2_r6d6q"]
+[ext_resource type="AudioStream" uid="uid://5p014vfi0xs0" path="res://assets/sounds/switchwithme.ogg" id="3_f4mfi"]
+[ext_resource type="AudioStream" uid="uid://b711paxnbsqco" path="res://assets/sounds/coin.ogg" id="4_es4n0"]
+
+[node name="Settings" type="Node" unique_id=29830959]
+script = ExtResource("1_r6d6q")
+
+[node name="Background" type="ColorRect" parent="." unique_id=313707117]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.29411766, 0.29411766, 0.3254902, 1)
+
+[node name="Settings" type="Label" parent="." unique_id=1267000088]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 16.0
+offset_right = 64.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/font = ExtResource("2_r6d6q")
+theme_override_font_sizes/font_size = 12
+text = "OPTIONS"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="." unique_id=486002403]
+offset_left = 224.0
+offset_top = 8.0
+offset_right = 248.0
+offset_bottom = 33.0
+theme_override_font_sizes/font_size = 12
+text = "X"
+
+[node name="SwitchHandButton" type="Button" parent="." unique_id=677781338]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_r6d6q")
+theme_override_font_sizes/font_size = 12
+text = "RIGHT HANDED"
+
+[node name="MusicLabel" type="Label" parent="." unique_id=1062615781]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -104.0
+offset_right = -64.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_r6d6q")
+theme_override_font_sizes/font_size = 12
+text = "Music:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SFXLabel" type="Label" parent="." unique_id=210644938]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -64.0
+offset_right = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_r6d6q")
+theme_override_font_sizes/font_size = 12
+text = "SFX:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="." unique_id=748402791]
+anchors_preset = -1
+offset_left = 72.0
+offset_top = 44.0
+offset_right = 312.0
+offset_bottom = 60.0
+scale = Vector2(0.5, 0.5)
+max_value = 1.0
+step = 0.1
+value = 1.0
+tick_count = 10
+ticks_position = 3
+
+[node name="SFXSlider" type="HSlider" parent="." unique_id=1705270752]
+anchors_preset = -1
+offset_left = 72.0
+offset_top = 84.0
+offset_right = 312.0
+offset_bottom = 100.0
+scale = Vector2(0.5, 0.5)
+max_value = 1.0
+step = 0.1
+value = 1.0
+tick_count = 10
+ticks_position = 3
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=871905208]
+stream = ExtResource("3_f4mfi")
+bus = &"Music"
+
+[node name="Sound" type="AudioStreamPlayer" parent="." unique_id=776159413]
+stream = ExtResource("4_es4n0")
+bus = &"SFX"
+
+[node name="Bindings" type="Node" parent="." unique_id=364005907]
+
+[node name="Instructions" type="Label" parent="Bindings" unique_id=1018947661]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 56.0
+offset_right = 64.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_r6d6q")
+theme_override_font_sizes/font_size = 12
+text = "MOVE: WASD / ARROW KEYS
+ATTACK: J / NUMPAD 4
+JUMP: K / NUMPAD 5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="SwitchHandButton" to="." method="_on_switch_hand_button_pressed"]
+[connection signal="value_changed" from="MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="SFXSlider" to="." method="_on_sfx_slider_value_changed"]

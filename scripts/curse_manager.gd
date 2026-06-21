@@ -10,7 +10,7 @@ const STEP_MAX = 3
 const TIMER_SPEED = 3
 
 # Curse values
-var current := 3
+var current := 0
 var step := 0
 
 var timer: Timer
@@ -42,7 +42,7 @@ func update_curse(value: int, step_value: int = 0):
 
 func increment_curse():
 	var new_curse = current
-	var new_step = step + 1
+	var new_step = step + STEP_MAX
 	
 	if new_step >= STEP_MAX:
 		new_step = 0

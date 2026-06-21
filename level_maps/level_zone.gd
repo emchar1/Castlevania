@@ -14,7 +14,7 @@ enum Direction {
 	LEFT, RIGHT, TOP_LEFT, TOP_RIGHT, TOP
 }
 
-@export var music: AudioData.Music
+var music_new: AudioData.Music = AudioData.Music.SWITCHWITHME
 @export var zone_type: ZoneType
 @export var zone_number: int
 var zone_id: String
@@ -74,9 +74,9 @@ func set_music():
 	if CurseManager.active:
 		return
 	
-	if not AudioManager.is_music_playing(music):
+	if not AudioManager.is_music_playing(music_new):
 		AudioManager.stop_music(AudioManager.current_music)
-		AudioManager.play_music(music)
+		AudioManager.play_music(music_new)
 
 
 # Checks if a point is within the bounds of this zone.

@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://hyvpvlue8gbb"]
+
+[ext_resource type="FontFile" uid="uid://5fm5qvh53ma0" path="res://assets/fonts/Jersey10-Regular.ttf" id="1_4ignj"]
+[ext_resource type="Script" uid="uid://njk3xjm13nje" path="res://scripts/title.gd" id="1_wosw1"]
+[ext_resource type="AudioStream" uid="uid://b711paxnbsqco" path="res://assets/sounds/coin.ogg" id="2_wosw1"]
+[ext_resource type="Texture2D" uid="uid://yukqgslhiqsw" path="res://assets/images/title.png" id="3_4rr2b"]
+
+[sub_resource type="Gradient" id="Gradient_p6dhs"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pyl7j"]
+gradient = SubResource("Gradient_p6dhs")
+
+[node name="Title" type="Node" unique_id=82165822]
+script = ExtResource("1_wosw1")
+
+[node name="ColorRect" type="TextureRect" parent="." unique_id=1132717898]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_pyl7j")
+
+[node name="TintScreen" type="ColorRect" parent="." unique_id=1921245615]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="Cursed" type="Sprite2D" parent="." unique_id=217185257]
+texture_filter = 1
+position = Vector2(128, 64)
+texture = ExtResource("3_4rr2b")
+
+[node name="Control" type="Control" parent="." unique_id=1092562676]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StartButton" type="Button" parent="Control" unique_id=642437303]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 15.337001
+anchor_top = 9.35
+anchor_right = 15.337001
+anchor_bottom = 9.35
+offset_left = -509.48004
+offset_top = -238.0
+offset_right = -461.48004
+offset_bottom = -214.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_4ignj")
+theme_override_font_sizes/font_size = 12
+text = "START
+"
+
+[node name="SettingsButton" type="Button" parent="Control" unique_id=623625100]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 15.237
+anchor_top = 12.975
+anchor_right = 15.237
+anchor_bottom = 12.975
+offset_left = -521.48004
+offset_top = -343.0
+offset_right = -441.48004
+offset_bottom = -319.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_4ignj")
+theme_override_font_sizes/font_size = 12
+text = "OPTIONS
+"
+
+[node name="Audio" type="Node" parent="." unique_id=1233145972]
+
+[node name="StartSound" type="AudioStreamPlayer" parent="Audio" unique_id=1990429536]
+stream = ExtResource("2_wosw1")
+bus = &"SFX"
+
+[node name="SwitchHandSound" type="AudioStreamPlayer" parent="Audio" unique_id=513393138]
+stream = ExtResource("2_wosw1")
+bus = &"SFX"
+
+[node name="FadeScreen" type="ColorRect" parent="." unique_id=591922109]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="Control/StartButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Control/SettingsButton" to="." method="_on_settings_pressed"]
