@@ -54,6 +54,9 @@ atlas = ExtResource("2_oo0fn")
 region = Rect2(8, 8, 8, 8)
 
 [sub_resource type="FontFile" id="FontFile_5ysmq"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/variation_coordinates = {}
 cache/0/face_index = 0
 cache/0/embolden = 0.0
@@ -184,7 +187,8 @@ text = "HEALTH:"
 
 [node name="Container" type="Control" parent="Health" unique_id=1268750974]
 anchors_preset = 0
-offset_right = 40.0
+offset_left = 3.0
+offset_right = 43.0
 offset_bottom = 40.0
 
 [node name="Health0" type="Sprite2D" parent="Health/Container" unique_id=1160097639]
@@ -238,11 +242,12 @@ offset_right = 40.0
 offset_bottom = 29.0
 theme_override_fonts/font = ExtResource("1_oo0fn")
 theme_override_font_sizes/font_size = 12
-text = "CURSE:"
+text = "MUTANT:"
 
 [node name="Container" type="Control" parent="Curse" unique_id=1963613191]
 anchors_preset = 0
-offset_right = 40.0
+offset_left = 3.0
+offset_right = 43.0
 offset_bottom = 40.0
 
 [node name="Curse0" type="Sprite2D" parent="Curse/Container" unique_id=1453873199]

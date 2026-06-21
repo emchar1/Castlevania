@@ -110,7 +110,7 @@ func configure_enemy(_type: Type):
 			_set_collisions(false, false, true)
 		Type.GREEN_SLIME:
 			sprite.play("green_slime")
-			speed = 15
+			speed = 12
 			hp = 1
 			attack_dmg = 1
 			score = 5

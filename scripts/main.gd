@@ -48,7 +48,7 @@ func kill_player():
 	await get_tree().create_timer(2.0).timeout
 	
 	GameState.reset_health()
-	CurseManager.reset_curse()
+	#CurseManager.reset_curse()
 	get_tree().call_deferred("reload_current_scene")
 
 
@@ -56,7 +56,7 @@ func kill_player():
 
 # FIXME: - You have to "guess" the zone_type and number :(
 func _on_loop_left_body_entered(body: Node2D) -> void:
-	loop_zone(body, spawn_right, Zone.ZoneType.GRAVEYARD, 1)
+	loop_zone(body, spawn_right, Zone.ZoneType.GRAVEYARD, 3)
 
 
 func _on_loop_right_body_entered(body: Node2D) -> void:
@@ -106,7 +106,7 @@ func curse_activated(active: bool):
 		await get_tree().create_timer(1.0).timeout
 		AudioManager.play_music(AudioData.Music.ENERGIA)
 	else:
-		AudioManager.play_music(AudioData.Music.BLOODYTEARS)
+		AudioManager.play_music(AudioData.Music.SWITCHWITHME)
 
 
 func set_checkpoint_if_exists():
