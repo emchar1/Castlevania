@@ -96,6 +96,10 @@ func kill_player(delay: float):
 	is_dead = true
 	allow_input = false
 	turn_on_invincibility(false)
+	
+	if CurseManager.active:
+		CurseManager.reset_curse()
+	
 	GameState.update_health(0)
 	AudioManager.play(AudioData.AudioKey.DEATH)
 	dead.emit()
