@@ -40,8 +40,6 @@ var projectile_scene = preload("res://scenes/projectile.tscn")
 var orig_speed = 50.0
 var dir := 1.0
 var score := 0
-var pickup_chance: float
-var pickup_items: Array[Pickup.Type]
 
 var is_on_ground := false
 var was_on_ground := false
@@ -75,10 +73,7 @@ func change_directions():
 
 func configure_enemy(_type: Type):
 	type = _type
-	var gem = Pickup.Type.CURSE_GEM
-	var gold = Pickup.Type.GOLD
-	var heart = Pickup.Type.HEART
-	
+		
 	match type:
 		Type.ZOMBIE:
 			sprite.play("zombie")
@@ -86,8 +81,6 @@ func configure_enemy(_type: Type):
 			hp = 1
 			attack_dmg = 1
 			score = 10
-			pickup_chance = 0.5
-			pickup_items = [gem, heart]
 			movement_type = _movement1
 			_set_collisions(false, true, false)
 		Type.SKELETON:
@@ -96,8 +89,6 @@ func configure_enemy(_type: Type):
 			hp = 2
 			attack_dmg = 1
 			score = 20
-			pickup_chance = 0.75
-			pickup_items = [gem, heart]
 			movement_type = _movement1
 			_set_collisions(false, true, false)
 		Type.SKELETON2:
@@ -106,8 +97,6 @@ func configure_enemy(_type: Type):
 			hp = 3
 			attack_dmg = 1
 			score = 30
-			pickup_chance = 1.0
-			pickup_items = [heart]
 			movement_type = _movement2
 			_set_collisions(false, true, false)
 		Type.FRANKENSTEIN:
@@ -116,8 +105,6 @@ func configure_enemy(_type: Type):
 			hp = 6
 			attack_dmg = 2
 			score = 100
-			pickup_chance = 1.0
-			pickup_items = [gold]
 			movement_type = _movement1b
 			sprite.offset.y = -16
 			_set_collisions(false, false, true)
@@ -127,8 +114,6 @@ func configure_enemy(_type: Type):
 			hp = 1
 			attack_dmg = 1
 			score = 5
-			pickup_chance = 1.0
-			pickup_items = [gem]
 			movement_type = _movement1
 			_set_collisions(true, false, false)
 		Type.ORANGE_SLIME:
@@ -137,8 +122,6 @@ func configure_enemy(_type: Type):
 			hp = 1
 			attack_dmg = 1
 			score = 25
-			pickup_chance = 1.0
-			pickup_items = [gem]
 			movement_type = _movement1
 			_set_collisions(true, false, false)
 		Type.BAT:
@@ -147,8 +130,6 @@ func configure_enemy(_type: Type):
 			hp = 1
 			attack_dmg = 1
 			score = 15
-			pickup_chance = 1.0
-			pickup_items = [gem]
 			movement_type = _movement3
 			_set_collisions(true, false, false)
 	
@@ -387,17 +368,16 @@ func spawn_pickup():
 	if pickup_scene == null:
 		return
 	
-	var random_chance = randf_range(0, 1)
-	if random_chance > pickup_chance:
+	var random_chance = randi_range(0, 1)
+	if random_chance > 0:
 		return
 	
 	var item = pickup_scene.instantiate()
 	item.global_position = global_position
 	get_tree().current_scene.add_child(item)
 	
-	var random_item = pickup_items.pick_random()
-	if random_item != null:
-		item.configure_pickup(random_item)
+	var random_item = randi_range(0, 2)
+	item.configure_pickup(random_item)
 
 
 # SIGNAL FUNCTIONS
