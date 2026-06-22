@@ -25,27 +25,18 @@ func _ready() -> void:
 
 
 func update_health(value: int):
-	if value < 0 or value > HEALTH_MAX:
-		return
-	
-	health_current = value
-	health_changed.emit(value)
+	health_current = clampi(value, 0, HEALTH_MAX)
+	health_changed.emit(health_current)
 
 
 func update_coins(value: int):
-	if value < 0:
-		return
-	
-	total_coins = value
-	coins_changed.emit(value)
+	total_coins = max(value, 0)
+	coins_changed.emit(total_coins)
 
 
 func update_score(value: int):
-	if value < 0:
-		return
-	
-	current_score = value
-	score_changed.emit(value)
+	current_score = max(value, 0)
+	score_changed.emit(current_score)
 
 
 func set_checkpoint(point: Vector2):
