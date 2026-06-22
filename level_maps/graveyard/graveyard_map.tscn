@@ -20,7 +20,7 @@ position = Vector2(1024, 0)
 position = Vector2(2048, 0)
 
 [node name="Graveyard3" parent="." unique_id=168273760 instance=ExtResource("5_u2pps")]
-position = Vector2(2304, -1040)
+position = Vector2(2304, -1056)
 
 [node name="Transition" type="CanvasLayer" parent="." unique_id=20464199]
 
