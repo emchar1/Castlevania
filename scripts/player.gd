@@ -399,13 +399,13 @@ func _on_curse_activated(cursed: bool, should_flash: bool = true):
 	
 	sword.visible = not cursed
 	sword_sprite.visible = not cursed
-	collision_stand.disabled = cursed
-	collision_crouch.disabled = cursed
+	collision_stand.set_deferred("disabled", cursed)
+	collision_crouch.set_deferred("disabled", cursed)
 	
 	claw.visible = cursed
 	claw_sprite.visible = cursed
-	collision_ww_stand.disabled = not cursed
-	collision_ww_crouch.disabled = not cursed
+	collision_ww_stand.set_deferred("disabled", not cursed)
+	collision_ww_crouch.set_deferred("disabled", not cursed)
 
 
 func _on_combo_timeout():

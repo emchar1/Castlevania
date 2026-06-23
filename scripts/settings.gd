@@ -60,10 +60,14 @@ func _on_switch_hand_button_pressed() -> void:
 	
 	if is_right_handed:
 		switch_button.text = "RIGHT HANDED"
-		instructions.text = "MOVE: WASD / ARROW KEYS\nATTACK: J / NUMPAD 4\nJUMP: K / NUMPAD 5"
+		instructions.text = "MOVE: WASD / ARROW KEYS"
+		instructions.text += "\nATTACK: J / NUMPAD 4"
+		instructions.text += "\nJUMP: K / NUMPAD 5"
 	else:
 		switch_button.text = "LEFT HANDED"
-		instructions.text = "MOVE: IJKL / ARROW KEYS\nATTACK: F / NUMPAD 4\nJUMP: D / NUMPAD 5"
+		instructions.text = "MOVE: IJKL / ARROW KEYS"
+		instructions.text += "\nATTACK: F / NUMPAD 4"
+		instructions.text += "\nJUMP: D / NUMPAD 5"
 
 
 # KEYS RE-BINDING HELPER FUNCTIONS
@@ -98,7 +102,11 @@ func _rebind_buttons():
 	_rebind_key_helper("jump", KEY_KP_5, true)
 
 
-func _rebind_key_helper(key_event: StringName, key: Key, should_erase_all: bool):
+func _rebind_key_helper(
+	key_event: StringName,
+	key: Key,
+	should_erase_all: bool
+):
 	if should_erase_all:
 		InputMap.action_erase_events(key_event)
 	
