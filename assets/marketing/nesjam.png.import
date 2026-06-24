@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8k0vogrdjg0h"
-path="res://.godot/imported/itch_image_OLD.png-1a699db370510fc3dd93874d8345bc71.ctex"
+uid="uid://chnr2gxwaanu3"
+path="res://.godot/imported/nesjam.png-3fd0f4035d5d52214c24f6308193d686.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/itch_image_OLD.png"
-dest_files=["res://.godot/imported/itch_image_OLD.png-1a699db370510fc3dd93874d8345bc71.ctex"]
+source_file="res://assets/marketing/nesjam.png"
+dest_files=["res://.godot/imported/nesjam.png-3fd0f4035d5d52214c24f6308193d686.ctex"]
 
 [params]
 
