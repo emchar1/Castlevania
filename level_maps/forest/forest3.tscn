@@ -270,19 +270,17 @@ position = Vector2(840, 112)
 enemy_type = 6
 
 [node name="SpawnManager2" parent="EnemySpawners" unique_id=901213073 instance=ExtResource("3_t5mp4")]
-position = Vector2(336, 184)
+position = Vector2(440, 184)
 
 [node name="SpawnManager3" parent="EnemySpawners" unique_id=382771032 instance=ExtResource("3_t5mp4")]
-position = Vector2(136, 184)
+position = Vector2(184, 184)
 
 [node name="SpawnManager4" parent="EnemySpawners" unique_id=706791830 instance=ExtResource("3_t5mp4")]
 position = Vector2(200, 24)
 enemy_type = 2
 
 [node name="CursedSpawners" parent="." unique_id=1010766562 instance=ExtResource("4_ab85y")]
-a_spawners_type = 6
 b_spawners_type = 4
-c_spawners_type = 6
 d_spawners_type = 4
 
 [connection signal="body_entered" from="ExitAreas/ExitLeft" to="." method="_on_exit_left_body_entered"]

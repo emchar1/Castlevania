@@ -77,6 +77,9 @@ func loop_zone(
 	if body.is_in_group("player"):
 		var zone_map: Node2D
 		
+		for spawner in get_tree().get_nodes_in_group("spawner"):
+			spawner.reset_spawn()
+		
 		match zone_type:
 			0: zone_map = forest_map
 			1: zone_map = graveyard_map

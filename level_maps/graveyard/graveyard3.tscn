@@ -150,7 +150,6 @@ size = Vector2(1024, 8)
 
 [node name="Graveyard3" type="Node2D" unique_id=957525744 groups=["zone"]]
 script = ExtResource("1_gxnlm")
-music = 4
 zone_type = 1
 zone_number = 3
 metadata/_edit_horizontal_guides_ = [0.0, 240.0]
