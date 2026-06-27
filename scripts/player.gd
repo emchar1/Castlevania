@@ -49,6 +49,9 @@ var rush_timer: Timer
 var is_rushing := false
 var did_rush := false
 
+var coyote_timer: Timer
+var is_falling := false
+
 var transformation_timer: Timer
 var tween: Tween
 var move_dir := Vector2.ZERO
@@ -146,8 +149,27 @@ func _get_movement_input():
 
 
 func _process_movement():
-	if is_on_floor() and not is_crouching:
-		velocity.x = move_dir.x * speed * speed_multiplier
+	if is_on_floor():
+		if not is_crouching:
+			velocity.x = move_dir.x * speed * speed_multiplier
+		
+		if coyote_timer:
+			coyote_timer.queue_free()
+		
+		is_falling = false
+	else:
+		if is_falling:
+			return
+		
+		is_falling = true
+
+		if coyote_timer == null:
+			coyote_timer = Timer.new()
+			coyote_timer.wait_time = 0.25
+			coyote_timer.one_shot = true
+			coyote_timer.timeout.connect(_on_coyote_timeout)
+			add_child(coyote_timer)
+			coyote_timer.start()
 
 
 func _process_crouching():
@@ -183,7 +205,9 @@ func _process_jumping():
 		velocity.x = jump_velocity_x * rush_multiplier
 		return
 	
-	if allow_input and Input.is_action_just_pressed("jump") and is_on_floor():
+	var jump_pressed = Input.is_action_just_pressed("jump")
+	var can_jump = is_on_floor() or coyote_timer != null
+	if allow_input and jump_pressed and can_jump:
 		velocity.y = jump_velocity
 		jump_velocity_x = velocity.x
 		is_jumping = true
@@ -419,6 +443,10 @@ func _on_rush_timeout():
 
 func _on_transformation_timeout():
 	transformation_timer.queue_free()
+
+
+func _on_coyote_timeout():
+	coyote_timer.queue_free()
 
 
 func _flash_player(cursed: bool, should_flash: bool):

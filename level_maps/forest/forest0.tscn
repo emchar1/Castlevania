@@ -168,7 +168,6 @@ size = Vector2(1024, 8)
 
 [node name="Forest0" type="Node2D" unique_id=2116938927 groups=["zone"]]
 script = ExtResource("1_tobf8")
-music = 4
 metadata/_edit_vertical_guides_ = [0.0, 256.0, 512.0, 768.0, 1024.0]
 metadata/_edit_horizontal_guides_ = [0.0, 240.0]
 
