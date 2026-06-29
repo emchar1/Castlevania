@@ -8,6 +8,7 @@ extends Node
 @onready var settings_button = $Control/SettingsButton
 @onready var start_sound = $Audio/StartSound
 @onready var switch_sound = $Audio/SwitchHandSound
+@onready var curse_red = $CursedRed
 
 var is_right_handed = true
 
@@ -16,6 +17,7 @@ var is_right_handed = true
 func _ready() -> void:
 	start_button.grab_focus()
 	fade_screen.modulate.a = 0
+	curse_red.modulate.a = 0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,6 +33,7 @@ func _on_button_pressed() -> void:
 	
 	for i in range(1, 21):
 		fade_screen.modulate.a = i * 0.05
+		curse_red.modulate.a = i * 0.05
 		await get_tree().create_timer(0.1).timeout
 	
 	await get_tree().create_timer(0.5).timeout

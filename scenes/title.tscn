@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ndah4r3xhohm" path="res://assets/images/title_text_small.png" id="2_pyl7j"]
 [ext_resource type="AudioStream" uid="uid://b711paxnbsqco" path="res://assets/sounds/coin.ogg" id="2_wosw1"]
 [ext_resource type="AudioStream" uid="uid://ovwdlbqkq377" path="res://assets/sounds/howl.ogg" id="4_b3w7a"]
+[ext_resource type="Texture2D" uid="uid://cfomohtxmry1a" path="res://assets/images/title_text_red.png" id="6_4rr2b"]
 
 [sub_resource type="Gradient" id="Gradient_p6dhs"]
 offsets = PackedFloat32Array(0)
@@ -99,6 +100,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="CursedRed" type="Sprite2D" parent="." unique_id=1467681492]
+texture_filter = 1
+position = Vector2(128, 63.999996)
+scale = Vector2(0.88709676, 0.88709676)
+texture = ExtResource("6_4rr2b")
 
 [connection signal="pressed" from="Control/StartButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Control/SettingsButton" to="." method="_on_settings_pressed"]
