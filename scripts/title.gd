@@ -6,8 +6,6 @@ extends Node
 @onready var fade_screen = $FadeScreen
 @onready var start_button = $Control/StartButton
 @onready var settings_button = $Control/SettingsButton
-#@onready var dpad_label = $Bindings/DPad
-#@onready var powerups_label = $Bindings/PowerUps
 @onready var start_sound = $Audio/StartSound
 @onready var switch_sound = $Audio/SwitchHandSound
 
@@ -31,16 +29,11 @@ func _on_button_pressed() -> void:
 	start_button.disabled = true
 	settings_button.disabled = true
 	
-	var tween = create_tween()
-	tween.tween_property(
-		fade_screen,
-		"modulate:a",
-		1.0,
-		3.0
-	)
+	for i in range(1, 21):
+		fade_screen.modulate.a = i * 0.05
+		await get_tree().create_timer(0.1).timeout
 	
-	await tween.finished
-	
+	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 

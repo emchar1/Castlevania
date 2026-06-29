@@ -2,8 +2,9 @@
 
 [ext_resource type="FontFile" uid="uid://5fm5qvh53ma0" path="res://assets/fonts/Jersey10-Regular.ttf" id="1_4ignj"]
 [ext_resource type="Script" uid="uid://njk3xjm13nje" path="res://scripts/title.gd" id="1_wosw1"]
+[ext_resource type="Texture2D" uid="uid://ndah4r3xhohm" path="res://assets/images/title_text_small.png" id="2_pyl7j"]
 [ext_resource type="AudioStream" uid="uid://b711paxnbsqco" path="res://assets/sounds/coin.ogg" id="2_wosw1"]
-[ext_resource type="Texture2D" uid="uid://yukqgslhiqsw" path="res://assets/images/title.png" id="3_4rr2b"]
+[ext_resource type="AudioStream" uid="uid://ovwdlbqkq377" path="res://assets/sounds/howl.ogg" id="4_b3w7a"]
 
 [sub_resource type="Gradient" id="Gradient_p6dhs"]
 offsets = PackedFloat32Array(0)
@@ -33,8 +34,9 @@ color = Color(0, 0, 0, 0.5019608)
 
 [node name="Cursed" type="Sprite2D" parent="." unique_id=217185257]
 texture_filter = 1
-position = Vector2(128, 64)
-texture = ExtResource("3_4rr2b")
+position = Vector2(128, 63.999996)
+scale = Vector2(0.88709676, 0.88709676)
+texture = ExtResource("2_pyl7j")
 
 [node name="Control" type="Control" parent="." unique_id=1092562676]
 layout_mode = 3
@@ -83,7 +85,7 @@ text = "OPTIONS
 [node name="Audio" type="Node" parent="." unique_id=1233145972]
 
 [node name="StartSound" type="AudioStreamPlayer" parent="Audio" unique_id=1990429536]
-stream = ExtResource("2_wosw1")
+stream = ExtResource("4_b3w7a")
 bus = &"SFX"
 
 [node name="SwitchHandSound" type="AudioStreamPlayer" parent="Audio" unique_id=513393138]
